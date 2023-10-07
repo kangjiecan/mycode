@@ -1,28 +1,31 @@
+#leetcode 28
+#find the index of the first occurrence in a string
+
 class Solution:
     def strStr(self, haystack: str, needle: str) -> int:
-        needle_len=len(needle)
+        
         k=0
-        if len(haystack)<needle_len:
+        if len(haystack)<len(needle): #if needle longer than haystack, must be false
             return -1
         
-        for i in range(len(haystack)):
+        for i in range(len(haystack)): #slide windows
             k=i
             if needle[0]==haystack[i]:
                 #print(haystack[i],"*",i)
                 
-                if needle_len==1:
+                if len(needle)==1:
                     return i
                 
-                for j in range(1,needle_len):
+                for j in range(1,len(needle)):
                     
                     k+=1
                     #print(haystack[k],"!",needle[j])
                     
                     if needle[j]!=haystack[k]:
                         break  
-                    if j==needle_len-1:
+                    if j==len(needle)-1:
                         return i
-            if i>=len(haystack)-needle_len: 
+            if i>=len(haystack)-len(needle): 
              return -1    
             
 haystackinput="mississippi"       
