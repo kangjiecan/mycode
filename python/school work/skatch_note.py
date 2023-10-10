@@ -14,7 +14,4 @@ result=solution.twoSum([3,3],6)
 print(result)          
 
 
-
-
-
-
+ 
