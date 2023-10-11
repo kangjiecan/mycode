@@ -7,7 +7,6 @@ class Solution:
         k=0
         if len(haystack)<len(needle): #if needle longer than haystack, must be false
             return -1
-        
         for i in range(len(haystack)): #slide windows
             k=i
             if needle[0]==haystack[i]:
@@ -15,9 +14,7 @@ class Solution:
                 
                 if len(needle)==1:
                     return i
-                
                 for j in range(1,len(needle)):
-                    
                     k+=1
                     #print(haystack[k],"!",needle[j])
                     

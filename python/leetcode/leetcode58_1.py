@@ -5,11 +5,9 @@ class Solution:
         stop_counting=0
         length=0
         
-        
         if " " not in s:
            return len(s) 
                
-       
         for i in range(len(s)):
            if s[i-1]==" " and s[i]!=" ":
                counting=i
@@ -21,6 +19,7 @@ class Solution:
                length=stop_counting-counting
            
         return length  
+        
                    
                    
 
