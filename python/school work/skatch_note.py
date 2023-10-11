@@ -1,17 +1,5 @@
-class Solution:
-    def twoSum(self, nums: list[int], target: int) -> list[int]:
-        hassmap={}
-        
-        for i in range(len(nums)):
-            if nums[i]in hassmap and hassmap[nums[i]]!=i:
-             return [(hassmap[nums[i]]),i]
-            hassmap[target-nums[i]]=i
-          
-           
-           
-solution=Solution()
-result=solution.twoSum([3,3],6)    
-print(result)          
-
+i=1,2,3,4,5
+for i in range(len(i)-1,-1,0):
+    print(i)
 
  
