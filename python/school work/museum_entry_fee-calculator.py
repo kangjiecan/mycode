@@ -31,7 +31,7 @@ class Ticket_caculator:
       self.student_rate=student_rate
 
    def caculation(self)-> str:
-    # looping forvervifing group member counting and avoid total musum members > total group members.  
+    # looping for vervifing group member counting and avoid total musum members > total group members.  
     while True:  
       print(self.Str1)
       total=info_input()
