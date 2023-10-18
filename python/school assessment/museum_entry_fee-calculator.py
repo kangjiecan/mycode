@@ -16,7 +16,8 @@ def info_input():
         print ("wrong input, please try again")
 # use a class for the futurn updates
 class Ticket_caculator:
-   def __init__ (self,Str1:str,Str2:str,Str3:str,Str4:str,Str5:str,Str6:str,Str7:str,children_rate:int,student_rate:int,adults_rate:int,senior_rate:int,discount:float):
+   def __init__ (self,Str1:str,Str2:str,Str3:str,Str4:str,Str5:str,Str6:str,Str7:str,children_rate:int,
+                 student_rate:int,adults_rate:int,senior_rate:int,discount:float):
       self.Str1=Str1
       self.Str2=Str2
       self.Str3=Str3
@@ -76,7 +77,8 @@ adult_price=10
 senior_price=7
 member_discount=0.2
 
-museumHalifax=Ticket_caculator(welcome,children,adult,senior,discount_member,output,student,children_price,student_price,adult_price,senior_price,member_discount)
+museumHalifax=Ticket_caculator(welcome,children,adult,senior,discount_member,output,student,children_price,
+                               student_price,adult_price,senior_price,member_discount)
 result=museumHalifax.caculation()
 print(result)      
        
