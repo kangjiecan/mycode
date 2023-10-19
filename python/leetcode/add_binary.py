@@ -5,12 +5,11 @@
 
 class Solution:
     def addBinary(self, a: str, b: str) -> str:
+        
         n=max(len(a),len(b))
-        a=a.zfill(n)
-        b=b.zfill(n)
+        a,b=a.zfill(n),b.zfill(n)
         carry=0
-        len_a=len(a)
-        len_b=len(b)
+        len_a,len_b=len(a),len(b)
         c=""
         # caculation different conditons and output to C
         while len_a!=0 and len_b!=0:
