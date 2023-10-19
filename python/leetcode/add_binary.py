@@ -1,55 +1,67 @@
+
+"""Given two binary strings a and b, return their sum as a binary string."""
+""" use bite to bite caculation, output carry and bite to bite caculation to c string"""
+"""use zfile to make sure two strings are in the same length(fill with 0)"""
+
 class Solution:
     def addBinary(self, a: str, b: str) -> str:
-        next=0
+        n=max(len(a),len(b))
+        a=a.zfill(n)
+        b=b.zfill(n)
+        carry=0
         len_a=len(a)
         len_b=len(b)
         c=""
+        # caculation different conditons and output to C
         while len_a!=0 and len_b!=0:
-            if a[len_a-1]=="1" and b[len_b-1]=="1" and next==0:
+            if a[len_a-1]=="1" and b[len_b-1]=="1" and carry==0:
                 c +="0"
-                next=1
+                carry=1
                 len_a -=1
                 len_b -=1
                 continue
                 
-            elif a[len_a-1]=="0" and b[len_b-1]=="0" and next==0:
+            elif a[len_a-1]=="0" and b[len_b-1]=="0" and carry==0:
                 c +="0"
                 len_a -=1
                 len_b -=1
                 continue    
 
-            elif  a[len_a-1]!=b[len_b-1] and next==0:
+            elif  a[len_a-1]!=b[len_b-1] and carry==0:
                 c+="1"
                 len_a -=1
                 len_b -=1
                 continue
             
-            elif a[len_a-1]=="1" and b[len_b-1]=="1" and next==1:
+            elif a[len_a-1]=="1" and b[len_b-1]=="1" and carry==1:
                 c +="1"
-                next=1
+                carry=1
                 len_a -=1
                 len_b -=1
                 continue
-            elif a[len_a-1]=="0" and b[len_b-1]=="0" and next==1:
+            
+            elif a[len_a-1]=="0" and b[len_b-1]=="0" and carry==1:
                 c +="1"    
                 len_a -=1
                 len_b -=1
-                next=0
+                carry=0
                 continue
-            elif  a[len_a-1]!=b[len_b-1] and next==1:
+            
+            elif  a[len_a-1]!=b[len_b-1] and carry==1:
                 c+="0"
-                next=1
+                carry=1
                 len_a -=1
                 len_b -=1
                 continue
-              
-         
-         
-        if len_a==len_b==0 and next==1:
+            
+        # output the final carry to c if the string index=0 and carry =1      
+        if len_a==len_b==0 and carry==1: 
             c +="1"
             return c[::-1]
+        else:
+            return c[::-1]
         
-        elif len_b==0:
+        """elif len_b==0:
            while len_a!=0:
                if next==1 and a[len_a-1]=="1" and len_a-1==0:
                    c +="01"
@@ -91,9 +103,9 @@ class Solution:
                   
                
         return c[::-1]
-
-a="11"
-b="1001"
+        """
+a="1110"
+b="1001110"
 solution=Solution()
 restult=solution.addBinary(a,b)
 print(restult)                  
