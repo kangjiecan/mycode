@@ -14,7 +14,7 @@ def info_input():
         return float(input())
      except ValueError:
         print ("wrong input, please try again")
-# use a class for the futurn updates
+# use a class for the future updates
 class Ticket_caculator:
    def __init__ (self,Str1:str,Str2:str,Str3:str,Str4:str,Str5:str,Str6:str,Str7:str,children_rate:int,
                  student_rate:int,adults_rate:int,senior_rate:int,discount:float):
@@ -32,7 +32,7 @@ class Ticket_caculator:
       self.student_rate=student_rate
 
    def caculation(self)-> str:
-    # looping for vervifing group member counting and avoid total musum members > total group members.  
+    # looping for verifying group member count and ensure total museum members < total group members.  
     while True:  
       print(self.Str1)
       total=info_input()
