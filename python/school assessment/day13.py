@@ -1,3 +1,6 @@
+
+
+
 class grading:
     #fool proof
     def input1(self)->list[str,int,float]:

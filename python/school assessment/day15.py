@@ -1,5 +1,5 @@
 
-# creat a class for using extenable dictionaries so the code can answer more questions.
+# creat a class for using extenable dictionaries so the code can answer more questions if it needs.
 class QA:
     def QA_Game(self,quest:str,dictionray:dict):
         

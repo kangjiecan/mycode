@@ -1,3 +1,7 @@
+""" loan caculation
+use recirsion
+"""
+
 class loan_caculator():
     def __init__(self,loan,increament,year):
         self.loan=loan

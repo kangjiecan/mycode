@@ -1,3 +1,7 @@
+""" "Seconds in a year:
+First, calculate the leap year, then do the common calculation."
+"""
+
 
 import os
 
@@ -8,7 +12,7 @@ def caculating(year:int):
     elif year%100==0 or year%4!=0:
         return 365*24*60*60  
 
-# limiting the input
+# valid input
 def interge_input():
   while True:
      try:
