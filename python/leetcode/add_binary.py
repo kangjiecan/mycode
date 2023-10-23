@@ -1,5 +1,17 @@
 
-"""Given two binary strings a and b, return their sum as a binary string."""
+""""Given two binary strings a and b, return their sum as a binary string.
+
+ 
+
+Example 1:
+
+Input: a = "11", b = "1"
+Output: "100"
+Example 2:
+
+Input: a = "1010", b = "1011"
+Output: "10101"
+"""
 """ use bite to bite caculation, output carry and bite to bite caculation to c string"""
 """use zfile to make sure two strings are in the same length(fill with 0)"""
 
