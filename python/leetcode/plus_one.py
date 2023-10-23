@@ -38,13 +38,13 @@ class Solution:
                 return digits
             
             if digits[-1]==9:
-                for i in range(len(digits)-1,-1,-1):
+                for i in range(len(digits)-1,-1,-1): # if last numer is 9, pluse a carry to the privous element.
                     if digits[i]!=9:
                        digits[i]=digits[i]+1
                        return digits
-                    digits[i]=0
+                    digits[i]=0   #replace 0 over 9
                     if i==0:
-                         digits.insert(0,1)
+                         digits.insert(0,1)# insert 1 as a carry to digits[0] if conditon likes [9]
                          return digits    
                     
                          
