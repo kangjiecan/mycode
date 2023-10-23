@@ -1,32 +1,22 @@
-class Node:
-    def __init__(self, data):
-        self.data = data
-        self.next = None
+class Solution:
+    def lengthOfLongestSubstring(self, s: str) -> int:
+        stack={}
+        count=0
+        length=0
 
-class Linkedlist:
-    def __init__(self, head=None):
-        self.head = head
-    
-    def insert(self, value):
-        if self.head is None:
-            self.head = Node(value)
+        while count<len(s):
+         if s[count] in stack:  
+           if len(stack) > length:
+            length=len(stack)
+           count = stack[s[count]]+1
+           stack = {}
+
+         if s[count] not in stack:
+             stack[s[count]]=count
+                              
+         count +=1
+
+        if len(stack)>length:
+           return len(stack)
         else:
-            current = self.head
-            while current.next:
-                current = current.next
-            current.next= Node(value)  
-            
-    def printlist(self):
-        current = self.head
-        while current:  
-            print(current.data)  
-            current = current.next
-        
-           
-
-test = Linkedlist()
-test.insert("a")
-test.insert("aa")
-test.insert("aaa")
-test.printlist()
-
+           return length
