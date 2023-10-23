@@ -17,16 +17,23 @@ class Linkedlist:
             current.next= Node(value)  
             
     def printlist(self):
+        a=[]
         current = self.head
         while current:  
-            print(current.data)  
+            print(current.data) 
+            a.append(current.data)
+            
             current = current.next
         
-           
+        return a   
 
 test = Linkedlist()
 test.insert("a")
 test.insert("aa")
 test.insert("aaa")
-test.printlist()
+result=test.printlist()
+print(result)
 
+test.insert("a;lsdkjf;asld")
+result=test.printlist()
+print(result)
