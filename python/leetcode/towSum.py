@@ -1,3 +1,9 @@
+
+
+
+
+
+
 """ 
 Given an array of integers nums and an integer target, return indices of the two numbers such that they add up to target.
 
@@ -20,33 +26,21 @@ Example 3:
 
 Input: nums = [3,3], target = 6
 Output: [0,1]
- 
 
-Constraints:
-
-2 <= nums.length <= 104
--109 <= nums[i] <= 109
--109 <= target <= 109
 """
-
 
 
 class Solution:
     def twoSum(self, nums: list[int], target: int) -> list[int]:
         hashmap={}
         for i in range(len(nums)):
-            if nums[i]in hashmap:
-             return [(hashmap[nums[i]]),i]
-            hashmap[target-nums[i]]=i
+             if nums[i] in hashmap:
+                return [i,hashmap[nums[i]]]
+                
+             hashmap[target-nums[i]]=i
+        
             
-           
-           
-solution=Solution()
-result=solution.twoSum([3,3],6)    
-print(result)          
-
-
-
-
-
-
+            
+solution=Solution()            
+result=solution.twoSum([2,3,4,5,6,7],10)
+print(result)
