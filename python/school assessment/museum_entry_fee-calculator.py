@@ -61,14 +61,14 @@ class Ticket_caculator:
          return (f"{self.Str6} {ouput_total_fee}")
          
       else:
-         print("goup memebers counting error, please input again")
+         print("group members counting error, please input again")
       
 
 welcome="Welcome to the Museum, how many people in your group today?"
 children="Great, please let me know how many children in your group (0-12)"
 discount_member="Perfect, how many are they members,if non, please enter 0"
 adult="Awesome,how many adults in your group (18-64?)"
-senior="Thank you for your patient, how many seniors in your group (avove 65 includ 65?)"
+senior="Thank you for your patient, how many seniors in your group (above 65 include 65?)"
 output="Thank you, the total tick fee is $"
 student="Awesome, how many students are in the group"
 children_price=0
