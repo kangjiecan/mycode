@@ -28,15 +28,15 @@ class Solution:
  def kthPalindrome(self, queries: list[int], intLength: int) -> list[int]:
   mylist=[]
   for number in queries:
-   print(number)
+   #print(number)
    mylist.append(self.generator(intLength,number))
-   print(mylist)
+   #print(mylist)
   return mylist
    
  
  
  def generator(self,intlength:int,number:int) -> int:
-  mylist=[]
+  
   
   if intlength %2!=0:
    firstnumber=10**(intlength//2)
