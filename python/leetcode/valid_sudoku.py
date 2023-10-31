@@ -54,21 +54,21 @@ class Solution:
        
        for i in range(len(board)):
         for j in range(len(board[i])):
-         if board[i][j] in hashtable.values():
+         if board[i][j] in stack1:
           return False
-         elif board[i][j]!="." and board[i][j] not in hashtable.values():
-           hashtable[k]=board[i][j]
+         elif board[i][j]!="." and board[i][j] not in stack1:
+           stack1.append(board[i][j])
            k+=1
-        hashtable={}  
+        stack1=[]
   
        for j in range(len(board[i])):
         for i in range(len(board)):
-         if board[i][j] in hashtable.values():
+         if board[i][j] in stack1:
           return False
-         elif board[i][j]!="." and board[i][j] not in hashtable.values():
-          hashtable[k]=board[i][j]
+         elif board[i][j]!="." and board[i][j] not in stack1:
+          stack1.append(board[i][j])
           k+=1
-        hashtable={} 
+        stack1=[]
         
        m=0
        l=3
@@ -76,15 +76,11 @@ class Solution:
        for k in range(0,3):
         for i in range(0,9):
           for j in range(m,l):
-            #print(i,"!",j)
             if board[i][j] in stack1:
-            # print(board[j][i],"*",j,i)
-             return False
+              return False
             if board[i][j]!="." and board[i][j] not in stack1:
              stack1.append(board[i][j])
-             #print(stack1,"@")
           if (i+1)%3==0:
-            #print(stack1)
             stack1=[]
         m +=3
         l +=3   
@@ -92,15 +88,15 @@ class Solution:
        return True    
           
         
-s=[[".",".","4",".",".",".","6","3","."],
-   [".",".",".",".",".",".",".",".","."],
-   ["5",".",".",".",".",".",".","9","."],
-   [".",".",".","5","6",".",".",".","."],
-   ["4",".","3",".",".",".",".",".","1"],
-   [".",".",".","7",".",".",".",".","."],
-   [".",".",".","5",".",".",".",".","."],
-   [".",".",".",".",".",".",".",".","."],
-   [".",".",".",".",".",".",".",".","."]]
+s=[["5","3",".",".","7",".",".",".","."]
+,["6",".",".","1","9","5",".",".","."]
+,[".","9","8",".",".",".",".","6","."]
+,["8",".",".",".","6",".",".",".","3"]
+,["4",".",".","8",".","3",".",".","1"]
+,["7",".",".",".","2",".",".",".","6"]
+,[".","6",".",".",".",".","2","8","."]
+,[".",".",".","4","1","9",".",".","5"]
+,[".",".",".",".","8",".",".","7","9"]]
      
 testcase=Solution()
 result=testcase.isValidSudoku(s)
