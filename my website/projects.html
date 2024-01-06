@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>About Me - [Your Name]</title>
+    <link rel="stylesheet" type="text/css" href="project.css">
+</head>
+<body>
+    <div class="aspect-ratio-container">
+        <div class="content-container">
+            <div class="text-container">
+                <h1>python C and ChatGPT</h1>
+                <p>I coded for the classic question 'two sum' with Python and C.
+
+                    You should not be surprised by Python's ease of use in getting the job done. Just by using a dictionary as a hashtable to check the difference between the given number and the array value. If the difference is not in the dictionary, push it in. If the difference equals the array value, then you have found the number you need.
+                    
+                    You could do it with Python in only 10 minutes.</p>
+                    
+                   <p> But for C, it is a long story. At first, I need to structure a data format for the hashtable. At this point, as there is only one solution, so I don’t need to worry about collision. Thus, I did not use the classic linked list for the collision impact. I used the difference as the hash key; it will improve the code's runtime efficiency.
+                    
+                    However, there is a problem: the difference could be a negative integer. I can’t use it as an index. If I simply call the ABS function, collisions will occur. (1 and -1 will return the same value of 1). So the solution is to use a large enough number as an offset to turn the negative number to positive. However, this creates another problem: if the input number is too big, the offset result will be greater than an unsigned int can hold and cause a wraparound. I had to implement control flow for the negative and positive integers, which is not ideal. So I asked ChatGPT for a hint.
+                    
+                   </p>The first answer didn't surprise me; it just showed me the offset method. I gave it low feedback. The second time, it returned me this: '& 0x7FFFFFFF'. That is ingenious; it turns a negative int into a positive int without any collision.
+                    
+                    <p>In the end, ChatGPT is not yet good enough to replace a programmer. But it helps programmers a lot. If mastering a language needed 10,000 hours before, now with ChatGPT, it might only be 3,000 hours.
+                    
+                    And the runtime based on LeetCode, C code for twoSum is 2 ms. Python is 60 ms. C and C++ will continue to serve for a very long time because of their robustness and efficiency.
+                    
+                    </p>
+                <p><a href="index.html">Back to Home</a></p>
+            </div>
+            <img src="twoSumCPython.png" alt="Description of Image 1" class="about-image">
+        </div>
+    </div>
+</body>
+</html>
