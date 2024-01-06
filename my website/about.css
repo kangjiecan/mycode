@@ -1,0 +1,18 @@
+.content-container {
+    width: 80%;
+    margin: auto;
+    padding: 20px;
+    text-align: center;
+}
+
+.content-container img {
+    max-width: 100%; /* Ensures images are responsive */
+    height: auto;
+    margin: 20px 0; /* Adds space above and below the images */
+}
+
+.content-container video {
+    max-width: 100%; /* Ensures video is responsive */
+    height: auto;
+    margin: 20px 0;
+}

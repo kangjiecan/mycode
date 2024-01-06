@@ -1,0 +1,58 @@
+body, html {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+}
+
+.nav-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: 20px;
+}
+
+.nav-container nav ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.nav-container nav ul li {
+    display: block; /* Stack the links vertically */
+    margin-bottom: 10px; /* Space between nav items */
+}
+
+.nav-container nav ul li a {
+    text-decoration: none;
+    color: white; /* Adjust for better visibility */
+    background-color: rgba(0, 0, 0, 0.4); /* Semi-transparent background */
+    padding: 10px;
+    border-radius: 5px;
+    display: block; /* Make the anchor tag a block element */
+    text-align: left; /* Align text to the left */
+    width: 120px; /* Uniform width for all buttons */
+    padding-left: 20px; /* Additional padding to the left for text */
+}
+
+.nav-container nav ul li a:hover {
+    background-color: rgba(0, 0, 0, 0.6); /* Slightly darker on hover */
+}
+
+.welcome-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    height: 100%;
+    background-image: url('r0000922.jpeg'); /* Your background image */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.welcome-container h1 {
+    color: white;
+    font-size: 50px;
+    text-shadow: 2px 2px 4px #000000;
+}
