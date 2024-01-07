@@ -1,16 +1,25 @@
 body, html {
     margin: 0;
     padding: 0;
-    height: 100%;
     font-family: Arial, sans-serif;
     background: #f0f0f0;
+    overflow-x: hidden; /* Prevent horizontal scroll */
+}
+
+.max-width-container {
+    margin: 0 auto; /* Center the container */
+    max-width: 1920px; /* Maximum width for 1080p */
+    position: relative; /* For absolute child positioning */
+    width: 100%;
+    overflow: hidden; /* Prevents content from spilling out */
 }
 
 .nav-container {
+    width: 100%; /* Full width */
+    padding: 20px 40px; /* Padding on the left and right */
+    box-sizing: border-box; /* Include padding in width calculation */
     position: absolute;
-    top: 0;
-    left: 0;
-    padding: 20px;
+    top: 0; /* Position at the top of the parent container */
     z-index: 10;
 }
 
@@ -18,56 +27,55 @@ body, html {
     list-style-type: none;
     padding: 0;
     margin: 0;
-}
-
-.nav-container nav ul li {
-    display: block;
-    margin-bottom: 10px;
+    display: flex;
+    justify-content: center; /* Center items horizontally */
 }
 
 .nav-container nav ul li a {
     text-decoration: none;
     color: white;
-    background-color: gray; /* Updated background color */
-    padding: 10px;
+    background-color: rgba(183, 228, 244, 0.6); /* Semi-transparent background */
+    padding: 10px 20px;
     border-radius: 5px;
-    display: block;
-    text-align: left;
-    width: 120px;
-    padding-left: 20px;
+    margin-right: 10px; /* Space between links */
 }
 
 .nav-container nav ul li a:hover {
-    background-color: darkgray; /* Slightly darker on hover */
+    background-color: rgba(0, 0, 0, 0.8);
+}
+
+/* Reset the margin for the last item */
+.nav-container nav ul li:last-child a {
+    margin-right: 0;
 }
 
 .image-aspect-ratio {
     position: relative;
-    width: 100%;
-    padding-top: 75%;
-    overflow: hidden;
+    width: 100%; /* Full width */
+    padding-top: 56.25%; /* Aspect ratio padding */
 }
 
 .background-image {
     position: absolute;
     top: 0;
     left: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    object-fit: cover; /* Cover the entire area */
 }
 
 .welcome-container {
     position: absolute;
-    width: 100%;
-    top: 50%;
-    transform: translateY(-50%);
+    top: 60%; /* Adjust this percentage to move the welcome message up or down */
+    left: 50%;
+    transform: translate(-50%, -50%); /* Offset the position */
     text-align: center;
     z-index: 5;
+    width: 100%; /* Full width */
 }
 
 .welcome-container h1 {
     color: white;
-    font-size: 50px;
+    font-size: 2.5rem; /* Font size */
     text-shadow: 2px 2px 4px #000000;
 }
