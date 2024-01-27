@@ -2,11 +2,10 @@
     "tasks": [
         {
             "type": "cppbuild",
-            "label": "C/C++: clang build active file",
-            "command": "/usr/bin/clang",
+            "label": "C/C++: gcc build active file",
+            "command": "/usr/bin/gcc",
             "args": [
-                "-fcolor-diagnostics",
-                "-fansi-escape-codes",
+                "-fdiagnostics-color=always",
                 "-g",
                 "${file}",
                 "-o",
@@ -26,10 +25,11 @@
         },
         {
             "type": "cppbuild",
-            "label": "C/C++: cpp build active file",
-            "command": "/usr/bin/cpp",
+            "label": "C/C++: clang build active file",
+            "command": "/usr/bin/clang",
             "args": [
-                "-fdiagnostics-color=always",
+                "-fcolor-diagnostics",
+                "-fansi-escape-codes",
                 "-g",
                 "${file}",
                 "-o",

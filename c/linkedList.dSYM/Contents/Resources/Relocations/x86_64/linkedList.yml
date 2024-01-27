@@ -1,0 +1,11 @@
+---
+triple:          'x86_64-apple-darwin'
+binary-path:     '/Users/kangjiecan/mycode/c/linkedList'
+relocations:
+  - { offsetInCU: 0x26, offset: 0x26, size: 0x8, addend: 0x0, symName: _createNode, symObjAddr: 0x0, symBinAddr: 0x100003E10, symSize: 0x40 }
+  - { offsetInCU: 0x6E, offset: 0x6E, size: 0x8, addend: 0x0, symName: _createNode, symObjAddr: 0x0, symBinAddr: 0x100003E10, symSize: 0x40 }
+  - { offsetInCU: 0xA4, offset: 0xA4, size: 0x8, addend: 0x0, symName: _insertNode, symObjAddr: 0x40, symBinAddr: 0x100003E50, symSize: 0x40 }
+  - { offsetInCU: 0xE8, offset: 0xE8, size: 0x8, addend: 0x0, symName: _printingNote, symObjAddr: 0x80, symBinAddr: 0x100003E90, symSize: 0x50 }
+  - { offsetInCU: 0x10C, offset: 0x10C, size: 0x8, addend: 0x0, symName: _freeList, symObjAddr: 0xD0, symBinAddr: 0x100003EE0, symSize: 0x40 }
+  - { offsetInCU: 0x13E, offset: 0x13E, size: 0x8, addend: 0x0, symName: _main, symObjAddr: 0x110, symBinAddr: 0x100003F20, symSize: 0x51 }
+...
