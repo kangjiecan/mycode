@@ -1,81 +1,45 @@
-body, html {
-    margin: 0;
-    padding: 0;
-    font-family: Arial, sans-serif;
-    background: #f0f0f0;
-    overflow-x: hidden; /* Prevent horizontal scroll */
-}
 
-.max-width-container {
-    margin: 0 auto; /* Center the container */
-    max-width: 1920px; /* Maximum width for 1080p */
-    position: relative; /* For absolute child positioning */
-    width: 100%;
-    overflow: hidden; /* Prevents content from spilling out */
-}
 
-.nav-container {
-    width: 100%; /* Full width */
-    padding: 20px 40px; /* Padding on the left and right */
-    box-sizing: border-box; /* Include padding in width calculation */
-    position: absolute;
-    top: 0; /* Position at the top of the parent container */
-    z-index: 10;
-}
 
-.nav-container nav ul {
-    list-style-type: none;
-    padding: 0;
-    margin: 0;
+  .welcome{
+    background-image:url('r0000922.jpeg');
+    background-size: cover;
+    background-position: center center;
+    background-attachment: fixed;
+    height: 99vh;
     display: flex;
-    justify-content: center; /* Center items horizontally */
-}
+  justify-content: center;
+  align-items: center;
+  bottom: 50px;
+    
+  }
 
-.nav-container nav ul li a {
-    text-decoration: none;
-    color: white;
-    background-color: rgba(183, 228, 244, 0.6); /* Semi-transparent background */
-    padding: 10px 20px;
-    border-radius: 5px;
-    margin-right: 10px; /* Space between links */
-}
-
-.nav-container nav ul li a:hover {
-    background-color: rgba(0, 0, 0, 0.8);
-}
-
-/* Reset the margin for the last item */
-.nav-container nav ul li:last-child a {
-    margin-right: 0;
-}
-
-.image-aspect-ratio {
+.kangjie{
+    font-size: 4vw;
+    color:aliceblue;
     position: relative;
-    width: 100%; /* Full width */
-    padding-top: 56.25%; /* Aspect ratio padding */
+    top: 100px;
+    
 }
 
-.background-image {
-    position: absolute;
+.bottom-nav {
+    position: fixed;
     top: 0;
-    left: 0;
-    width: 100%; /* Full width */
-    height: 100%; /* Full height */
-    object-fit: cover; /* Cover the entire area */
-}
-
-.welcome-container {
-    position: absolute;
-    top: 60%; /* Adjust this percentage to move the welcome message up or down */
-    left: 50%;
-    transform: translate(-50%, -50%); /* Offset the position */
-    text-align: center;
-    z-index: 5;
-    width: 100%; /* Full width */
-}
-
-.welcome-container h1 {
-    color: white;
-    font-size: 2.5rem; /* Font size */
-    text-shadow: 2px 2px 4px #000000;
-}
+    width: 100%;
+    background-color: #f8f8f8;
+    border-top: 1px solid #e7e7e7;
+    display: flex;
+    justify-content: space-around; /* This will space out the nav items evenly */
+    align-items: center;
+    padding: 10px 0;
+  }
+  
+  .nav-item a {
+    text-decoration: none;
+    color: #333;
+    padding: 10px;
+    display: block; /* Makes the entire area clickable */
+  }
+  
+  /* Add any responsive or additional styling as needed */
+  

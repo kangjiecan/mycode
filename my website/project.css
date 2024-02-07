@@ -6,38 +6,13 @@ body, html {
     background: grey;
 }
 
-.aspect-ratio-container {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: center;
-    width: 100%;
-    padding: 20px;
-    box-sizing: border-box;
-}
 
-/* Responsive breakpoints */
-@media (max-width: 1200px) { /* Larger screens */
-    .aspect-ratio-container {
-        max-width: 80%; /* Slightly narrower on larger screens */
-    }
-}
 
-@media (max-width: 768px) { /* Tablet screens */
-    .aspect-ratio-container {
-        max-width: 90%; /* Use more of the screen on tablets */
-    }
-}
 
-@media (max-width: 480px) { /* Mobile screens */
-    .aspect-ratio-container {
-        max-width: 95%; /* Nearly full width on small screens */
-    }
-}
 
 .content-container {
     width: 100%;
-    max-width: 800px; /* Adjust this for desired maximum width */
+    
     background: white;
     padding: 20px;
     box-sizing: border-box;
@@ -49,14 +24,10 @@ body, html {
     margin-top: 0;
 }
 
-.content-container img {
-    max-width: 100%;
-    height: auto;
-    margin-top: 20px;
+.about-image{
+    margin-top: auto;
+    padding: auto;
+   width:100%;
 }
 
-.content-container a {
-    display: block;
-    font-size: 18px;
-    margin-top: 20px;
-}
+
