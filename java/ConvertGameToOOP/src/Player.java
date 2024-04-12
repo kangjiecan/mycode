@@ -10,4 +10,16 @@ public class Player extends Character {
         System.out.println(favouriteSaying);
     }
 
+    private int winCount = 0;
+
+    public int getWin() {
+        return winCount;
+    }
+
+    public void addWin() {
+        winCount++;
+    }
+
 }
+
+

@@ -8,9 +8,10 @@ import java.util.Scanner;
 
 public class CharacterCreator {
     private int damage, health;
-    private String name, weapon,namesFilePath, weaponsFilePath, titlesFilePath;
+    private String name, weapon, namesFilePath, titlesFilePath;
     private String taunts[];
     private String favouriteSaying;
+
     public CharacterCreator() {
         titlesFilePath = "src/titles.txt";
         namesFilePath = "src/names.txt";
@@ -27,10 +28,10 @@ public class CharacterCreator {
             System.out.println("Please enter a path for titles.txt:");
             titlesFilePath = scanner.nextLine();
             System.out.println("Please enter a path for weapons.txt:");
-            weaponsFilePath = scanner.nextLine();
         }
     }
-    private  Enemy generateEnemy(String[] taunts) {
+
+    private Enemy generateEnemy(String[] taunts) {
 
         this.taunts = taunts;
         Random healthRandom = new Random();
@@ -60,45 +61,46 @@ public class CharacterCreator {
         String randomTitle = titles.get(randomIndex.nextInt(titles.size()));
         name = randomName + " " + randomTitle;
 
-       Enemy enemy=new Enemy(name,health,taunts);
-       return enemy;
+        Enemy enemy = new Enemy(name, health, taunts);
+        return enemy;
     }
 
-        private Player generatePLayer(String favouriteSaying) {
+    private Player generatePLayer(String favouriteSaying) {
 
-            this.favouriteSaying=favouriteSaying;
-            Random healthRandom = new Random();
-            health = 25 + healthRandom.nextInt(16);
-            ArrayList<String> names = new ArrayList<>();
-            ArrayList<String> titles = new ArrayList<>();
+        this.favouriteSaying = favouriteSaying;
+        Random healthRandom = new Random();
+        health = 25 + healthRandom.nextInt(16);
+        ArrayList<String> names = new ArrayList<>();
+        ArrayList<String> titles = new ArrayList<>();
 
-            try {
-                BufferedReader reader = new BufferedReader(new FileReader(namesFilePath));
-                String line;
-                while ((line = reader.readLine()) != null) {
-                    names.add(line);
-                }
-                reader.close();
-
-                BufferedReader reader1 = new BufferedReader(new FileReader(titlesFilePath));
-                String line1;
-                while ((line1 = reader1.readLine()) != null) {
-                    titles.add(line1);
-                }
-                reader1.close();
-            } catch (IOException e) {
-                e.printStackTrace();
+        try {
+            BufferedReader reader = new BufferedReader(new FileReader(namesFilePath));
+            String line;
+            while ((line = reader.readLine()) != null) {
+                names.add(line);
             }
-            Random randomIndex = new Random();
-            String randomName = names.get(randomIndex.nextInt(names.size()));
-            String randomTitle = titles.get(randomIndex.nextInt(titles.size()));
-            name = randomName + " " + randomTitle;
+            reader.close();
 
-            return new Player(name, health,favouriteSaying);
+            BufferedReader reader1 = new BufferedReader(new FileReader(titlesFilePath));
+            String line1;
+            while ((line1 = reader1.readLine()) != null) {
+                titles.add(line1);
+            }
+            reader1.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        Random randomIndex = new Random();
+        String randomName = names.get(randomIndex.nextInt(names.size()));
+        String randomTitle = titles.get(randomIndex.nextInt(titles.size()));
+        name = randomName + " " + randomTitle;
+
+        return new Player(name, health, favouriteSaying);
 
 
     }
-    public Enemy getNewEnemy(){
+
+    public Enemy getNewEnemy() {
         String[] taunts = {
                 "You can't defeat me!",
                 "Prepare to meet your doom!",
@@ -116,7 +118,7 @@ public class CharacterCreator {
         return generateEnemy(taunts);
     }
 
-    public Player getNewPlayer(){
+    public Player getNewPlayer() {
         return generatePLayer("For Freedom");
     }
 }
