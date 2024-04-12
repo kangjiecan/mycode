@@ -1,0 +1,7 @@
+Axe 15
+Sword 9
+Hammer 7
+Staff 12
+Scythe 17
+Dagger 7
+Gauntlets 8
