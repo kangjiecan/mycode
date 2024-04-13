@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import './App.css'; // Make sure the path is correct relative to th
 
 function App() {
   const [regionName, setRegionName] = useState('');
@@ -19,7 +20,7 @@ function App() {
       .then(data => {
         if (!data || data.length === 0) {
           // Handle case where Nova Scotia API returns null or empty array
-          setNovaScotiaData("No information was found.");
+          setNovaScotiaData("No Access Nova scotia in this location.");
           return; // Early return to avoid fetching weather data when no Nova Scotia data is found
         }
         // If data is found, process as before
@@ -56,7 +57,9 @@ function App() {
         const formattedWeather = {
           temperature: weather.main.temp,
           condition: weather.weather[0].main,
-          humidity: weather.main.humidity
+          humidity: weather.main.humidity,
+          iconUrl: `http://openweathermap.org/img/wn/${weather.weather[0].icon}@2x.png` // Add the icon URL
+
         };
         setWeatherData(formattedWeather);
       })
@@ -77,34 +80,50 @@ function App() {
   };
 
   return (
-    <div>
-      <form onSubmit={handleSubmit}>
-        <label>
-          Region Name:
-          <input
-            type="text"
-            value={regionName}
-            onChange={(e) => setRegionName(e.target.value)}
-          />
-        </label>
-        <button type="submit">Submit</button>
-      </form>
-      {typeof novaScotiaData === 'string' ? (
-        <p>{novaScotiaData}</p>
-      ) : novaScotiaData ? (
-        <div>
-          <h2>Nova Scotia Data:</h2>
-          <pre>{JSON.stringify(novaScotiaData, null, 2)}</pre>
+    <div className="App">
+  <form onSubmit={handleSubmit} className="search-form">
+    <h2>Access Nova Scotia Location and Weather conditon research:</h2>
+    <label className="search-label">
+      Your Region Name:
+      <input
+        type="text"
+        value={regionName}
+        onChange={(e) => setRegionName(e.target.value)}
+        className="search-bar"
+      />
+    </label>
+    <button type="submit" className="submit-button">Submit</button>
+  </form>
+  {typeof novaScotiaData === 'string' ? (
+    <p>{novaScotiaData}</p>
+  ) : (
+    <div className="location-search-results">
+      
+      {novaScotiaData && novaScotiaData.map((item, index) => (
+        <div key={index} className="location-result-item">
+          <p><strong>Office Address:</strong> {item.office_address}</p>
+          <p><strong>Postal Code:</strong> {item.postal_code}</p>
+          <p><strong>Toll Free:</strong> {item.tollfree}</p>
         </div>
-      ) : null}
-      {weatherData && (
-        <div>
-          <h2>Weather Data:</h2>
-          <pre>{JSON.stringify(weatherData, null, 2)}</pre>
-        </div>
+      ))}
+    </div>
+  )}
+  {weatherData && (
+    <div className="weather-results">
+      <h2>Weather Condition:</h2>
+      <p><strong>Temperature:</strong> {weatherData.temperature}°C</p>
+      <p><strong>Condition:</strong> {weatherData.condition}</p>
+      <p><strong>Humidity:</strong> {weatherData.humidity}%</p>
+      {weatherData.iconUrl && (
+        <img src={weatherData.iconUrl} alt="Weather icon" className="weather-icon" />
       )}
     </div>
-  );
+  )}
+</div>
+);
+  
 }
 
 export default App;
+
+
