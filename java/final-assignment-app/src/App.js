@@ -10,19 +10,25 @@ function App() {
     setNovaScotiaData(null);
     setWeatherData(null);
 
+
+
     // Nova Scotia API request
     const novaScotiaUrl = `https://data.novascotia.ca/resource/f35v-t3mg.json?region=${region}`;
     fetch(novaScotiaUrl)
       .then(response => response.json())
       .then(data => {
-        // Process Nova Scotia data as before
+        if (!data || data.length === 0) {
+          // Handle case where Nova Scotia API returns null or empty array
+          setNovaScotiaData("No information was found.");
+          return; // Early return to avoid fetching weather data when no Nova Scotia data is found
+        }
+        // If data is found, process as before
         const filteredData = data.map(item => ({
           office_address: item.office_address,
           postal_code: item.postal_code,
           tollfree: item.tollfree
         }));
 
-        // Deduplicate based on office_address and postal_code
         const uniqueData = Object.values(filteredData.reduce((acc, cur) => {
           const key = `${cur.office_address}|${cur.postal_code}`;
           acc[key] = acc[key] || cur;
@@ -31,13 +37,21 @@ function App() {
 
         setNovaScotiaData(uniqueData);
 
-        // Once Nova Scotia data is set, fetch weather data
-        const apiKey = '2ea9a21e0ce9a9119507d3331b6a32ff'; // Use your OpenWeather API Key
+        // Proceed to fetch weather data
+        const apiKey = '2ea9a21e0ce9a9119507d3331b6a32ff'; // Replace with your OpenWeather API Key
         const weatherUrl = `https://api.openweathermap.org/data/2.5/weather?q=${region}&appid=${apiKey}&units=metric`;
         return fetch(weatherUrl);
       })
-      .then(response => response.json())
+      .then(response => {
+        if(response) {
+          return response.json();
+        }
+        return null;
+      })
       .then(weather => {
+        if (!weather) {
+          return; // Early return if there is no response for weather data
+        }
         // Process and set weather data
         const formattedWeather = {
           temperature: weather.main.temp,
@@ -50,8 +64,11 @@ function App() {
   };
 
   const formatRegionName = (regionName) => {
-    return regionName.charAt(0).toUpperCase() + regionName.slice(1).toLowerCase();
+    return regionName.split(' ')
+                     .map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
+                     .join(' ');
   };
+  
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -72,12 +89,14 @@ function App() {
         </label>
         <button type="submit">Submit</button>
       </form>
-      {novaScotiaData && (
+      {typeof novaScotiaData === 'string' ? (
+        <p>{novaScotiaData}</p>
+      ) : novaScotiaData ? (
         <div>
           <h2>Nova Scotia Data:</h2>
           <pre>{JSON.stringify(novaScotiaData, null, 2)}</pre>
         </div>
-      )}
+      ) : null}
       {weatherData && (
         <div>
           <h2>Weather Data:</h2>
