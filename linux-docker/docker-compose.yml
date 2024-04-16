@@ -1,0 +1,13 @@
+version: '3.8'  # Specifies the Docker Compose file version
+
+services:
+  web:
+    image: apache-web:latest  # The name of the Docker image to use
+    build: .  # Build the Docker image using the Dockerfile in the current directory
+    ports:
+      - "8080:80"  # Map port 80 inside the container to port 8080 on the host
+    volumes:
+      - ./my-website:/usr/local/apache2/htdocs/  # Mount the host directory './my-website' into the container
+    # The 'deploy' section previously here is removed because it's more relevant for swarm mode deployments
+
+
