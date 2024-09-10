@@ -24,5 +24,5 @@ int* twoSum(int* nums, int numsSize, int target, int* returnSize) {
     }
     free(remainder);
     *returnSize = 0;
-    return NULL;
+    return NULl;
 } 

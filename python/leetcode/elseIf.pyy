@@ -1,0 +1,10 @@
+# Define a variable with an integer value
+number = 10
+
+# Check the value of the number and print a message based on the condition
+if number < 0:
+    print("The number is negative.")
+elif number == 0:
+    print("The number is zero.")
+else:
+    print("The number is positive.")

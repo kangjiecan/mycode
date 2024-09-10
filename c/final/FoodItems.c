@@ -24,7 +24,7 @@ FoodItem *createFoodItem(void)
     }
 
     printf("Enter calorie count: ");
-    if (scanf("%lu", &item->calories) != 1)
+    if (scanf("%d", &item->calories) != 1)
     {
         free(item);
         return NULL;
@@ -46,6 +46,6 @@ void displayFoodItem( FoodItem *item)
     }
     else
     {
-        printf("%s: %lu calories\n", item->name, item->calories);
+        printf("%s: %d calories\n", item->name, item->calories);
     }
 }

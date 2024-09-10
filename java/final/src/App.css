@@ -1,0 +1,47 @@
+/* App.css */
+.search-bar {
+  /* Styles for the search input */
+}
+
+.submit-button {
+  /* Styles for the submit button */
+}
+
+.location-search-results {
+  /* Styles for the location search results container */
+}
+
+.location-result-item {
+  
+
+    padding-left: 30px; /* Sets the left padding to 30 pixels */
+  
+  }
+
+.weather-results {
+  padding-top: 20px;
+  padding-left: 30px}
+
+.weather-icon {
+padding-left: 30px}
+
+
+.search-form {
+  padding-top: 20px;
+  padding-left: 30px;
+}
+
+.App {
+  background-color: #d3e1e3; 
+
+    margin: auto;
+    padding: 20px;
+    width: 100%; 
+    max-width: 4000px; 
+    
+}
+
+.submit-button {
+  background-color: aquamarine;
+
+}

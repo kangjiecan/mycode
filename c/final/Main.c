@@ -3,16 +3,16 @@
 #include <stdlib.h>
 #include <string.h>
 
-#define MAX_FOOD_ITEMS 500
+#define MAX_FOOD_ITEMS 550
 
 FoodItem* foodItems[MAX_FOOD_ITEMS];
-size_t foodItemCount = 0;
+int foodItemCount = 0;
 
 void printAllFoodItems() {
     if (foodItemCount == 0) {
         printf("No food items available.\n");
     } else {
-        for (size_t i = 0; i < foodItemCount; i++) {
+        for (int i = 0; i < foodItemCount; i++) {
             displayFoodItem(foodItems[i]);
         }
     }
@@ -28,7 +28,7 @@ void addNewFoodItem() {
         printf("Failed to add new food item.\n");
     } else {
         foodItems[foodItemCount++] = newItem;
-        printf("Food item added successfully.\n");
+        printf("Food item added.\n");
     }
 }
 
@@ -44,7 +44,7 @@ void sortItemsByCalories() {
 }
 
 void deleteItemByName(const char* name) {
-    for (size_t i = 0; i < foodItemCount; i++) {
+    for (int i = 0; i < foodItemCount; i++) {
         if (strcmp(foodItems[i]->name, name) == 0) {
             free(foodItems[i]);
             foodItems[i] = foodItems[--foodItemCount];
@@ -87,7 +87,7 @@ int main() {
                 deleteItemByName(itemName);
                 break;
             case 5:
-                for (size_t i = 0; i < foodItemCount; i++) {
+                for (int i = 0; i < foodItemCount; i++) {
                     free(foodItems[i]);
                 }
                 printf("Exiting the program.\n");

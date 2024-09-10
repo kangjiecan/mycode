@@ -1,0 +1,74 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Terminal",
+            "request": "launch",
+            "mainClass": "Terminal",
+            "projectName": "myCode_1d5d1b9"
+        },
+        {
+            "type": "java",
+            "name": "Lambda",
+            "request": "launch",
+            "mainClass": "Lambda",
+            "projectName": "myCode_1d5d1b9"
+        },
+        {
+            "type": "java",
+            "name": "MyCivic",
+            "request": "launch",
+            "mainClass": "MyCivic",
+            "projectName": "myCode_1d5d1b9"
+        },
+        {
+            "type": "java",
+            "name": "RacingCar",
+            "request": "launch",
+            "mainClass": "RacingCar",
+            "projectName": "myCode_1d5d1b9"
+        },
+        {
+            "type": "java",
+            "name": "car",
+            "request": "launch",
+            "mainClass": "car",
+            "projectName": "myCode_1d5d1b9"
+        },
+        {
+            "type": "java",
+            "name": "Car",
+            "request": "launch",
+            "mainClass": "Car",
+            "projectName": "myCode_1d5d1b9"
+        },
+        {
+            "type": "java",
+            "name": "HelloJava",
+            "request": "launch",
+            "mainClass": "HelloJava",
+            "projectName": "myCode_1d5d1b9"
+        },
+        {
+            "type": "java",
+            "name": "Main",
+            "request": "launch",
+            "mainClass": "Main",
+            "projectName": "myCode_1d5d1b9"
+        },
+        {
+            "name": "C/C++: clang build and debug active file",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${fileDirname}/${fileBasenameNoExtension}",
+            "args": [],
+            "stopAtEntry": false,
+            "cwd": "${fileDirname}",
+            "environment": [],
+            "externalConsole": false,
+            "MIMode": "lldb",
+            "preLaunchTask": "C/C++: clang build active file"
+        }
+    ],
+    "version": "2.0.0"
+}

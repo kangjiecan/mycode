@@ -1,0 +1,15 @@
+/Users/kangjiecan/myCode/c#/MyFirstApp/bin/Debug/net8.0/MyFirstApp
+/Users/kangjiecan/myCode/c#/MyFirstApp/bin/Debug/net8.0/MyFirstApp.deps.json
+/Users/kangjiecan/myCode/c#/MyFirstApp/bin/Debug/net8.0/MyFirstApp.runtimeconfig.json
+/Users/kangjiecan/myCode/c#/MyFirstApp/bin/Debug/net8.0/MyFirstApp.dll
+/Users/kangjiecan/myCode/c#/MyFirstApp/bin/Debug/net8.0/MyFirstApp.pdb
+/Users/kangjiecan/myCode/c#/MyFirstApp/obj/Debug/net8.0/MyFirstApp.GeneratedMSBuildEditorConfig.editorconfig
+/Users/kangjiecan/myCode/c#/MyFirstApp/obj/Debug/net8.0/MyFirstApp.AssemblyInfoInputs.cache
+/Users/kangjiecan/myCode/c#/MyFirstApp/obj/Debug/net8.0/MyFirstApp.AssemblyInfo.cs
+/Users/kangjiecan/myCode/c#/MyFirstApp/obj/Debug/net8.0/MyFirstApp.csproj.CoreCompileInputs.cache
+/Users/kangjiecan/myCode/c#/MyFirstApp/obj/Debug/net8.0/MyFirstApp.sourcelink.json
+/Users/kangjiecan/myCode/c#/MyFirstApp/obj/Debug/net8.0/MyFirstApp.dll
+/Users/kangjiecan/myCode/c#/MyFirstApp/obj/Debug/net8.0/refint/MyFirstApp.dll
+/Users/kangjiecan/myCode/c#/MyFirstApp/obj/Debug/net8.0/MyFirstApp.pdb
+/Users/kangjiecan/myCode/c#/MyFirstApp/obj/Debug/net8.0/MyFirstApp.genruntimeconfig.cache
+/Users/kangjiecan/myCode/c#/MyFirstApp/obj/Debug/net8.0/ref/MyFirstApp.dll

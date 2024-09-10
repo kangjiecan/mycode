@@ -1,0 +1,13 @@
+mkdir MathOperationsSolution
+cd MathOperationsSolution
+dotnet new sln
+
+dotnet new console -n MathOperations
+
+dotnet sln add MathOperations/MathOperations.csproj
+
+dotnet new xunit -n MathOperations.Tests
+
+dotnet sln add MathOperations.Tests/MathOperations.Tests.csproj
+
+dotnet add MathOperations.Tests/MathOperations.Tests.csproj reference MathOperations/MathOperations.csproj

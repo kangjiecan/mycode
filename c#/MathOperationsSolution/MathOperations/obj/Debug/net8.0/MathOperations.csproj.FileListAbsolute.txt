@@ -1,0 +1,15 @@
+/Users/kangjiecan/myCode/c#/MathOperationsSolution/MathOperations/bin/Debug/net8.0/MathOperations
+/Users/kangjiecan/myCode/c#/MathOperationsSolution/MathOperations/bin/Debug/net8.0/MathOperations.deps.json
+/Users/kangjiecan/myCode/c#/MathOperationsSolution/MathOperations/bin/Debug/net8.0/MathOperations.runtimeconfig.json
+/Users/kangjiecan/myCode/c#/MathOperationsSolution/MathOperations/bin/Debug/net8.0/MathOperations.dll
+/Users/kangjiecan/myCode/c#/MathOperationsSolution/MathOperations/bin/Debug/net8.0/MathOperations.pdb
+/Users/kangjiecan/myCode/c#/MathOperationsSolution/MathOperations/obj/Debug/net8.0/MathOperations.GeneratedMSBuildEditorConfig.editorconfig
+/Users/kangjiecan/myCode/c#/MathOperationsSolution/MathOperations/obj/Debug/net8.0/MathOperations.AssemblyInfoInputs.cache
+/Users/kangjiecan/myCode/c#/MathOperationsSolution/MathOperations/obj/Debug/net8.0/MathOperations.AssemblyInfo.cs
+/Users/kangjiecan/myCode/c#/MathOperationsSolution/MathOperations/obj/Debug/net8.0/MathOperations.csproj.CoreCompileInputs.cache
+/Users/kangjiecan/myCode/c#/MathOperationsSolution/MathOperations/obj/Debug/net8.0/MathOperations.sourcelink.json
+/Users/kangjiecan/myCode/c#/MathOperationsSolution/MathOperations/obj/Debug/net8.0/MathOperations.dll
+/Users/kangjiecan/myCode/c#/MathOperationsSolution/MathOperations/obj/Debug/net8.0/refint/MathOperations.dll
+/Users/kangjiecan/myCode/c#/MathOperationsSolution/MathOperations/obj/Debug/net8.0/MathOperations.pdb
+/Users/kangjiecan/myCode/c#/MathOperationsSolution/MathOperations/obj/Debug/net8.0/MathOperations.genruntimeconfig.cache
+/Users/kangjiecan/myCode/c#/MathOperationsSolution/MathOperations/obj/Debug/net8.0/ref/MathOperations.dll
