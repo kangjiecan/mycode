@@ -1,147 +1,119 @@
-// src/repo/userRepo.js
-
 const { PrismaClient } = require("@prisma/client");
+const User = require("../models/User"); // Adjust the path as needed
 const prisma = new PrismaClient();
-const User = require("../model/User");
 
-async function saveUserInstance(newUser) {
-  try {
-    console.log("Attempting to find existing user...");
-
-    const existingUser = await prisma.user.findUnique({
-      where: { name: newUser.getName() },
-    });
-
-    if (existingUser) {
-      console.error("Error: Username already exists. Please choose a different username.");
-      throw new Error("Username already exists. Please choose a different username.");
+class UserRepo {
+ 
+    async createUser(name, password) {
+      try {
+        // First, check if the username already exists
+        const existingUser = await prisma.user.findUnique({
+          where: { name },
+        });
+  
+        if (existingUser) {
+          throw new Error('Username already exists');
+        }
+  
+        // Create the new user without specifying the ID
+        await prisma.user.create({
+          data: {
+            name,
+            password,
+          },
+        });
+  
+        // Retrieve the created user to get the auto-generated ID
+        const createdUser = await prisma.user.findUnique({
+          where: { name },
+        });
+  
+        if (!createdUser) {
+          throw new Error('Failed to retrieve created user');
+        }
+  
+        // Return a User instance
+        return User.createWithId(createdUser.id, createdUser.name, createdUser.password);
+      } catch (error) {
+        console.error('Error in createUser:', error);
+        throw error;
+      }
     }
 
-    console.log("No existing user found, creating new user...");
+  async updatePassword(name, newPassword) {
+    try {
+      const existingUser = await prisma.user.findUnique({
+        where: { name },
+      });
+      if (!existingUser) {
+        throw new Error("User not found");
+      }
 
-    const userSave = await prisma.user.create({
-      data: {
-        id: newUser.getId(),
-        name: newUser.getName(),
-        password: newUser.getPassword(),
-      },
-    });
-
-    console.log("User created successfully:", userSave);
-    return new User(userSave.id, userSave.name, userSave.password);
-
-  } catch (error) {
-    console.error("An error occurred while creating the user:", error.message);
-    throw error;  // Ensure the error is propagated
-  }
-}
-
-async function getUserByName(userName) {
-  try {
-    const user = await prisma.user.findUnique({
-      where: {
-        name: userName,
-      },
-    });
-
-    if (!user) {
-      console.log(`User with name ${userName} not found.`);
-      return null;
+      const updatedUser = await prisma.user.update({
+        where: { name },
+        data: { password: newPassword },
+      });
+      return User.createWithId(
+        updatedUser.id,
+        updatedUser.name,
+        updatedUser.password
+      );
+    } catch (error) {
+      console.error("Error in updatePassword:", error);
+      throw error;
     }
-
-    return new User(user.id, user.name, user.password);
-  } catch (error) {
-    console.error(`Error fetching user by name: ${userName}`, error);
-    throw error;
-  } finally {
-    await prisma.$disconnect();
   }
-}
 
-async function getLastUserId() {
-  try {
-    const lastUser = await prisma.user.findFirst({
-      orderBy: {
-        id: "desc",
-      },
-    });
-
-    if (!lastUser) {
-      console.log("No users found in the database");
-      return 0;
+  async getUserByName(name) {
+    try {
+      const user = await prisma.user.findUnique({
+        where: { name },
+      });
+      if (!user) {
+        throw new Error("User not found");
+      }
+      return User.createWithId(user.id, user.name, user.password);
+    } catch (error) {
+      console.error("Error in getUserByName:", error);
+      throw error;
     }
-
-    console.log(`Last user ID: ${lastUser.id}`);
-    return lastUser.id;
-  } catch (error) {
-    console.error("Error fetching the last user ID:", error);
-    throw error;
   }
-}
 
-async function updateUserPasswordByUsername(userName, newPassword) {
-  try {
-    const user = await prisma.user.findUnique({
-      where: {
-        name: userName,
-      },
-    });
-
-    if (!user) {
-      console.log(`User with name ${userName} not found.`);
-      return "User not found";
+  async deleteUserByName(name) {
+    try {
+      const existingUser = await prisma.user.findUnique({
+        where: { name },
+      });
+      if (!existingUser) {
+        throw new Error("User not found");
+      }
+      const deletedUser = await prisma.user.delete({
+        where: { name },
+      });
+      return User.createWithId(
+        deletedUser.id,
+        deletedUser.name,
+        deletedUser.password
+      );
+    } catch (error) {
+      console.error("Error in deleteUserByName:", error);
+      throw error;
     }
-
-    await prisma.user.update({
-      where: {
-        name: userName,
-      },
-      data: {
-        password: newPassword,
-      },
-    });
-
-    return `Password updated successfully for user: ${userName}`;
-  } catch (error) {
-    console.error(`Error updating password for user ${userName}:`, error);
-    return "Error updating password";
-  } finally {
-    await prisma.$disconnect();
   }
-}
 
-async function deleteUserByName(userName) {
-  try {
-    const user = await prisma.user.findUnique({
-      where: {
-        name: userName,
-      },
-    });
-
-    if (!user) {
-      console.log(`User with name ${userName} not found.`);
-      return "User not found";
+  async disconnect() {
+    try {
+      await this.prisma.$disconnect();
+      console.log('Successfully disconnected from the database');
+    } catch (error) {
+      console.error('Error disconnecting from the database:', error);
+      throw error;
     }
-
-    await prisma.user.delete({
-      where: {
-        name: userName,
-      },
-    });
-
-    return `User ${userName} deleted successfully`;
-  } catch (error) {
-    console.error(`Error deleting user ${userName}:`, error);
-    return "Error deleting user";
-  } finally {
-    await prisma.$disconnect();
   }
 }
+  
 
-module.exports = {
-  saveUserInstance,
-  getLastUserId,
-  getUserByName,
-  updateUserPasswordByUsername,
-  deleteUserByName,
-};
+
+
+
+module.exports = new UserRepo();

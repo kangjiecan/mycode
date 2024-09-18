@@ -1,46 +1,93 @@
-// src/services/photoService.js
+// src/services/imageService.js
+const { PrismaClient } = require("@prisma/client");
+const Photo = require("../models/Photo");
 
-const fs = require('fs');
-const path = require('path');
+const prisma = new PrismaClient();
 
-// Base directory for public user photos
-const baseDir = path.join(__dirname, '../../public/userPhotos');
-
-function createUserFolder(user) {
-  const folderName = user.getName(); 
-  const userFolder = path.join(baseDir, folderName);
-
-  if (!fs.existsSync(userFolder)) {
-    fs.mkdirSync(userFolder, { recursive: true });
-    console.log(`Folder created for user: ${folderName}`);
-  } else {
-    console.log(`Folder already exists for user: ${folderName}`);
+async function uploadPhoto(userId, imagePath) {
+  try {
+    const newPhoto = await prisma.photo.create({
+      data: {
+        path: imagePath,
+        userId: userId,
+      },
+    });
+    console.log('New photo created:', newPhoto);
+    return Photo.fromDatabase(newPhoto);
+  } catch (error) {
+    console.error('Error creating photo:', error);
+    throw error;
   }
-
-  return userFolder;
 }
 
-async function deleteFolderByName(folderName) {
-  const folderPath = path.join(__dirname, '../../public/userPhotos', folderName); // Adjust the path based on your folder structure
-
+async function getPhotoById(photoId) {
   try {
-    // Check if the folder exists
-    if (fs.existsSync(folderPath)) {
-      // Use fs.rm to delete the folder recursively
-      await fs.promises.rm(folderPath, { recursive: true, force: true });
-      console.log(`Folder ${folderName} deleted successfully.`);
-      return `Folder ${folderName} deleted successfully.`;
-    } else {
-      console.log(`Folder ${folderName} not found.`);
-      return `Folder ${folderName} not found.`;
-    }
+    const photo = await prisma.photo.findUnique({
+      where: { id: photoId },
+    });
+    return photo ? Photo.fromDatabase(photo) : null;
   } catch (error) {
-    console.error(`Error deleting folder ${folderName}:`, error);
-    return `Error deleting folder ${folderName}.`;
+    console.error('Error fetching photo:', error);
+    throw error;
   }
+}
+
+async function removePhotoById(photoId) {
+  try {
+    const deletedPhoto = await prisma.photo.delete({
+      where: { id: photoId },
+    });
+    console.log('Photo record deleted:', deletedPhoto);
+    return Photo.fromDatabase(deletedPhoto);
+  } catch (error) {
+    if (error.code === 'P2025') {
+      console.error(`Error: Photo with id ${photoId} not found`);
+      return null;
+    }
+    console.error('Error deleting photo:', error);
+    throw error;
+  }
+}
+
+async function getPhotosByUserId(userId) {
+  try {
+    const photos = await prisma.photo.findMany({
+      where: { userId: userId },
+    });
+    console.log(`Found ${photos.length} photos for user ${userId}`);
+    return photos.map(photo => Photo.fromDatabase(photo));
+  } catch (error) {
+    console.error('Error fetching photos for user:', error);
+    throw error;
+  }
+}
+
+
+
+async function getAllImageFromDatabase(skip = 0, take = 50) {
+  try {
+    const photos = await prisma.photo.findMany({
+      skip: skip,
+      take: take,
+      orderBy: { id: 'desc' },
+    });
+    console.log(`Retrieved ${photos.length} photos from the database`);
+    return photos.map(photo => Photo.fromDatabase(photo));
+  } catch (error) {
+    console.error('Error fetching all photos from database:', error);
+    throw error;
+  }
+}
+
+async function disconnectPrisma() {
+  await prisma.$disconnect();
 }
 
 module.exports = {
-  createUserFolder,
-  deleteFolderByName,
+  uploadPhoto,
+  getPhotoById,
+  removePhotoById,
+  getPhotosByUserId,
+  getAllImageFromDatabase,
+  disconnectPrisma,
 };

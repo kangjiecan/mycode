@@ -1,29 +1,22 @@
-// src/server.js
-
 const express = require('express');
+const path = require('path');
 const app = express();
 const port = 3000;
 
-// Correctly import the createUser handler from the userController
-const { createUser,deleteUser, getUserInfoByName,updatePassword } = require('./controllers/userController'); // Adjust path as necessary
+// Import the routes
+const userRoutes = require('./routes/allIncommingRoutes');
 
-// Middleware to parse JSON
+// Middleware
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));  
+app.use(express.static(path.join(__dirname, '..', '..','public')));  
 
-// Define a simple route
-app.get('/', (req, res) => {
-  res.send('Hello, world!');
-});
 
-// Define the user creation route
-app.post('/api/users/create', createUser);
-app.delete('/api/users/delete/:userName', deleteUser) // Ensure the handler is correctly imported
-app.get('/api/users/userInfo/:userName', getUserInfoByName);
-app.put('/api/users/updatePassword/', updatePassword);
-//app.put('/api/users/updatePassword', hangleUpdateUserPassword);
-// Start the server
+app.use('/', userRoutes);
+
+
 app.listen(port, () => {
   console.log(`Server is running on http://localhost:${port}`);
 });
 
-module.exports = app; // Export the app for testing
+module.exports = app; 

@@ -1,41 +1,56 @@
-// src/services/uploadService.js
-
 const multer = require('multer');
 const path = require('path');
 
-// Define the storage configuration
+
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    // Set the folder to save uploaded files
-    cb(null, path.join(__dirname, '../../public/userPhotos')); // Adjust the path as necessary
+    cb(null, path.join(__dirname, '..', '..','public', 'userImages'));
   },
   filename: function (req, file, cb) {
-    // Save files with a timestamp and the original file name
-    cb(null, `${Date.now()}-${file.originalname}`);
-  },
+    const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
+    cb(null, 'photo-' + uniqueSuffix + path.extname(file.originalname));
+  }
 });
 
-// Create the multer upload instance with storage configuration and file size limit
-const upload = multer({
+const upload = multer({ 
   storage: storage,
-  limits: { fileSize: 1024 * 1024 * 5 }, // Limit file size to 5MB
-}).single('file'); // Use .single('file') for single file uploads with the form key 'file'
+  limits: { fileSize: 5 * 1024 * 1024 } // 5MB limit
+});
 
-// Middleware function to handle file uploads
-function uploadFile(req, res, next) {
-  upload(req, res, function (err) {
-    if (err instanceof multer.MulterError) {
-      // Handle Multer-specific errors
-      return res.status(400).send(`Multer Error: ${err.message}`);
-    } else if (err) {
-      // Handle other errors
-      return res.status(500).send(`Server Error: ${err.message}`);
+const uploadMiddleware = upload.single('photo');
+
+function handleUpload(req, res, next) {
+  console.log('Handling upload request');
+  uploadMiddleware(req, res, function (err) {
+    if (err) {
+      console.error('Upload error:', err);
+      return res.status(500).json({ error: 'An unknown error occurred: ' + err.message });
     }
-    // Proceed to the next middleware or route handler if successful
+    
+    if (!req.file) {
+      console.log('No file uploaded');
+      return res.status(400).json({ error: 'No file uploaded.' });
+    }
+    
+    const userId = req.body.userId || 'unknown';
+    const filePath = '/userImages/' + req.file.filename;
+    
+    console.log('File uploaded successfully:', {
+      userId: userId,
+      filePath: filePath,
+      originalName: req.file.originalname,
+      size: req.file.size
+    });
+    
+    req.uploadedFile = {
+      userId: userId,
+      filePath: filePath
+    };
+    
     next();
   });
 }
 
 module.exports = {
-  uploadFile,
+  handleUpload
 };
