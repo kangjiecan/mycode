@@ -1,8 +1,8 @@
-class Photo {
-  constructor(name, path) {
-    this.id = null;
-    this.title = title;
-    this.uri = uri;
+class Image {
+  constructor(id,name, path) {
+    this.id = id;
+    this.name= name;
+    this.path = path;
   }
 
   setId(id) {
@@ -26,11 +26,9 @@ class Photo {
     return this.path;
   }
 
-  static createPhoto(id, name, path) {
-    this.id = id;
-    this.name = name;
-    this.path = path;
+
 
   }
-}
+
     // Static method
+module.exports = Image;

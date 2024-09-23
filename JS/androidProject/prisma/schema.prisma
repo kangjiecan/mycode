@@ -13,6 +13,6 @@ generator client{
 
 model image{
   id   Int    @id @default(autoincrement())
-  name String
+  name String @unique
   path String
 }
