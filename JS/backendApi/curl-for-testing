@@ -9,18 +9,19 @@ update
 
 curl -X PUT http://localhost:3000/api/photo/update \
   -F "file=@test.jpg" \
-  -F "oldFileName=1727327808170-780-test.jpg "
+  -F "oldFileName=1727363781011-628-test.jpg"
 
 
 read all
-curl -X GET http://localhost:3000/api/photo \
+curl -X GET http://localhost:3000/api/photo/all 
 
  
 read one by id
-curl -X GET http://localhost:3000/api/photo/read/110 \
+curl -X GET http://localhost:3000/api/photo/read -H "Content-Type: application/json" -d '{"id": ***}'
+
 
 delete
-curl -X DELETE http://localhost:3000/api/photo/delete/110 \
+curl -X DELETE http://localhost:3000/api/photo/delete -H "Content-Type: application/json" -d '{"id": 117}'
 
 
 

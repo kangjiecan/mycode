@@ -10,7 +10,7 @@ const fileHandler = new FileHandler();  // Instantiate correctly
     await imageControl.postImage(req, res);
 });
 */
-router.get('/api/photo/read/:id', async (req, res) => {
+router.get('/api/photo/read/', async (req, res) => {
     await imageControl.getImage(req, res);
 });
 
@@ -18,7 +18,7 @@ router.get('/api/photo/all', async (req, res) => {
     await imageControl.getAllImages(req, res);
 });   
 
-router.delete('/api/photo/delete/:id', async (req, res) => {
+router.delete('/api/photo/delete/', async (req, res) => {
     await imageControl.deleteImage(req, res);
 }); 
 

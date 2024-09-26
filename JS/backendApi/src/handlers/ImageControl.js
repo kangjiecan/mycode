@@ -27,7 +27,7 @@ class ImageControl {
   }
 
   async getImage(req, res) {
-    const id = parseInt(req.params.id, 10);
+    const id = parseInt(req.body.id, 10);
     if (!id) {
       res
         .status(400)
@@ -73,7 +73,7 @@ class ImageControl {
   }
 
   async deleteImage(req, res) {
-    const id = parseInt(req.params.id, 10);
+    const id = parseInt(req.body.id, 10);
     console.log(id);
     if (!id) {
       res

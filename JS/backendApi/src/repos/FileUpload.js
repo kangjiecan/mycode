@@ -28,12 +28,9 @@ class FileService {
 
     extension = this.getExtensionFromMimetype(file.mimetype);
 
-    console.log("Field name:", fieldName);
-    console.log("Original filename:", originalname);
-    console.log("File extension:", extension);
+    
 
     const fileName = `${timestamp}-${randomValue}-${path.basename(originalname, extension)}${extension}`;
-    console.log("Generated file name:", fileName);
     return fileName;
   }
 
@@ -54,7 +51,6 @@ class FileService {
 
   getFilePath() {
     const pathname=path.join(this.destinationFolder,this.fileName);
-    console.log("Pathname:",pathname);
     return pathname
     
   }

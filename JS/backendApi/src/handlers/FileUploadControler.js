@@ -1,4 +1,3 @@
-const express = require("express");
 const FileService = require("../repos/FileUpload");
 const ImageRepo = require("../repos/ImageRepo");
 const imageRepo = new ImageRepo();
@@ -16,9 +15,15 @@ class FileHandler {
         return res.status(400).json({ message: err.message });
       }
 
-      console.log(req.body.filename + " *****");
-      console.log("File uploaded:", this.fileService.getStoredFileName());
+      if (!req.body.FieldName) {
+        return res
+          .status(400)
+          .json({
+            message: "Missing a fieldName which will form a new file name"
+          });
+      }
 
+      
       try {
         const newImage = await imageRepo.postImage(
           this.fileService.getStoredFileName(),
@@ -26,9 +31,10 @@ class FileHandler {
         );
 
         return res.status(201).json({
-          message: "File uploaded and image saved successfully",
+          message: "File uploaded and data saved successfully",
           fileName: newImage.name,
           imageId: newImage.id,
+          path:this.fileService.getFilePath(),
         });
       } catch (postImageErr) {
         console.error("Error in postImage:", postImageErr);
@@ -45,6 +51,11 @@ class FileHandler {
         console.error("Error during file upload:", err);
         return res.status(400).json({ message: err.message });
       }
+      if (!req.body.oldFileName) {
+        return res
+          .status(400)
+          .json({ message: "Missing oldFileName to update" });
+      }
 
       console.log("File uploaded:", this.fileService.getStoredFileName());
       try {
@@ -54,7 +65,7 @@ class FileHandler {
           this.fileService.getFilePath()
         );
         return res.status(201).json({
-          message: "File uploaded and image updated successfully",
+          message: "File uploaded and database updated successfully",
           fileName: this.fileService.getStoredFileName(),
           imageId: req.body.imageId,
         });
@@ -64,8 +75,6 @@ class FileHandler {
           .status(500)
           .json({ message: "Error updating image information" });
       }
-
-     
     });
   }
 }
