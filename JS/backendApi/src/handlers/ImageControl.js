@@ -1,13 +1,15 @@
 const ImageRepo = require("../repos/ImageRepo");
 const Image = require("../models/Image");
+const FileManager = require("../repos/FileManager");
+const { path } = require("path");
+const fileManager = new FileManager();
 
 class ImageControl {
   constructor() {
     this.imageRepo = new ImageRepo();
   }
 
-  async postImage(req, res) {
-    const { name, path } = req.body;
+  async postImage(name, path) {
     if (!name || !path) {
       return res.status(400).json({
         message: "Bad Request: 'name' and 'path' are required fields",
@@ -80,7 +82,12 @@ class ImageControl {
       return;
     }
     try {
-      await this.imageRepo.deleteImage(id);
+      const imageToDelete=await this.imageRepo.getImage(id);
+      const newimage=new FileManager(imageToDelete.id,imageToDelete.name,imageToDelete.path);
+      newimage.delfile(this.path);
+      await this.imageRepo.deleteImage(imageToDelete.id);
+      
+
       res
         .status(200)
         .json({ message: `Image ${id} was successfully deleted` });

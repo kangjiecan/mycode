@@ -88,7 +88,6 @@ class ImageRepo {
 
   async deleteImage(id) {
     try {
-     
       const deletedImage = await this.prisma.image.delete({
         where: { id: id },
       });
@@ -104,11 +103,11 @@ class ImageRepo {
     }
   }
 
-  async updateImage(id, newName) {
+  async updateImage(name, newName,newPath) {  
     try {
       const updatedImage = await this.prisma.image.update({
-        where: { id: id },
-        data: { name: newName },
+        where: { name: name },
+        data: { name: newName, path: newPath },
       });
       return updatedImage;
     } catch (error) {
