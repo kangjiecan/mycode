@@ -58,7 +58,7 @@ class ImageRepo {
         where: { id: id },
       });
       if (!imageData) {
-        throw new Error(`Image with ID "${id}" not found`);
+        throw new Error(`Image with ID ${id} not found`);
       }
       return imageData;
     } catch (error) {
@@ -67,7 +67,27 @@ class ImageRepo {
         throw new Error(`Database error: ${error.code}`);
       } else {
         console.error("Unexpected error:", error);
-        throw error; // Re-throw the original error
+        throw error;
+      }
+    }
+  }
+
+  async getImageByName(name) {
+    try {
+      const imageData = await this.prisma.image.findUnique({
+        where: { name: name },
+      });
+      if (!imageData) {
+        throw new Error(`Image with name ${name} not found`);
+      }
+      return imageData;
+    } catch (error) {
+      if (error instanceof Prisma.PrismaClientKnownRequestError) {
+        console.error(`Prisma error: ${error.code}, ${error.meta}`);
+        throw new Error(`Database error: ${error.code}`);
+      } else {
+        console.error("Unexpected error:", error);
+        throw error;
       }
     }
   }
@@ -103,7 +123,7 @@ class ImageRepo {
     }
   }
 
-  async updateImage(name, newName,newPath) {  
+  async updateImage(name, newName, newPath) {
     try {
       const updatedImage = await this.prisma.image.update({
         where: { name: name },

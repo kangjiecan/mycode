@@ -1,21 +1,38 @@
 const multer = require("multer");
 const path = require("path");
 
-class FileService {
+class FileUploadService {
   constructor(destinationFolder = path.join(process.cwd(), "/public/images")) {
     this.destinationFolder = destinationFolder;
     this.fileName = "";
-    this.storage = multer.diskStorage({
+  }
+
+  upLoader() {
+    const storage = multer.diskStorage({
       destination: (req, file, cb) => {
         cb(null, this.destinationFolder);
       },
       filename: (req, file, cb) => {
-        const fileName = this.generateFileName(file);
-        this.fileName = fileName;
-        cb(null, fileName);
+        this.fileName = `${Date.now()}-${file.originalname}`;
+        cb(null, this.fileName);
       },
     });
-    this.upload = multer({ storage: this.storage });
+
+    return multer({ storage: storage });
+  }
+
+  updater(){
+    const storage = multer.diskStorage({
+      destination: (req, file, cb) => {
+        cb(null, this.destinationFolder);
+      },
+      filename: (req, file, cb) => {
+        this.fileName = `${Date.now()}-${Math.floor(Math.random() * 1000)}-${file.originalname}`;
+        cb(null, this.fileName);
+      },
+    });
+    
+    return multer({ storage: storage });
   }
 
   generateFileName(file) {
@@ -28,9 +45,10 @@ class FileService {
 
     extension = this.getExtensionFromMimetype(file.mimetype);
 
-    
-
-    const fileName = `${timestamp}-${randomValue}-${path.basename(originalname, extension)}${extension}`;
+    const fileName = `${timestamp}-${randomValue}-${path.basename(
+      originalname,
+      extension
+    )}${extension}`;
     return fileName;
   }
 
@@ -50,11 +68,9 @@ class FileService {
   }
 
   getFilePath() {
-    const pathname=path.join(this.destinationFolder,this.fileName);
-    return pathname
-    
+    const pathname = path.join(this.destinationFolder, this.fileName);
+    return pathname;
   }
-  
 }
 
-module.exports = FileService;
+module.exports = FileUploadService;

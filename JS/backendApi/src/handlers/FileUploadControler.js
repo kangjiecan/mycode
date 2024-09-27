@@ -1,82 +1,94 @@
-const FileService = require("../repos/FileUpload");
+const FileService = require("../repos/FileUploadService");
 const ImageRepo = require("../repos/ImageRepo");
 const imageRepo = new ImageRepo();
-const fileService = new FileService();
+const FileUploadService = require("../repos/FileUploadService");
+const fileUpLoadService = new FileUploadService();
 
-class FileHandler {
+const FileManager = require("../repos/FileManager");
+
+class FileUpLoadControler {
   constructor() {
-    this.fileService = fileService;
+    this.imageRepo = new ImageRepo();
+    this.fileUploadService = new FileUploadService();
   }
 
   fileUpload(req, res) {
-    this.fileService.upload.single("file")(req, res, async (err) => {
+    fileUpLoadService.upLoader().single("file")(req, res, async (err) => {
       if (err) {
-        console.error("Error during file upload:", err);
-        return res.status(400).json({ message: err.message });
+        console.error("Error uploading file:", err);
+        return res.status(500).json({ message: "Internal Server Error" });
       }
 
-      if (!req.body.FieldName) {
-        return res
-          .status(400)
-          .json({
-            message: "Missing a fieldName which will form a new file name"
-          });
+      if (!req.file) {
+        return res.status(400).json({ message: "No file uploaded" });
       }
 
-      
+      const file = req.file;
+      const fileName = file.filename; // Multer already generated the filename
+      const filePath = fileUpLoadService.getFilePath();
+
       try {
-        const newImage = await imageRepo.postImage(
-          this.fileService.getStoredFileName(),
-          this.fileService.getFilePath()
-        );
+        await imageRepo.postImage(fileName, filePath);
+
+        let message = `File ${fileName} uploaded successfully`;
+        if (!req.body.FieldName || req.body.FieldName === undefined) {
+          message +=
+            ". Please set fieldName in the request body next time in order to better manage the file name";
+        }
 
         return res.status(201).json({
-          message: "File uploaded and data saved successfully",
-          fileName: newImage.name,
-          imageId: newImage.id,
-          path:this.fileService.getFilePath(),
+          message: message,
+          fileName: fileName,
+          filePath: filePath,
         });
-      } catch (postImageErr) {
-        console.error("Error in postImage:", postImageErr);
+      } catch (error) {
+        console.error("Error saving file information:", error);
         return res
           .status(500)
-          .json({ message: "Error saving image information" });
+          .json({ message: "Error saving file information" });
       }
     });
   }
 
-  fileUpdate(req, res) {
-    this.fileService.upload.single("file")(req, res, async (err) => {
+  async fileUpdater(req, res) {
+    fileUpLoadService.updater().single("file")(req, res, async (err) => {
       if (err) {
-        console.error("Error during file upload:", err);
-        return res.status(400).json({ message: err.message });
+        console.error("Error uploading file:", err);
+        return res.status(500).json({ message: "Internal Server Error" });
       }
-      if (!req.body.oldFileName) {
-        return res
-          .status(400)
-          .json({ message: "Missing oldFileName to update" });
-      }
-
-      console.log("File uploaded:", this.fileService.getStoredFileName());
       try {
-        await imageRepo.updateImage(
-          req.body.oldFileName,
-          this.fileService.getStoredFileName(),
-          this.fileService.getFilePath()
+        const file = req.file;
+        const fileName = file.filename; // Multer already generated the filename
+        const filePath = fileUpLoadService.getFilePath();
+        const fileToReplace = await imageRepo.getImageByName(
+          req.body.existingFileName
         );
+        await imageRepo.updateImage(fileToReplace.name, fileName, filePath);
+        const fileToDel = new FileManager(
+          fileToReplace.name,
+          fileToReplace.path
+        );
+        console.log(fileToReplace);
+        fileToDel.delfile();
         return res.status(201).json({
-          message: "File uploaded and database updated successfully",
-          fileName: this.fileService.getStoredFileName(),
-          imageId: req.body.imageId,
+          message: `New file ${fileName} update successfully`,
+          fileName: fileName,
+          filePath: filePath,
         });
-      } catch (updateImageErr) {
-        console.error("Error in updateImage:", updateImageErr);
+      } catch (error) {
+        if (error.message.includes("Image with name")) {
+          const errorUpload = new FileManager(fileUpLoadService.getStoredFileName(), fileUpLoadService.getFilePath());
+          console.log(errorUpload);
+          errorUpload.delfile();
+          return res.status(404).json({ message: error.message });
+        }
+        console.error("Error updating file information:", error);
         return res
           .status(500)
-          .json({ message: "Error updating image information" });
+          .json({ message: "Error updating file information" });
       }
     });
   }
 }
 
-module.exports = FileHandler;
+module.exports = FileUpLoadControler;

@@ -2,13 +2,12 @@ const fs = require("fs");
 const path = require("path");
 
 class FileManager {
-  constructor(id, name, path) {
-    this.id = id;
+  constructor(name, path) {
     this.name = name;
     this.path = path;
   }
 
-  delfile(path) {
+  delfile() {
     fs.unlink(this.path, (err) => {
       if (err) {
         console.error(err);
@@ -18,7 +17,7 @@ class FileManager {
     });
   }
 
-  updatefile(id, path, newName) {
+  rename(path, newName) {
     fs.rename(this.path, path, (err) => {
       if (err) {
         console.error(err);

@@ -28,18 +28,17 @@ class ImageControl {
 
   async getImage(req, res) {
     const id = parseInt(req.body.id, 10);
-    if (!id) {
-      res
+
+    if (id === NaN || id < 0) {
+      return res
         .status(400)
-        .json({ message: "Bad Request: 'id' is a required field" });
-      return;
+        .json({ message: "Bad Request: 'id' must be a valid number" });
     }
+
     try {
       const image = await this.imageRepo.getImage(id);
       if (image) {
         res.status(201).json({
-          id: image.id,
-          name: image.name,
           message: `Image ${image.name} ID ${image.id} from ${image.path} successfully retrieved`,
         });
         return {
@@ -51,8 +50,12 @@ class ImageControl {
         res.status(404).json({ message: "Image not found" });
       }
     } catch (error) {
-      console.error("Error retrieving image:", error);
-      res.status(500).json({ message: "Internal Server Error" });
+      if (error.message.includes("Image with ID")) {
+        res.status(404).json({ message: error.message });
+      } else {
+        console.error("Error retrieving image:", error);
+        res.status(500).json({ message: "Internal Server Error" });
+      }
     }
   }
 
@@ -82,23 +85,28 @@ class ImageControl {
       return;
     }
     try {
-      const imageToDelete=await this.imageRepo.getImage(id);
-      const newimage=new FileManager(imageToDelete.id,imageToDelete.name,imageToDelete.path);
+      const imageToDelete = await this.imageRepo.getImage(id);
+      const newimage = new FileManager(
+        imageToDelete.id,
+        imageToDelete.name,
+        imageToDelete.path
+      );
       newimage.delfile(this.path);
       await this.imageRepo.deleteImage(imageToDelete.id);
-      
 
-      res
-        .status(200)
-        .json({ message: `Image ${id} was successfully deleted` });
+      res.status(200).json({ message: `image ${id} was successfully deleted` });
     } catch (error) {
-      console.error("Error deleting image:", error);
-      res.status(500).json({ message: "Internal Server Error" });
+      if (error.message.includes("Image with ID")) {
+        res.status(404).json({ message: error.message });
+      } else {
+        console.error("Error deleting image:", error);
+        res.status(500).json({ message: "Internal Server Error" });
+      }
     }
   }
 
   async updateImage(req, res) {
-    const newName  = req.body.newName;
+    const newName = req.body.newName;
     const id = parseInt(req.body.id, 10);
     console.log(id);
     console.log(newName);

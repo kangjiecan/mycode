@@ -3,13 +3,13 @@ curl -X POST http://localhost:3000/api/photo/create \
   -F "file=@test.jpg" \
   -F "FieldName=abcd"
 
-
-
 update 
 
-curl -X PUT http://localhost:3000/api/photo/update \
-  -F "file=@test.jpg" \
-  -F "oldFileName=1727363781011-628-test.jpg"
+curl -X PUT \
+  -H "Content-Type: multipart/form-data" \
+  -F "file=@replace.jpg" \
+  -F "existingFileName=1727413405600-test.jpg" \
+  http://localhost:3000/api/photo/update
 
 
 read all
@@ -17,11 +17,10 @@ curl -X GET http://localhost:3000/api/photo/all
 
  
 read one by id
-curl -X GET http://localhost:3000/api/photo/read -H "Content-Type: application/json" -d '{"id": ***}'
+curl -X GET http://localhost:3000/api/photo/read -H "Content-Type: application/json" -d '{"id": 129}'
 
 
 delete
 curl -X DELETE http://localhost:3000/api/photo/delete -H "Content-Type: application/json" -d '{"id": 117}'
-
 
 
