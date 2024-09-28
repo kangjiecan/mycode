@@ -4,7 +4,7 @@ const ImageControl = require("../handlers/ImageControl");
 const imageControl = new ImageControl();
 const router = express.Router();
 const FileUpLoadControler = require("../handlers/FileUploadControler");
-const fileUpLoadControler = new FileUpLoadControler(); // Instantiate correctly
+const fileUpLoadControler = new FileUpLoadControler(); 
 
 router.get("/api/photo/read/", async (req, res) => {
   await imageControl.getImage(req, res);

@@ -13,7 +13,7 @@ class FileUploadService {
         cb(null, this.destinationFolder);
       },
       filename: (req, file, cb) => {
-        this.fileName = `${Date.now()}-${file.originalname}`;
+        this.fileName = `${Date.now()}-${Math.floor(Math.random() * 1000)}-${file.originalname}`;
         cb(null, this.fileName);
       },
     });
@@ -35,7 +35,7 @@ class FileUploadService {
     return multer({ storage: storage });
   }
 
-  generateFileName(file) {
+  /*generateFileName(file) {
     const fieldName = file.fieldname || "file";
     const timestamp = Date.now();
     const randomValue = Math.floor(Math.random() * 1000);
@@ -50,9 +50,9 @@ class FileUploadService {
       extension
     )}${extension}`;
     return fileName;
-  }
+  }*/
 
-  getExtensionFromMimetype(mimetype) {
+ /* getExtensionFromMimetype(mimetype) {
     const mimetypeExtMap = {
       "image/jpeg": ".jpg",
       "image/png": ".png",
@@ -61,16 +61,21 @@ class FileUploadService {
       // Add more as needed
     };
     return mimetypeExtMap[mimetype] || ".bin";
-  }
+  }*/
 
   getStoredFileName() {
     return this.fileName;
   }
 
-  getFilePath() {
-    const pathname = path.join(this.destinationFolder, this.fileName);
+  getFilePath(file) {
+    const pathname = path.join(this.destinationFolder,this.fileName);
     return pathname;
   }
-}
 
-module.exports = FileUploadService;
+  getFilePathWithoutFileName() {
+    const pathname = path.join(this.destinationFolder);
+    return pathname;
+    }
+  }
+  
+  module.exports = FileUploadService;

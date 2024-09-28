@@ -1,3 +1,4 @@
+const { json } = require("express");
 const fs = require("fs");
 const path = require("path");
 
@@ -17,14 +18,23 @@ class FileManager {
     });
   }
 
-  rename(path, newName) {
-    fs.rename(this.path, path, (err) => {
+  rename(oldPath, newName) {
+    // Extract the directory from the old path
+    const directory = path.dirname(oldPath);
+    
+    const newPath = path.join(directory, newName);
+    console.log("new path" + newPath);
+
+    fs.rename(oldPath, newPath, (err) => {
       if (err) {
-        console.error(err);
+        console.error("Error renaming file:", err);
         return;
       }
-      console.log("File updated");
     });
+    this.name = newName;
+    this.path = newPath;
+
+    return new FileManager(newName, newPath);
   }
 }
 

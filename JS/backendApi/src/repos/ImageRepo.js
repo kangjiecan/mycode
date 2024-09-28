@@ -20,7 +20,7 @@ class ImageRepo {
         throw new Error(`Database error: ${error.code}`);
       } else {
         console.error("Unexpected error:", error);
-        throw error; // Re-throw the original error
+        throw error; 
       }
     }
   }
@@ -47,7 +47,7 @@ class ImageRepo {
         throw new Error(`Database error: ${error.code}`);
       } else {
         console.error("Unexpected error:", error);
-        throw error; // Re-throw the original error
+        throw error; 
       }
     }
   }
@@ -101,7 +101,7 @@ class ImageRepo {
         throw new Error(`Database error: ${error.code}`);
       } else {
         console.error("Unexpected error:", error);
-        throw error; // Re-throw the original error
+        throw error; 
       }
     }
   }
@@ -136,7 +136,7 @@ class ImageRepo {
         throw new Error(`Database error: ${error.code}`);
       } else {
         console.error("Unexpected error:", error);
-        throw error; // Re-throw the original error
+        throw error; 
       }
     }
   }

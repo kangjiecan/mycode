@@ -8,15 +8,17 @@ The following cURL commands were used to test the API endpoints. Files such as `
 
 
 create:
-curl -X POST http://localhost:3000/api/photo/create \
+curl -X POST \
+  -H "Content-Type: multipart/form-data" \
   -F "file=@test.jpg" \
-  -F "FieldName=abcd"
+  -F "customName=MyCustomFileName" \
+  http://localhost:3000/api/photo/create
 
 upate:
 curl -X PUT \
   -H "Content-Type: multipart/form-data" \
   -F "file=@replace.jpg" \
-  -F "existingFileName=1727486707266-test.jpg" \
+  -F "existingFileName=MyCustomFileName-1727564017519-397-test.jpg" \
   http://localhost:3000/api/photo/update
 
 read all
@@ -25,12 +27,12 @@ curl -X GET http://localhost:3000/api/photo/all
 read by ID
 curl -X GET http://localhost:3000/api/photo/read \
   -H "Content-Type: application/json" \
-  -d '{"id": 157}'
+  -d '{"id": 223}'
 
 delete by ID
 curl -X DELETE http://localhost:3000/api/photo/delete \
   -H "Content-Type: application/json" \
-  -d '{"id": 157}'
+  -d '{"id": 223}'
 
 Additional Information
 

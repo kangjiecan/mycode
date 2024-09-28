@@ -11,7 +11,7 @@ class FileUpLoadControler {
     this.fileUploadService = new FileUploadService();
   }
 
-  fileUpload(req, res) {
+  async fileUpload(req, res) {
     fileUpLoadService.upLoader().single("file")(req, res, async (err) => {
       if (err) {
         console.error("Error uploading file:", err);
@@ -22,21 +22,25 @@ class FileUpLoadControler {
         return res.status(400).json({ message: "No file uploaded" });
       }
       const file = req.file;
-      const fileName = file.filename; 
+      const fileName = file.filename;
       const filePath = fileUpLoadService.getFilePath();
+      const newName = `${req.body.customName}-${fileName}`;
       try {
-        await imageRepo.postImage(fileName, filePath);
-
-        let message = `File ${fileName} uploaded successfully`;
-        if (!req.body.FieldName || req.body.FieldName === undefined) {
+        if (!req.body.customName || req.body.customName === undefined) {
           message +=
             ". Please set fieldName in the request body next time in order to better manage the file name";
         }
+        const reName = new FileManager(filePath, newName);
+        reName.rename(filePath, newName);
+
+        await imageRepo.postImage(reName.name, reName.path);
+
+        let message = `File ${fileName} uploaded successfully`;
 
         return res.status(201).json({
           message: message,
-          fileName: fileName,
-          filePath: filePath,
+          uploaded_fileName: reName.name,
+          filePath: reName.path,
         });
       } catch (error) {
         console.error("Error saving file information:", error);
@@ -55,7 +59,7 @@ class FileUpLoadControler {
       }
       try {
         const file = req.file;
-        const fileName = file.filename; // Multer already generated the filename
+        const fileName = file.filename;
         const filePath = fileUpLoadService.getFilePath();
         const fileToReplace = await imageRepo.getImageByName(
           req.body.existingFileName
