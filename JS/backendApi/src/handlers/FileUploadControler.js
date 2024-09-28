@@ -3,7 +3,6 @@ const ImageRepo = require("../repos/ImageRepo");
 const imageRepo = new ImageRepo();
 const FileUploadService = require("../repos/FileUploadService");
 const fileUpLoadService = new FileUploadService();
-
 const FileManager = require("../repos/FileManager");
 
 class FileUpLoadControler {
@@ -22,11 +21,9 @@ class FileUpLoadControler {
       if (!req.file) {
         return res.status(400).json({ message: "No file uploaded" });
       }
-
       const file = req.file;
-      const fileName = file.filename; // Multer already generated the filename
+      const fileName = file.filename; 
       const filePath = fileUpLoadService.getFilePath();
-
       try {
         await imageRepo.postImage(fileName, filePath);
 
@@ -77,7 +74,10 @@ class FileUpLoadControler {
         });
       } catch (error) {
         if (error.message.includes("Image with name")) {
-          const errorUpload = new FileManager(fileUpLoadService.getStoredFileName(), fileUpLoadService.getFilePath());
+          const errorUpload = new FileManager(
+            fileUpLoadService.getStoredFileName(),
+            fileUpLoadService.getFilePath()
+          );
           console.log(errorUpload);
           errorUpload.delfile();
           return res.status(404).json({ message: error.message });

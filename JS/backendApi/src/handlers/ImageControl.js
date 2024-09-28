@@ -1,8 +1,5 @@
 const ImageRepo = require("../repos/ImageRepo");
-const Image = require("../models/Image");
 const FileManager = require("../repos/FileManager");
-const { path } = require("path");
-const fileManager = new FileManager();
 
 class ImageControl {
   constructor() {
@@ -86,15 +83,12 @@ class ImageControl {
     }
     try {
       const imageToDelete = await this.imageRepo.getImage(id);
-      const newimage = new FileManager(
-        imageToDelete.id,
-        imageToDelete.name,
-        imageToDelete.path
-      );
-      newimage.delfile(this.path);
+      const newimage = new FileManager(imageToDelete.name, imageToDelete.path);
+      newimage.delfile();
       await this.imageRepo.deleteImage(imageToDelete.id);
-
-      res.status(200).json({ message: `image ${id} was successfully deleted` });
+      res.status(200).json({
+        message: `image ${id} was successfully deleted from database and unlinked`,
+      });
     } catch (error) {
       if (error.message.includes("Image with ID")) {
         res.status(404).json({ message: error.message });
@@ -110,7 +104,6 @@ class ImageControl {
     const id = parseInt(req.body.id, 10);
     console.log(id);
     console.log(newName);
-
     if (!id || !newName) {
       res.status(400).json({
         message: "Bad Request: 'id' and 'newName' are required fields",

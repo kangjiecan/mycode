@@ -1,7 +1,7 @@
 class Image {
-  constructor(id,name, path) {
+  constructor(id, name, path) {
     this.id = id;
-    this.name= name;
+    this.name = name;
     this.path = path;
   }
 
@@ -25,10 +25,7 @@ class Image {
   getPath() {
     return this.path;
   }
+}
 
-
-
-  }
-
-    // Static method
+// Static method
 module.exports = Image;

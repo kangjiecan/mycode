@@ -21,7 +21,7 @@ class FileUploadService {
     return multer({ storage: storage });
   }
 
-  updater(){
+  updater() {
     const storage = multer.diskStorage({
       destination: (req, file, cb) => {
         cb(null, this.destinationFolder);
@@ -31,7 +31,7 @@ class FileUploadService {
         cb(null, this.fileName);
       },
     });
-    
+
     return multer({ storage: storage });
   }
 
