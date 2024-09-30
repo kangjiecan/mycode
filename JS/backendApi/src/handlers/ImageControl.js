@@ -35,14 +35,12 @@ class ImageControl {
     try {
       const image = await this.imageRepo.getImage(id);
       if (image) {
-        res.status(201).json({
+        return res.status(201).json({
           message: `Image ${image.name} ID ${image.id} from ${image.path} successfully retrieved`,
-        });
-        return {
           id: image.id,
           name: image.name,
           path: image.path,
-        };
+        });
       } else {
         res.status(404).json({ message: "Image not found" });
       }
