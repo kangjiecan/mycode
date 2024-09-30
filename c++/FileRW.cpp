@@ -3,15 +3,8 @@
 #include <stdexcept>
 #include <sys/stat.h>
 #include <filesystem>
-#include <sys/stat.h> // for stat
-#include <unistd.h>   // for access()
-
-std::string FileRW::outputNaming(const std::string &fileNameWithPath)
-{
-    size_t dot_pos = fileNameWithPath.find_last_of('.');
-    std::string outputFileNameWithPath = fileNameWithPath.substr(0, dot_pos) + "-converted.html";
-    return outputFileNameWithPath;
-}
+#include <sys/stat.h>
+#include <unistd.h>
 
 bool FileRW::validFile(const std::string &fileNameWithPath)
 {
@@ -39,10 +32,8 @@ bool FileRW::openInputFile(const std::string &fileNameWithPath)
     if (!inFile.is_open())
     {
         throw std::runtime_error("Cannot open input file: " + fileNameWithPath);
-        return false;
     }
     std::cout << "Input file opened: " << std::endl;
-    std::cout << "File is being read" << std::endl;
     return true;
 }
 
@@ -52,7 +43,6 @@ bool FileRW::openOutputFile(const std::string &fileNameWithPath)
     if (!outFile.is_open())
     {
         throw std::runtime_error("Cannot open output file: " + fileNameWithPath);
-        return false;
     }
     std::cout << "Output file opened: " << std::endl;
     return true;
@@ -101,7 +91,6 @@ bool FileRW::validatePath(const std::string &path)
     if (path.empty())
     {
         std::cerr << "Error: Path is empty." << std::endl;
-        return false;
     }
 
     struct stat buffer;
@@ -109,19 +98,16 @@ bool FileRW::validatePath(const std::string &path)
     if (stat(path.c_str(), &buffer) != 0)
     {
         std::cerr << "Error: Path does not exist." << std::endl;
-        return false;
     }
 
     if (!S_ISDIR(buffer.st_mode))
     {
         std::cerr << "Error: Path is not a directory." << std::endl;
-        return false;
     }
 
     if (access(path.c_str(), R_OK) != 0)
     {
         std::cerr << "Error: Directory is not readable." << std::endl;
-        return false;
     }
 
     std::cout << "Path is valid." << std::endl;
@@ -133,11 +119,11 @@ bool FileRW::validatOutputName(const std::string &filename)
     size_t dot_pos = filename.find_last_of('.');
     if (dot_pos == std::string::npos || filename.substr(dot_pos) != ".html")
     {
-        throw std::runtime_error("Output file is not a .html file: " + filename);
+        throw std::runtime_error("Output file is not a .html file: ");
     }
     if (filename.length() > 255)
     {
-        throw std::runtime_error("Filename is too long: " + filename);
+        throw std::runtime_error("Filename is too long: ");
     }
 
     std::cout << "Output file name is valid: " << std::endl;

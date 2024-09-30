@@ -1,0 +1,33 @@
+<PRE>
+#ifndef FILERW_H
+#define FILERW_H
+
+#include &ltstring&gt
+#include &ltvector&gt
+#include &ltfstream&gt
+
+class FileRW {
+
+private:
+    std::ifstream inFile;
+    std::ofstream outFile;
+    std::string line;
+    std::vector&ltstd::string&gt lines;
+    char left='&lt';
+    char right='&gt';
+    std::string beginning="&ltPRE&gt";
+    std::string ending="&lt/PRE&gt";
+
+public:
+    bool validFile(const std::string &filename);
+    bool validatePath(const std::string &path);
+    bool openInputFile(const std::string &filename);
+    bool openOutputFile(const std::string &filename);
+    std::string outputNaming(const std::string &fileNameWithPath);
+    void conversion();
+    void closeFiles();
+    bool validatOutputName(const std::string &filename);    
+};
+
+#endif // FILERW_H
+</PRE>
