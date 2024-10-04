@@ -6,7 +6,6 @@
             "label": "C/C++: clang++ build active file",
             "command": "/usr/bin/clang++",
             "args": [
-                "-arch", "arm64",       // Specify the architecture
 
                 "-fcolor-diagnostics",
                 "-fansi-escape-codes",

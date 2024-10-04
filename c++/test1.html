@@ -1,10 +1,11 @@
+<PRE>
 #include "FileRW.h"
-#include <iostream>
-#include <stdexcept>
-#include <sys/stat.h>
-#include <filesystem>
-#include <sys/stat.h>
-#include <unistd.h>
+#include &ltiostream&gt
+#include &ltstdexcept&gt
+#include &ltsys/stat.h&gt
+#include &ltfilesystem&gt
+#include &ltsys/stat.h&gt
+#include &ltunistd.h&gt
 
 
 
@@ -16,7 +17,7 @@ bool FileRW::openInputFile(const std::string &fileNameWithPath)
     {
         throw std::runtime_error("Cannot open input file: " + fileNameWithPath);
     }
-    std::cout << "Input file opened: " << std::endl;
+    std::cout &lt&lt "Input file opened: " &lt&lt std::endl;
     return true;
 }
 
@@ -27,13 +28,13 @@ bool FileRW::openOutputFile(const std::string &fileNameWithPath)
     {
         throw std::runtime_error("Cannot open output file: " + fileNameWithPath);
     }
-    std::cout << "Output file opened: " << std::endl;
+    std::cout &lt&lt "Output file opened: " &lt&lt std::endl;
     return true;
 }
 
 void FileRW::conversion()
 {
-    outFile << beginning + "\n";
+    outFile &lt&lt beginning + "\n";
 
     lines.clear();
     while (std::getline(inFile, line))
@@ -54,18 +55,19 @@ void FileRW::conversion()
                 newLine += ch;
             }
         }
-        std::cout << newLine << std::endl;
-        outFile << newLine << std::endl;
+        std::cout &lt&lt newLine &lt&lt std::endl;
+        outFile &lt&lt newLine &lt&lt std::endl;
         lines.push_back(newLine);
     }
-    outFile << ending;
-    std::cout << "Conversion completed." << std::endl;
+    outFile &lt&lt ending;
+    std::cout &lt&lt "Conversion completed." &lt&lt std::endl;
 }
 
 void FileRW::closeFiles()
 {
     inFile.close();
     outFile.close();
-    std::cout << "Files closed." << std::endl;
+    std::cout &lt&lt "Files closed." &lt&lt std::endl;
 }
 
+</PRE>

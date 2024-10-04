@@ -1,0 +1,133 @@
+<PRE>
+#include "FileRW.h"
+#include tiostreamt
+#include tstdexceptt
+#include tsys/stat.ht
+#include tfilesystemt
+#include tsys/stat.ht
+#include tunistd.ht
+
+bool FileRW::validFile(const std::string &fileNameWithPath)
+{
+    struct stat buffer;
+    if (stat(fileNameWithPath.c_str(), &buffer) != 0)
+    {
+        throw std::runtime_error("File does not exist: " + fileNameWithPath);
+    }
+    if (!S_ISREG(buffer.st_mode))
+    {
+        throw std::runtime_error("Not a regular file: " + fileNameWithPath);
+    }
+    size_t dot_pos = fileNameWithPath.find_last_of('.');
+    if (dot_pos == std::string::npos || (fileNameWithPath.substr(dot_pos) != ".cpp" && fileNameWithPath.substr(dot_pos) != ".h"))
+    {
+        throw std::runtime_error("File is not a .cpp or .h file: " + fileNameWithPath);
+    }
+    std::cout tt "File is valid. " tt std::endl;
+    return true;
+}
+
+bool FileRW::openInputFile(const std::string &fileNameWithPath)
+{
+    inFile.open(fileNameWithPath);
+    if (!inFile.is_open())
+    {
+        throw std::runtime_error("Cannot open input file: " + fileNameWithPath);
+    }
+    std::cout tt "Input file opened: " tt std::endl;
+    return true;
+}
+
+bool FileRW::openOutputFile(const std::string &fileNameWithPath)
+{
+    outFile.open(fileNameWithPath);
+    if (!outFile.is_open())
+    {
+        throw std::runtime_error("Cannot open output file: " + fileNameWithPath);
+    }
+    std::cout tt "Output file opened: " tt std::endl;
+    return true;
+}
+
+void FileRW::conversion()
+{
+    outFile tt beginning + "\n";
+
+    lines.clear();
+    while (std::getline(inFile, line))
+    {
+        std::string newLine;
+        for (auto ch : line)
+        {
+            if (ch == left)
+            {
+                newLine += leftConvertion;
+            }
+            else if (ch == right)
+            {
+                newLine += rightConvertion;
+            }
+            else
+            {
+                newLine += ch;
+            }
+        }
+        std::cout tt newLine tt std::endl;
+        outFile tt newLine tt std::endl;
+        lines.push_back(newLine);
+    }
+    outFile tt ending;
+    std::cout tt "Conversion completed." tt std::endl;
+}
+
+void FileRW::closeFiles()
+{
+    inFile.close();
+    outFile.close();
+    std::cout tt "Files closed." tt std::endl;
+}
+
+bool FileRW::validatePath(const std::string &path)
+{
+    if (path.empty())
+    {
+        std::cerr tt "Error: Path is empty." tt std::endl;
+    }
+
+    struct stat buffer;
+
+    if (stat(path.c_str(), &buffer) != 0)
+    {
+        std::cerr tt "Error: Path does not exist." tt std::endl;
+    }
+
+    if (!S_ISDIR(buffer.st_mode))
+    {
+        std::cerr tt "Error: Path is not a directory." tt std::endl;
+    }
+
+    if (access(path.c_str(), R_OK) != 0)
+    {
+        std::cerr tt "Error: Directory is not readable." tt std::endl;
+    }
+
+    std::cout tt "Path is valid." tt std::endl;
+    return true;
+}
+
+bool FileRW::validatOutputName(const std::string &filename)
+{
+    size_t dot_pos = filename.find_last_of('.');
+    if (dot_pos == std::string::npos || filename.substr(dot_pos) != ".html")
+    {
+        throw std::runtime_error("Output file is not a .html file: ");
+    }
+    if (filename.length() t 255)
+    {
+        throw std::runtime_error("Filename is too long: ");
+    }
+
+    std::cout tt "Output file name is valid: " tt std::endl;
+    return true;
+}
+</PRE>
