@@ -1,0 +1,11 @@
+C:\Users\kangj\source\repos\gameChat\ChatLibrary\bin\Debug\net8.0\ChatLibrary.deps.json
+C:\Users\kangj\source\repos\gameChat\ChatLibrary\bin\Debug\net8.0\ChatLibrary.dll
+C:\Users\kangj\source\repos\gameChat\ChatLibrary\bin\Debug\net8.0\ChatLibrary.pdb
+C:\Users\kangj\source\repos\gameChat\ChatLibrary\obj\Debug\net8.0\ChatLibrary.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\kangj\source\repos\gameChat\ChatLibrary\obj\Debug\net8.0\ChatLibrary.AssemblyInfoInputs.cache
+C:\Users\kangj\source\repos\gameChat\ChatLibrary\obj\Debug\net8.0\ChatLibrary.AssemblyInfo.cs
+C:\Users\kangj\source\repos\gameChat\ChatLibrary\obj\Debug\net8.0\ChatLibrary.csproj.CoreCompileInputs.cache
+C:\Users\kangj\source\repos\gameChat\ChatLibrary\obj\Debug\net8.0\ChatLibrary.dll
+C:\Users\kangj\source\repos\gameChat\ChatLibrary\obj\Debug\net8.0\refint\ChatLibrary.dll
+C:\Users\kangj\source\repos\gameChat\ChatLibrary\obj\Debug\net8.0\ChatLibrary.pdb
+C:\Users\kangj\source\repos\gameChat\ChatLibrary\obj\Debug\net8.0\ref\ChatLibrary.dll
