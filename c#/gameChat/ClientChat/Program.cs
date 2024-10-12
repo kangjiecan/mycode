@@ -9,15 +9,13 @@ namespace ClientChat
         static async Task Main(string[] args)
         {
             Console.WriteLine("Chat Client");
-            Console.Write("Enter server IP address: ");
-            string ipAddress = Console.ReadLine() ?? "127.0.0.1";
 
-            Console.Write("Enter server port: ");
-            if (!int.TryParse(Console.ReadLine(), out int port))
-            {
-                Console.WriteLine("Invalid port number. Using default port 8888.");
-                port = 8888;
-            }
+            // Hard-code the IP address and port
+            string ipAddress = "127.0.0.1";
+            int port = 8888;
+
+            Console.WriteLine($"Using IP address: {ipAddress}");
+            Console.WriteLine($"Using port: {port}");
 
             var client = new ChatClient();
             client.MessageReceived += (sender, message) =>

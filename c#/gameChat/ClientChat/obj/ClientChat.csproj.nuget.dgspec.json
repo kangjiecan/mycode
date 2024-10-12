@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\kangj\\source\\repos\\gameChat\\ClientChat\\ClientChat.csproj": {}
+    "C:\\Users\\kangj\\mycode\\mycode\\c#\\gameChat\\ClientChat\\ClientChat.csproj": {}
   },
   "projects": {
-    "C:\\Users\\kangj\\source\\repos\\gameChat\\ChatLibrary\\ChatLibrary.csproj": {
+    "C:\\Users\\kangj\\mycode\\mycode\\c#\\gameChat\\ChatLibrary\\ChatLibrary.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\kangj\\source\\repos\\gameChat\\ChatLibrary\\ChatLibrary.csproj",
+        "projectUniqueName": "C:\\Users\\kangj\\mycode\\mycode\\c#\\gameChat\\ChatLibrary\\ChatLibrary.csproj",
         "projectName": "ChatLibrary",
-        "projectPath": "C:\\Users\\kangj\\source\\repos\\gameChat\\ChatLibrary\\ChatLibrary.csproj",
+        "projectPath": "C:\\Users\\kangj\\mycode\\mycode\\c#\\gameChat\\ChatLibrary\\ChatLibrary.csproj",
         "packagesPath": "C:\\Users\\kangj\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\kangj\\source\\repos\\gameChat\\ChatLibrary\\obj\\",
+        "outputPath": "C:\\Users\\kangj\\mycode\\mycode\\c#\\gameChat\\ChatLibrary\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\kangj\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -60,18 +60,18 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.400/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.403/PortableRuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\kangj\\source\\repos\\gameChat\\ClientChat\\ClientChat.csproj": {
+    "C:\\Users\\kangj\\mycode\\mycode\\c#\\gameChat\\ClientChat\\ClientChat.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\kangj\\source\\repos\\gameChat\\ClientChat\\ClientChat.csproj",
+        "projectUniqueName": "C:\\Users\\kangj\\mycode\\mycode\\c#\\gameChat\\ClientChat\\ClientChat.csproj",
         "projectName": "ClientChat",
-        "projectPath": "C:\\Users\\kangj\\source\\repos\\gameChat\\ClientChat\\ClientChat.csproj",
+        "projectPath": "C:\\Users\\kangj\\mycode\\mycode\\c#\\gameChat\\ClientChat\\ClientChat.csproj",
         "packagesPath": "C:\\Users\\kangj\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\kangj\\source\\repos\\gameChat\\ClientChat\\obj\\",
+        "outputPath": "C:\\Users\\kangj\\mycode\\mycode\\c#\\gameChat\\ClientChat\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\kangj\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -88,8 +88,8 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "C:\\Users\\kangj\\source\\repos\\gameChat\\ChatLibrary\\ChatLibrary.csproj": {
-                "projectPath": "C:\\Users\\kangj\\source\\repos\\gameChat\\ChatLibrary\\ChatLibrary.csproj"
+              "C:\\Users\\kangj\\mycode\\mycode\\c#\\gameChat\\ChatLibrary\\ChatLibrary.csproj": {
+                "projectPath": "C:\\Users\\kangj\\mycode\\mycode\\c#\\gameChat\\ChatLibrary\\ChatLibrary.csproj"
               }
             }
           }
@@ -124,7 +124,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.400/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.403/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

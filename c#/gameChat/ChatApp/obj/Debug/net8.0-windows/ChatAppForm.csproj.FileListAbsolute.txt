@@ -1,0 +1,17 @@
+C:\Users\kangj\mycode\mycode\c#\gameChat\ChatApp\bin\Debug\net8.0-windows\ChatAppForm.exe
+C:\Users\kangj\mycode\mycode\c#\gameChat\ChatApp\bin\Debug\net8.0-windows\ChatAppForm.deps.json
+C:\Users\kangj\mycode\mycode\c#\gameChat\ChatApp\bin\Debug\net8.0-windows\ChatAppForm.runtimeconfig.json
+C:\Users\kangj\mycode\mycode\c#\gameChat\ChatApp\bin\Debug\net8.0-windows\ChatAppForm.dll
+C:\Users\kangj\mycode\mycode\c#\gameChat\ChatApp\bin\Debug\net8.0-windows\ChatAppForm.pdb
+C:\Users\kangj\mycode\mycode\c#\gameChat\ChatApp\obj\Debug\net8.0-windows\ChatApp.ChatForm.resources
+C:\Users\kangj\mycode\mycode\c#\gameChat\ChatApp\obj\Debug\net8.0-windows\ChatAppForm.csproj.GenerateResource.cache
+C:\Users\kangj\mycode\mycode\c#\gameChat\ChatApp\obj\Debug\net8.0-windows\ChatAppForm.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\kangj\mycode\mycode\c#\gameChat\ChatApp\obj\Debug\net8.0-windows\ChatAppForm.AssemblyInfoInputs.cache
+C:\Users\kangj\mycode\mycode\c#\gameChat\ChatApp\obj\Debug\net8.0-windows\ChatAppForm.AssemblyInfo.cs
+C:\Users\kangj\mycode\mycode\c#\gameChat\ChatApp\obj\Debug\net8.0-windows\ChatAppForm.csproj.CoreCompileInputs.cache
+C:\Users\kangj\mycode\mycode\c#\gameChat\ChatApp\obj\Debug\net8.0-windows\ChatAppForm.sourcelink.json
+C:\Users\kangj\mycode\mycode\c#\gameChat\ChatApp\obj\Debug\net8.0-windows\ChatAppForm.dll
+C:\Users\kangj\mycode\mycode\c#\gameChat\ChatApp\obj\Debug\net8.0-windows\refint\ChatAppForm.dll
+C:\Users\kangj\mycode\mycode\c#\gameChat\ChatApp\obj\Debug\net8.0-windows\ChatAppForm.pdb
+C:\Users\kangj\mycode\mycode\c#\gameChat\ChatApp\obj\Debug\net8.0-windows\ChatAppForm.genruntimeconfig.cache
+C:\Users\kangj\mycode\mycode\c#\gameChat\ChatApp\obj\Debug\net8.0-windows\ref\ChatAppForm.dll

@@ -13,11 +13,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\kangj\\source\\repos\\gameChat\\ChatLibrary\\ChatLibrary.csproj",
+      "projectUniqueName": "C:\\Users\\kangj\\mycode\\mycode\\c#\\gameChat\\ChatLibrary\\ChatLibrary.csproj",
       "projectName": "ChatLibrary",
-      "projectPath": "C:\\Users\\kangj\\source\\repos\\gameChat\\ChatLibrary\\ChatLibrary.csproj",
+      "projectPath": "C:\\Users\\kangj\\mycode\\mycode\\c#\\gameChat\\ChatLibrary\\ChatLibrary.csproj",
       "packagesPath": "C:\\Users\\kangj\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\kangj\\source\\repos\\gameChat\\ChatLibrary\\obj\\",
+      "outputPath": "C:\\Users\\kangj\\mycode\\mycode\\c#\\gameChat\\ChatLibrary\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\kangj\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -66,7 +66,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.400/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.403/PortableRuntimeIdentifierGraph.json"
       }
     }
   }

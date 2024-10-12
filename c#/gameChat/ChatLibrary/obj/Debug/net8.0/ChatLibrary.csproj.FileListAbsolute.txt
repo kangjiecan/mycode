@@ -9,3 +9,15 @@ C:\Users\kangj\source\repos\gameChat\ChatLibrary\obj\Debug\net8.0\ChatLibrary.dl
 C:\Users\kangj\source\repos\gameChat\ChatLibrary\obj\Debug\net8.0\refint\ChatLibrary.dll
 C:\Users\kangj\source\repos\gameChat\ChatLibrary\obj\Debug\net8.0\ChatLibrary.pdb
 C:\Users\kangj\source\repos\gameChat\ChatLibrary\obj\Debug\net8.0\ref\ChatLibrary.dll
+C:\Users\kangj\mycode\mycode\c#\gameChat\ChatLibrary\bin\Debug\net8.0\ChatLibrary.deps.json
+C:\Users\kangj\mycode\mycode\c#\gameChat\ChatLibrary\bin\Debug\net8.0\ChatLibrary.dll
+C:\Users\kangj\mycode\mycode\c#\gameChat\ChatLibrary\bin\Debug\net8.0\ChatLibrary.pdb
+C:\Users\kangj\mycode\mycode\c#\gameChat\ChatLibrary\obj\Debug\net8.0\ChatLibrary.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\kangj\mycode\mycode\c#\gameChat\ChatLibrary\obj\Debug\net8.0\ChatLibrary.AssemblyInfoInputs.cache
+C:\Users\kangj\mycode\mycode\c#\gameChat\ChatLibrary\obj\Debug\net8.0\ChatLibrary.AssemblyInfo.cs
+C:\Users\kangj\mycode\mycode\c#\gameChat\ChatLibrary\obj\Debug\net8.0\ChatLibrary.csproj.CoreCompileInputs.cache
+C:\Users\kangj\mycode\mycode\c#\gameChat\ChatLibrary\obj\Debug\net8.0\ChatLibrary.sourcelink.json
+C:\Users\kangj\mycode\mycode\c#\gameChat\ChatLibrary\obj\Debug\net8.0\ChatLibrary.dll
+C:\Users\kangj\mycode\mycode\c#\gameChat\ChatLibrary\obj\Debug\net8.0\refint\ChatLibrary.dll
+C:\Users\kangj\mycode\mycode\c#\gameChat\ChatLibrary\obj\Debug\net8.0\ChatLibrary.pdb
+C:\Users\kangj\mycode\mycode\c#\gameChat\ChatLibrary\obj\Debug\net8.0\ref\ChatLibrary.dll
