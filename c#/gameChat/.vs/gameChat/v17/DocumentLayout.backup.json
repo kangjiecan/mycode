@@ -3,6 +3,14 @@
   "WorkspaceRootPath": "C:\\Users\\kangj\\mycode\\mycode\\c#\\gameChat\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{03BEBC25-E167-4006-AF61-42751716CA4D}|ServerChat\\ServerChat.csproj|c:\\users\\kangj\\mycode\\mycode\\c#\\gamechat\\serverchat\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{03BEBC25-E167-4006-AF61-42751716CA4D}|ServerChat\\ServerChat.csproj|solutionrelative:serverchat\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D5B054E5-B32D-4A40-8B14-F07F711FEE8F}|ChatClientform\\ChatClientform.csproj|c:\\users\\kangj\\mycode\\mycode\\c#\\gamechat\\chatclientform\\chatclientform.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{D5B054E5-B32D-4A40-8B14-F07F711FEE8F}|ChatClientform\\ChatClientform.csproj|solutionrelative:chatclientform\\chatclientform.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{D5B054E5-B32D-4A40-8B14-F07F711FEE8F}|ChatClientform\\ChatClientform.csproj|c:\\users\\kangj\\mycode\\mycode\\c#\\gamechat\\chatclientform\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
       "RelativeMoniker": "D:0:0:{D5B054E5-B32D-4A40-8B14-F07F711FEE8F}|ChatClientform\\ChatClientform.csproj|solutionrelative:chatclientform\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
@@ -13,14 +21,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{8FFFB31E-F07D-47A4-AF9A-6BDFCA839254}|ChatLibrary\\ChatLibrary.csproj|c:\\users\\kangj\\mycode\\mycode\\c#\\gamechat\\chatlibrary\\chatlibrary.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{8FFFB31E-F07D-47A4-AF9A-6BDFCA839254}|ChatLibrary\\ChatLibrary.csproj|solutionrelative:chatlibrary\\chatlibrary.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{03BEBC25-E167-4006-AF61-42751716CA4D}|ServerChat\\ServerChat.csproj|c:\\users\\kangj\\mycode\\mycode\\c#\\gamechat\\serverchat\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{03BEBC25-E167-4006-AF61-42751716CA4D}|ServerChat\\ServerChat.csproj|solutionrelative:serverchat\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{D5B054E5-B32D-4A40-8B14-F07F711FEE8F}|ChatClientform\\ChatClientform.csproj|c:\\users\\kangj\\mycode\\mycode\\c#\\gamechat\\chatclientform\\chatclientform.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
-      "RelativeMoniker": "D:0:0:{D5B054E5-B32D-4A40-8B14-F07F711FEE8F}|ChatClientform\\ChatClientform.csproj|solutionrelative:chatclientform\\chatclientform.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
     },
     {
       "AbsoluteMoniker": "D:0:0:{96CAF1DC-F007-4FEC-9C1D-3F22A3B8E2DE}|ClientChat\\ClientChat.csproj|c:\\users\\kangj\\mycode\\mycode\\c#\\gamechat\\clientchat\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -46,11 +46,11 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 7,
+          "SelectedChildIndex": 1,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 4,
               "Title": "ChatLibrary.cs",
               "DocumentMoniker": "C:\\Users\\kangj\\mycode\\mycode\\c#\\gameChat\\ChatLibrary\\ChatLibrary.cs",
               "RelativeDocumentMoniker": "ChatLibrary\\ChatLibrary.cs",
@@ -58,42 +58,37 @@
               "RelativeToolTip": "ChatLibrary\\ChatLibrary.cs",
               "ViewState": "AgIAAFwAAAAAAAAAAAAuwAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-12T15:58:06.753Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-10-12T15:58:06.753Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 0,
               "Title": "Program.cs",
               "DocumentMoniker": "C:\\Users\\kangj\\mycode\\mycode\\c#\\gameChat\\ServerChat\\Program.cs",
               "RelativeDocumentMoniker": "ServerChat\\Program.cs",
               "ToolTip": "C:\\Users\\kangj\\mycode\\mycode\\c#\\gameChat\\ServerChat\\Program.cs",
               "RelativeToolTip": "ServerChat\\Program.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-10-12T15:58:00.643Z",
               "EditorCaption": ""
             },
             {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{e5c86464-96be-4d7c-9a8b-abcb3bbf5f92}"
-            },
-            {
               "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "ChatClientform",
+              "DocumentIndex": 1,
+              "Title": "ChatClientform.csproj",
               "DocumentMoniker": "C:\\Users\\kangj\\mycode\\mycode\\c#\\gameChat\\ChatClientform\\ChatClientform.csproj",
               "RelativeDocumentMoniker": "ChatClientform\\ChatClientform.csproj",
               "ToolTip": "C:\\Users\\kangj\\mycode\\mycode\\c#\\gameChat\\ChatClientform\\ChatClientform.csproj",
               "RelativeToolTip": "ChatClientform\\ChatClientform.csproj",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAARAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
               "WhenOpened": "2024-10-12T06:50:24.85Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 3,
               "Title": "Program.cs",
               "DocumentMoniker": "C:\\Users\\kangj\\mycode\\mycode\\c#\\gameChat\\ChatClientform\\Program.cs",
               "RelativeDocumentMoniker": "ChatClientform\\Program.cs",
@@ -101,8 +96,7 @@
               "RelativeToolTip": "ChatClientform\\Program.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-12T06:25:49.199Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-10-12T06:25:49.199Z"
             },
             {
               "$type": "Document",
@@ -132,7 +126,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 2,
               "Title": "Form1.cs [Design]",
               "DocumentMoniker": "C:\\Users\\kangj\\mycode\\mycode\\c#\\gameChat\\ChatClientform\\Form1.cs",
               "RelativeDocumentMoniker": "ChatClientform\\Form1.cs",
@@ -152,8 +146,7 @@
               "RelativeToolTip": "ClientChat\\Program.cs",
               "ViewState": "AgIAAAUAAAAAAAAAAAAAADEAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-12T05:56:49.413Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-10-12T05:56:49.413Z"
             },
             {
               "$type": "Document",
@@ -167,6 +160,10 @@
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
               "WhenOpened": "2024-10-12T05:44:42.802Z",
               "EditorCaption": ""
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{e5c86464-96be-4d7c-9a8b-abcb3bbf5f92}"
             }
           ]
         }
