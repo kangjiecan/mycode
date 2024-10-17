@@ -12,7 +12,7 @@ const imageRepo = new ImageRepo();
 // Multer configuration for file uploads
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    const uploadDir = path.join(__dirname, "../../public/images");
+    const uploadDir = path.join(__dirname, "../uploads");
     if (!fs.existsSync(uploadDir)) {
       fs.mkdirSync(uploadDir, { recursive: true });
     }
@@ -27,7 +27,7 @@ const upload = multer({ storage: storage });
 
 // Utility functions to handle file paths
 function getFilePath(file) {
-  return path.join(__dirname, "../../public/images", file.filename);
+  return path.join(__dirname, "../uploads", file.filename);
 }
 
 // Function to delete a file
@@ -177,7 +177,6 @@ async function updateImage(req, res) {
 }
 
 // File upload function with multer
-
 async function fileUpload(req, res) {
   upload.single("file")(req, res, async (err) => {
     if (err) {
@@ -225,7 +224,6 @@ async function fileUpload(req, res) {
 
 // File updater function with multer
 async function fileUpdater(req, res) {
-  let file, fileName, filePath;
   upload.single("file")(req, res, async (err) => {
     if (err) {
       console.error("Error uploading file:", err);
@@ -237,20 +235,17 @@ async function fileUpdater(req, res) {
     }
 
     try {
-      file = req.file;
-      fileName = file.filename;
-      filePath = getFilePath(file);
+      const file = req.file;
+      const fileName = file.filename;
+      const filePath = getFilePath(file);
 //check if the file which to be replaced exists
       const fileToReplace = await imageRepo.getImageByName(
         req.body.existingFileName
       );
-      const fileToDelete=fileToReplace.path
 
       await imageRepo.updateImage(fileToReplace.name, fileName, filePath);
-      delfile(fileToDelete);
 
-      
-      
+      delfile(fileToReplace.path);
 
       return res.status(200).json({
         message: `File ${fileName} updated successfully`,
@@ -259,7 +254,7 @@ async function fileUpdater(req, res) {
       });
     } catch (error) {
       if (error.message.includes("Image with name")) {
-        delfile(filePath); // Clean up
+        //delfile(filePath); // Clean up
         return res.status(404).json({ message: error.message });
       }
       console.error("Error updating file information:", error);

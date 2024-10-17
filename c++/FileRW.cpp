@@ -71,7 +71,6 @@ void FileRW::conversion()
                 newLine += ch;
             }
         }
-        std::cout << newLine << std::endl;
         outFile << newLine << std::endl;
         lines.push_back(newLine);
     }

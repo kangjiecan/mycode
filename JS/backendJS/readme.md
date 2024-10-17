@@ -18,7 +18,8 @@ upate:
 curl -X PUT \
   -H "Content-Type: multipart/form-data" \
   -F "file=@replace.jpg" \
-  -F "existingFileName=MyCustomFileName-1729132103516.jpg" \
+  -F "existingFileName=MyCustomFileName-1729119461224-453-test.jpg" \
+  -f
   http://localhost:3000/api/photo/update
 
 read all
@@ -27,12 +28,12 @@ curl -X GET http://localhost:3000/api/photo/all
 read by ID
 curl -X GET http://localhost:3000/api/photo/read \
   -H "Content-Type: application/json" \
-  -d '{"id": 256}'
+  -d '{"id": 226}'
 
 delete by ID
 curl -X DELETE http://localhost:3000/api/photo/delete \
   -H "Content-Type: application/json" \
-  -d '{"id": 256}'
+  -d '{"id": 226}'
 
 Additional Information
 
