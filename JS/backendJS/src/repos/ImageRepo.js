@@ -25,7 +25,7 @@ class ImageRepo {
     }
   }
 
-  async postImage(name, path) {
+  async postImage(name, path,title,description) {
     try {
       if (await this.excistImageCheck(name)) {
         throw new Error(`Image with name "${name}" already exists`);
@@ -35,6 +35,8 @@ class ImageRepo {
         data: {
           name,
           path,
+          title,
+          description,
         },
       });
       //console.log(
@@ -123,11 +125,33 @@ class ImageRepo {
     }
   }
 
-  async updateImage(name, newName, newPath) {
+  async updateImage(id, newPath,filename) {
     try {
       const updatedImage = await this.prisma.image.update({
-        where: { name: name },
-        data: { name: newName, path: newPath },
+        where: { id: id },
+        data: {path: newPath, 
+          name: filename
+        },
+      });
+      return updatedImage;
+    } catch (error) {
+      if (error instanceof Prisma.PrismaClientKnownRequestError) {
+        console.error(`Prisma error: ${error.code}, ${error.meta}`);
+        throw new Error(`Database error: ${error.code}`);
+      } else {
+        console.error("Unexpected error:", error);
+        throw error; 
+      }
+    }
+  }
+  async updateImageInfo(id, title, description) {
+    try {
+      const updatedImage = await this.prisma.image.update({
+        where: { id: id },
+        data: {
+          title: title,
+          description: description,
+        },
       });
       return updatedImage;
     } catch (error) {

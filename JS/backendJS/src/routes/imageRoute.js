@@ -3,6 +3,7 @@ const ImageRepo = require("../repos/ImageRepo");
 const multer = require("multer");
 const fs = require("fs");
 const path = require("path");
+const { title } = require("process");
 
 const router = express.Router();
 
@@ -12,7 +13,7 @@ const imageRepo = new ImageRepo();
 // Multer configuration for file uploads
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    const uploadDir = path.join(__dirname, "../uploads");
+    const uploadDir = path.join(__dirname, "../../public/images");
     if (!fs.existsSync(uploadDir)) {
       fs.mkdirSync(uploadDir, { recursive: true });
     }
@@ -27,7 +28,7 @@ const upload = multer({ storage: storage });
 
 // Utility functions to handle file paths
 function getFilePath(file) {
-  return path.join(__dirname, "../uploads", file.filename);
+  return path.join(__dirname, "../../public/images", file.filename);
 }
 
 // Function to delete a file
@@ -97,6 +98,8 @@ async function getImage(req, res) {
         id: image.id,
         name: image.name,
         path: image.path,
+        title: image.title,
+        description: image.description,
       });
     } else {
       res.status(404).json({ message: "Image not found" });
@@ -120,6 +123,8 @@ async function getAllImages(req, res) {
         id: image.id,
         name: image.name,
         path: image.path,
+        title: image.title,
+        description: image.description,
       })),
     });
   } catch (error) {
@@ -194,6 +199,8 @@ async function fileUpload(req, res) {
     const newName = req.body.customName
       ? `${req.body.customName}-${fileName}`
       : fileName;
+    const title = req.body.title;
+    const description = req.body.description;  
 
     try {
       let message = `File ${fileName} uploaded successfully`;
@@ -204,7 +211,7 @@ async function fileUpload(req, res) {
 
       const renamedFile = rename(filePath, newName);
 
-      await imageRepo.postImage(renamedFile.name, renamedFile.path);
+      await imageRepo.postImage(renamedFile.name, renamedFile.path, title, description);  
 
       return res.status(201).json({
         message: message,
@@ -230,26 +237,26 @@ async function fileUpdater(req, res) {
       return res.status(500).json({ message: "Internal Server Error" });
     }
     //check jason
-    if (!req.body.existingFileName) {
+   /* if (!req.body.existingFileName) {
       return res.status(400).json({ message: "existingFileName is required" });
-    }
+    }*/
 
     try {
       const file = req.file;
-      const fileName = file.filename;
+      const id = parseInt(req.body.id);
       const filePath = getFilePath(file);
 //check if the file which to be replaced exists
-      const fileToReplace = await imageRepo.getImageByName(
-        req.body.existingFileName
+      const fileToReplace = await imageRepo.getImage(
+        id
       );
+      const fileName=file.filename;
 
-      await imageRepo.updateImage(fileToReplace.name, fileName, filePath);
+      await imageRepo.updateImage(id ,filePath,fileName);
 
       delfile(fileToReplace.path);
 
       return res.status(200).json({
         message: `File ${fileName} updated successfully`,
-        fileName: fileName,
         filePath: filePath,
       });
     } catch (error) {
@@ -266,11 +273,32 @@ async function fileUpdater(req, res) {
   });
 }
 
-// Routes
+async function updateImageInfo(req,res){
+  const id = parseInt(req.body.id, 10);
+  const title = req.body.title;
+  const description = req.body.description;
+  if (isNaN(id) || !title || !description) {
+    res.status(400).json({
+      message: "Bad Request: 'id', 'title' and 'description' are required fields",
+    });
+    return;
+  }
+  
+    const image = await imageRepo.updateImageInfo(id, title, description);
+    res.status(200).json({
+      id: image.id,
+      name: image.name,     
+      title: image.title, 
+      description: image.description,
+      message: `200, Image ${image.name} ID ${image.id} from ${image.path} successfully updated`,
+    });
+  }          
+
 router.get("/api/photo/read/", getImage);
 router.get("/api/photo/all", getAllImages);
 router.delete("/api/photo/delete/", deleteImage);
 router.post("/api/photo/create/", fileUpload);
 router.put("/api/photo/update", fileUpdater);
+router.put("/api/photo/updateInfo", updateImageInfo);
 
 module.exports = router;

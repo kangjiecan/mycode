@@ -1,5 +1,7 @@
 class Image {
-  constructor(id, name, path) {
+  constructor(id, name, path,title,description) {
+    this.title = title;
+    this.description = description;
     this.id = id;
     this.name = name;
     this.path = path;

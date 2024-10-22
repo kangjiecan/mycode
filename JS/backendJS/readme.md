@@ -12,15 +12,16 @@ curl -X POST \
   -H "Content-Type: multipart/form-data" \
   -F "file=@test.jpg" \
   -F "customName=MyCustomFileName" \
+  -F "title=My Photo Title" \
+  -F "description=This is a description of the photo" \
   http://localhost:3000/api/photo/create
-
 upate:
+
 curl -X PUT \
   -H "Content-Type: multipart/form-data" \
   -F "file=@replace.jpg" \
-  -F "existingFileName=MyCustomFileName-1729119461224-453-test.jpg" \
-  -f
-  http://localhost:3000/api/photo/update
+  -f "id=4"
+   http://localhost:3000/api/photo/update
 
 read all
 curl -X GET http://localhost:3000/api/photo/all
@@ -28,12 +29,12 @@ curl -X GET http://localhost:3000/api/photo/all
 read by ID
 curl -X GET http://localhost:3000/api/photo/read \
   -H "Content-Type: application/json" \
-  -d '{"id": 226}'
+  -d '{"id": 1}'
 
 delete by ID
 curl -X DELETE http://localhost:3000/api/photo/delete \
   -H "Content-Type: application/json" \
-  -d '{"id": 226}'
+  -d '{"id": 3}'
 
 Additional Information
 
