@@ -1,0 +1,10 @@
+.thumbnail {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+}
+
+.contact-info {
+  min-width: 300px;
+  padding-left: 1em;  
+}
