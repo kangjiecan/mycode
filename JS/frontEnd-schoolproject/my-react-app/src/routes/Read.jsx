@@ -1,6 +1,6 @@
-import { useParams } from 'react-router-dom'; // No need for useNavigate now
+import { useParams } from 'react-router-dom';
 import { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom'; // Import Link for navigation
+import { Link } from 'react-router-dom';
 
 export default function Read() {
   const { id } = useParams(); // Get the photo ID from the URL
@@ -39,9 +39,16 @@ export default function Read() {
       </div>
 
       {/* Return to Home Link */}
-      <div style={{ marginTop: '20px' }}>
-        <Link to="/" style={{ padding: '10px 20px', fontSize: '16px', backgroundColor: '#007bff', color: 'white', textDecoration: 'none', borderRadius: '5px', cursor: 'pointer' }}>
+      <div style={{ marginTop: '10px' }}>
+        <Link to="/" style={{ padding: '1px 5px', fontSize: '16px', backgroundColor: '#007bff', color: 'white', textDecoration: 'none', borderRadius: '5px', cursor: 'pointer' }}>
           Return to Home
+        </Link>
+      </div>
+
+      {/* Delete Photo Link */}
+      <div style={{ marginTop: '10px' }}>
+        <Link to={`/delete/${id}`} style={{ padding: '1px 5px', fontSize: '16px', backgroundColor: 'red', color: 'white', textDecoration: 'none', borderRadius: '5px', cursor: 'pointer' }}>
+            Delete Photo  
         </Link>
       </div>
     </div>
