@@ -2,7 +2,7 @@ import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Home from "./routes/Home";
-//import Create from './routes/Create';
+import Create from './routes/Create';
 //import Create2 from './routes/Create2';
 import Read from "./routes/Read";
 import Update from "./routes/Update";
@@ -17,11 +17,11 @@ const router = createBrowserRouter([
     path: "/",
     element: <Home />,
   },
-  /*  {
+  {
     path: "/create",
-    element: <Create2 />
+    element: <Create />
   },
-  */
+
   { path: "/updatephoto/:id", 
     element: <UpdatePhoto /> },
   {

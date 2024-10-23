@@ -1,35 +1,26 @@
-import { useState } from 'react';
-import { useParams, Link } from 'react-router-dom';
+import React, { useState } from 'react';
+import FileUpload from '../ui/FileUpload';
+import { useParams } from 'react-router-dom'; // Adjust the path to where FileUpload.jsx is located
 
 export default function UpdatePhoto() {
-  const { id } = useParams(); // Get the photo ID from the URL
-
-  // State for the photo file and status messages
-  const [file, setFile] = useState(null); // State to hold the file
-  const [status, setStatus] = useState(null); // To show success or error messages
-  const [isUploading, setIsUploading] = useState(false); // To disable the button after the first click
+  const [isUploading, setIsUploading] = useState(false);
+  const [status, setStatus] = useState(null);
+  const { id } = useParams(); // Assuming you're using react-router to get the photo ID
 
   const apiHost = import.meta.env.VITE_API_HOST;
   const apiUrl = `${apiHost}/api/photo/update`; // API to update the photo
 
-  // Handle form submission for uploading the photo
-  const handleUpload = async (e) => {
-    e.preventDefault(); // Prevent page reload
-    setIsUploading(true); // Disable the button after the first click
-
+  const handleUpload = async (file) => {
+    setIsUploading(true);
+    
     const formData = new FormData();
-    formData.append('file', file); // Add the file from the input
-    formData.append('id', id); // Add the photo ID
-
-    // Log the formData contents
-    formData.forEach((value, key) => {
-      console.log(`${key}: ${value}`);
-    });
+    formData.append('file', file);
+    formData.append('id', id); // Use the id from URL parameters
 
     try {
       const response = await fetch(apiUrl, {
         method: 'PUT',
-        body: formData, // Send the formData object (multipart/form-data)
+        body: formData,
       });
 
       if (response.ok) {
@@ -39,59 +30,24 @@ export default function UpdatePhoto() {
       }
     } catch (error) {
       setStatus('Error updating the photo.');
+    } finally {
+      setIsUploading(false);
     }
   };
 
+  const handleCancel = () => {
+    setStatus('Upload cancelled');
+  };
+
   return (
-    <div style={{ textAlign: 'center', marginTop: '50px' }}>
+    <div>
       <h1>Update Photo</h1>
-
-      <form onSubmit={handleUpload}>
-        <div style={{ marginBottom: '20px' }}>
-          <label>Choose a Photo:</label>
-          <input
-            type="file"
-            onChange={(e) => setFile(e.target.files[0])} // Update the file from input
-            style={{ padding: '10px', marginLeft: '10px' }}
-            required
-          />
-        </div>
-
-        {/* Upload Button */}
-        <button
-          type="submit"
-          disabled={isUploading} // Disable the button after first click
-          style={{
-            padding: '10px 20px',
-            backgroundColor: isUploading ? 'gray' : '#28a745',
-            color: 'white',
-            cursor: isUploading ? 'not-allowed' : 'pointer',
-            border: 'none',
-            borderRadius: '5px',
-          }}
-        >
-          {isUploading ? 'Uploading...' : 'Upload Photo'} {/* Change button text while uploading */}
-        </button>
-      </form>
-
-      {/* Show success or error status */}
-      {status && <p style={{ marginTop: '20px' }}>{status}</p>}
-
-      {/* Link back to home page */}
-      <div style={{ marginTop: '20px' }}>
-        <Link
-          to="/"
-          style={{
-            padding: '10px 20px',
-            backgroundColor: '#007bff',
-            color: 'white',
-            textDecoration: 'none',
-            borderRadius: '5px',
-          }}
-        >
-          Return to Home
-        </Link>
-      </div>
+      <FileUpload
+        onSubmit={handleUpload}
+        isUploading={isUploading}
+        onCancel={handleCancel}
+      />
+      {status && <p>{status}</p>}
     </div>
   );
 }
