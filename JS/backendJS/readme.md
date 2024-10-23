@@ -27,9 +27,7 @@ read all
 curl -X GET http://localhost:3000/api/photo/all
 
 read by ID
-curl -X GET http://localhost:3000/api/photo/read \
-  -H "Content-Type: application/json" \
-  -d '{"id": 1}'
+curl -X GET http://localhost:3000/api/photo/read/8
 
 delete by ID
 curl -X DELETE http://localhost:3000/api/photo/delete \

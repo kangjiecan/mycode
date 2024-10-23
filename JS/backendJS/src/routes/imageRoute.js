@@ -4,6 +4,8 @@ const multer = require("multer");
 const fs = require("fs");
 const path = require("path");
 const { title } = require("process");
+const BASE_URL = process.env.BASE_URL || 'http://localhost:3000'; // Fallback to localhost
+
 
 const router = express.Router();
 
@@ -82,7 +84,7 @@ async function postImage(req, res) {
 
 // Function to handle retrieving an image by ID
 async function getImage(req, res) {
-  const id = parseInt(req.body.id, 10);
+  const id = parseInt(req.params.id, 10);
 
   if (isNaN(id) || id < 0) {
     return res
@@ -97,7 +99,7 @@ async function getImage(req, res) {
         message: `Image ${image.name} ID ${image.id} from ${image.path} successfully retrieved`,
         id: image.id,
         name: image.name,
-        path: image.path,
+        path: `${BASE_URL}/images/${image.name}`, // Construct the full URL using BASE_URL
         title: image.title,
         description: image.description,
       });
@@ -118,11 +120,15 @@ async function getImage(req, res) {
 async function getAllImages(req, res) {
   try {
     const images = await imageRepo.getAllImages();
+    
+    // Ensure BASE_URL is loaded from the environment
+
+    // Map through the images and construct the correct path
     res.status(200).json({
       images: images.map((image) => ({
         id: image.id,
         name: image.name,
-        path: image.path,
+        path: `${BASE_URL}/images/${image.name}`, // Construct the full URL using BASE_URL
         title: image.title,
         description: image.description,
       })),
@@ -135,7 +141,7 @@ async function getAllImages(req, res) {
 
 // Function to handle deleting an image by ID
 async function deleteImage(req, res) {
-  const id = parseInt(req.body.id, 10);
+  const id = parseInt(req.params.id, 10);
   if (isNaN(id)) {
     res.status(400).json({ message: "Bad Request: 'id' is a required field" });
     return;
@@ -294,9 +300,9 @@ async function updateImageInfo(req,res){
     });
   }          
 
-router.get("/api/photo/read/", getImage);
+router.get("/api/photo/read/:id", getImage);
 router.get("/api/photo/all", getAllImages);
-router.delete("/api/photo/delete/", deleteImage);
+router.delete("/api/photo/delete/:id", deleteImage);
 router.post("/api/photo/create/", fileUpload);
 router.put("/api/photo/update", fileUpdater);
 router.put("/api/photo/updateInfo", updateImageInfo);
