@@ -40,15 +40,22 @@ export default function Read() {
 
       {/* Return to Home Link */}
       <div style={{ marginTop: '10px' }}>
-        <Link to="/" style={{ padding: '1px 5px', fontSize: '16px', backgroundColor: '#007bff', color: 'white', textDecoration: 'none', borderRadius: '5px', cursor: 'pointer' }}>
+        <Link to="/" style={{ padding: '5px 10px', fontSize: '16px', backgroundColor: '#007bff', color: 'white', textDecoration: 'none', borderRadius: '5px', cursor: 'pointer' }}>
           Return to Home
         </Link>
       </div>
 
       {/* Delete Photo Link */}
       <div style={{ marginTop: '10px' }}>
-        <Link to={`/delete/${id}`} style={{ padding: '1px 5px', fontSize: '16px', backgroundColor: 'red', color: 'white', textDecoration: 'none', borderRadius: '5px', cursor: 'pointer' }}>
-            Delete Photo  
+        <Link to={`/delete/${id}`} style={{ padding: '5px 10px', fontSize: '16px', backgroundColor: 'red', color: 'white', textDecoration: 'none', borderRadius: '5px', cursor: 'pointer' }}>
+          Delete Photo  
+        </Link>
+      </div>
+
+      {/* Update Photo Info Link */}
+      <div style={{ marginTop: '10px' }}>
+        <Link to={`/update/${id}`} style={{ padding: '5px 10px', fontSize: '16px', backgroundColor: 'green', color: 'white', textDecoration: 'none', borderRadius: '5px', cursor: 'pointer' }}>
+          Update Info
         </Link>
       </div>
     </div>
