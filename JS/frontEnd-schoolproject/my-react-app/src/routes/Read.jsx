@@ -41,21 +41,21 @@ export default function Read() {
       {/* Return to Home Link */}
       <div style={{ marginTop: '10px' }}>
         <Link to="/" style={{ padding: '5px 10px', fontSize: '16px', backgroundColor: '#007bff', color: 'white', textDecoration: 'none', borderRadius: '5px', cursor: 'pointer' }}>
-          Return to Home
+          Return
         </Link>
       </div>
 
       {/* Delete Photo Link */}
       <div style={{ marginTop: '10px' }}>
         <Link to={`/delete/${id}`} style={{ padding: '5px 10px', fontSize: '16px', backgroundColor: 'red', color: 'white', textDecoration: 'none', borderRadius: '5px', cursor: 'pointer' }}>
-          Delete Photo  
+          Delete
         </Link>
       </div>
 
       {/* Update Photo Info Link */}
       <div style={{ marginTop: '10px' }}>
         <Link to={`/update/${id}`} style={{ padding: '5px 10px', fontSize: '16px', backgroundColor: 'green', color: 'white', textDecoration: 'none', borderRadius: '5px', cursor: 'pointer' }}>
-          Update Info
+          Update
         </Link>
       </div>
     </div>
