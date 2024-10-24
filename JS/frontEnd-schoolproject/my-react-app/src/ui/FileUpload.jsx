@@ -1,34 +1,35 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom'; // Import Link to navigate back to home
+import { Link } from 'react-router-dom'; 
 
 export default function FileUpload({ onSubmit, isUploading, buttonText = 'Upload Photo', onCancel }) {
-  const [file, setFile] = useState(null); // State to hold the selected file
-  const [isSubmitted, setIsSubmitted] = useState(false); // State to disable the button after first click
+  const [file, setFile] = useState(null); 
+  const [isSubmitted, setIsSubmitted] = useState(false); 
 
   // Handle the file selection
   const handleFileChange = (e) => {
-    setFile(e.target.files[0]); // Store the selected file
-    setIsSubmitted(false); // Reset isSubmitted when a new file is selected
+    setFile(e.target.files[0]);
+    setIsSubmitted(false); 
   };
 
   // Handle the form submission
   const handleSubmit = (e) => {
     e.preventDefault();
     if (file) {
-      setIsSubmitted(true); // Disable the buttons after the first click
-      onSubmit(file); // Call the provided onSubmit function with the selected file
+      setIsSubmitted(true); 
+      onSubmit(file); 
     }
   };
 
   return (
-    <div style={{ textAlign: 'center', marginTop: '50px' }}>
+    <div className="container text-center mt-5">
       <form onSubmit={handleSubmit}>
-        <div style={{ marginBottom: '20px' }}>
-          <label>Choose a Photo:</label>
+        {/* File Input */}
+        <div className="mb-3">
+          <label className="form-label">Choose a Photo:</label>
           <input
             type="file"
             onChange={handleFileChange} // Update the file state
-            style={{ padding: '10px', marginLeft: '10px' }}
+            className="form-control d-inline-block w-auto ms-3" // Bootstrap form control and spacing
             required
           />
         </div>
@@ -39,7 +40,7 @@ export default function FileUpload({ onSubmit, isUploading, buttonText = 'Upload
           disabled={isUploading || isSubmitted} // Disable the button after first click or while uploading
           style={{
             padding: '10px 20px',
-            backgroundColor: isUploading || isSubmitted ? 'gray' : '#28a745',
+            backgroundColor: isUploading || isSubmitted ? 'gray' : '#28a745', // Custom green color
             color: 'white',
             cursor: isUploading || isSubmitted ? 'not-allowed' : 'pointer',
             border: 'none',
@@ -57,8 +58,8 @@ export default function FileUpload({ onSubmit, isUploading, buttonText = 'Upload
             disabled={isSubmitted} // Disable after upload
             style={{
               padding: '10px 20px',
-              marginLeft: '10px',
-              backgroundColor: isSubmitted ? 'gray' : '#007bff',
+              marginLeft: '10px', // Bootstrap margin for spacing
+              backgroundColor: isSubmitted ? 'gray' : '#CBD6E2', // Custom blue color
               color: 'white',
               border: 'none',
               borderRadius: '5px',
@@ -71,18 +72,18 @@ export default function FileUpload({ onSubmit, isUploading, buttonText = 'Upload
       </form>
 
       {/* Return to Home Button */}
-      <div style={{ marginTop: '20px' }}>
+      <div className="mt-4">
         <Link
           to="/"
           style={{
             padding: '10px 20px',
-            backgroundColor: '#007bff',
+            backgroundColor: '#CBD6E2', // Custom blue color
             color: 'white',
             textDecoration: 'none',
             borderRadius: '5px',
           }}
         >
-          Return to Home
+          Return
         </Link>
       </div>
     </div>

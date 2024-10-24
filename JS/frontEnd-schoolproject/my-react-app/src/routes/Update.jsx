@@ -1,15 +1,15 @@
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import PhotoInfoForm from '../ui/PhotoInfoForm'; // Import the PhotoInfoForm component
+import PhotoInfoForm from '../ui/PhotoInfoForm'; 
 
 export default function Update() {
-  const { id } = useParams(); // Get the photo ID from the URL
-  const [isSubmitted, setIsSubmitted] = useState(false); // To disable the button after the first click
-  const [status, setStatus] = useState(null); // For success or error messages
-  const [initialData, setInitialData] = useState({ title: '', description: '' }); // Pre-fill form data
+  const { id } = useParams(); 
+  const [isSubmitted, setIsSubmitted] = useState(false); 
+  const [status, setStatus] = useState(null); 
+  const [initialData, setInitialData] = useState({ title: '', description: '' }); 
 
   const apiHost = import.meta.env.VITE_API_HOST;
-  const apiUrl = `${apiHost}/api/photo/updateInfo`; // API to update the photo info
+  const apiUrl = `${apiHost}/api/photo/updateInfo`; 
 
   // Pre-fill the form with the current title and description (if needed)
   useEffect(() => {
@@ -23,16 +23,16 @@ export default function Update() {
     fetchPhoto();
   }, [id, apiHost]);
 
-  // Handle form submission for updating the photo info
+  
   const handleUpdate = async ({ title, description }) => {
-    setIsSubmitted(true); // Disable the button after the first click
+    setIsSubmitted(true); 
     try {
       const response = await fetch(apiUrl, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ id, title, description }), // Send the photo ID, title, and description
+        body: JSON.stringify({ id, title, description }), 
       });
 
       if (response.ok) {

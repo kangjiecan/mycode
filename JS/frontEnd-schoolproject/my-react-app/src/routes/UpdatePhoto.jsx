@@ -1,21 +1,21 @@
 import React, { useState } from 'react';
 import FileUpload from '../ui/FileUpload';
-import { useParams } from 'react-router-dom'; // Adjust the path to where FileUpload.jsx is located
+import { useParams } from 'react-router-dom'; 
 
 export default function UpdatePhoto() {
   const [isUploading, setIsUploading] = useState(false);
   const [status, setStatus] = useState(null);
-  const { id } = useParams(); // Assuming you're using react-router to get the photo ID
+  const { id } = useParams(); 
 
   const apiHost = import.meta.env.VITE_API_HOST;
-  const apiUrl = `${apiHost}/api/photo/update`; // API to update the photo
+  const apiUrl = `${apiHost}/api/photo/update`; 
 
   const handleUpload = async (file) => {
     setIsUploading(true);
     
     const formData = new FormData();
     formData.append('file', file);
-    formData.append('id', id); // Use the id from URL parameters
+    formData.append('id', id); 
 
     try {
       const response = await fetch(apiUrl, {
