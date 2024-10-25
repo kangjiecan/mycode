@@ -15,7 +15,8 @@ const imageRepo = new ImageRepo();
 // Multer configuration for file uploads
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    const uploadDir = path.join(__dirname, "../../public/images");
+    const uploadDir = req.body.uploadDir || path.join(__dirname, "../../public/images");
+
     if (!fs.existsSync(uploadDir)) {
       fs.mkdirSync(uploadDir, { recursive: true });
     }
@@ -30,7 +31,7 @@ const upload = multer({ storage: storage });
 
 // Utility functions to handle file paths
 function getFilePath(file) {
-  return path.join(__dirname, "../../public/images", file.filename);
+  return path.join(file.destination, file.filename); // Use dynamic destination
 }
 
 // Function to delete a file

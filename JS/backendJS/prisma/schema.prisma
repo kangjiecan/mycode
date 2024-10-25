@@ -1,0 +1,21 @@
+//prisma/schema.prisma
+
+
+datasource db{
+  provider="sqlite"
+  url="file:./dev.db"
+}
+
+generator client{
+  provider="prisma-client-js"
+
+}
+
+model image{
+  id   Int    @id @default(autoincrement())
+  name String @unique
+  path String
+  title String
+  description String
+}
+
