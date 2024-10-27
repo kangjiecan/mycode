@@ -26,58 +26,57 @@ export default function Home() {
   }, []);
 
   return (
-    <div className="container py-4">
-      {" "}
-      {/* Bootstrap container and padding */}
-      {/* Title and button aligned */}
+    <div className="container mt-5">
+      {/* Title and Add New button row */}
       <div className="d-flex justify-content-between align-items-center mb-4">
-        {" "}
-        {/* Bootstrap flex utilities */}
-        <h3>All POST</h3>
-        {/* Add New Photo Button */}
-        <Link
-          to="/create"
-          className="btn btn-success btn-sm" // Bootstrap button classes
-        >
+        <h1>Photo Gallery</h1>
+        <Link to="/create" className="btn btn-sm" style={{ backgroundColor: '#CBD6E2', color: 'white' }}>
           Add New
         </Link>
       </div>
-      {/* Display the posts */}
-      <div className="row g-5">
-        {" "}
-        {/* Bootstrap row */}
+      
+      <div className="row">
         {posts && posts.length > 0 ? (
           posts.map((post) => (
-            <div key={post.id} className="col-md-2 mb-4">
-              {" "}
-              {/* Bootstrap grid system and margin-bottom */}
-              {/* Wrap the image in a Link */}
-              <Link to={`/read/${post.id}`} className="text-decoration-none">
-                <div
-                  className="card"
-                  style={{
-                    width: "200px", // Correctly set the width
-                    height: "300px", // Correctly set the height
-                    overflow: "hidden", // Ensure overflow is hidden
-                  }}
-                >
-                  {/* Ensure you're rendering children correctly */}
-                  <img
-                    src={post.path}
-                    alt={post.title}
-                    className="card-img-top"
-                    style={{ height: "150px", objectFit: "cover" }}
-                  />
-                  <div className="card-body">
-                    <h5 className="card-title">ID: {post.id}</h5>
-                    <p className="card-text">{post.description}</p>
+            <div key={post.id} className="col-md-3 mb-4">
+              <div className="card" style={{ height: '400px' }}>
+                <img
+                  src={post.path}
+                  alt={post.title}
+                  className="card-img-top"
+                  style={{ height: '150px', objectFit: 'cover' }}
+                />
+                <div className="card-body d-flex flex-column">
+                  <h5 className="card-title">{post.title}</h5>
+                  
+                  <p className="card-text" style={{
+                    overflow: 'hidden',
+                    textOverflow: 'ellipsis',
+                    display: '-webkit-box',
+                    WebkitLineClamp: 3, 
+                    WebkitBoxOrient: 'vertical'
+                  }}>
+                    {post.description}
+                  </p>
+
+                  {/* Buttons in the same row */}
+                  <div className="mt-auto d-flex justify-content-between">
+                    <Link to={`/read/${post.id}`} className="btn btn-sm" style={{ backgroundColor: '#CBD6E2', color: 'white' }}>
+                      View
+                    </Link>
+                    <Link to={`/update/${post.id}`} className="btn btn-sm" style={{ backgroundColor: '#CBD6E2', color: 'white' }}>
+                      Update
+                    </Link>
+                    <Link to={`/delete/${post.id}`} className="btn btn-sm" style={{ backgroundColor: '#CBD6E2', color: 'white' }}>
+                      Delete
+                    </Link>
                   </div>
                 </div>
-              </Link>
+              </div>
             </div>
           ))
         ) : (
-          <p>No posts found.</p>
+          <p className="text-center">No posts found.</p>
         )}
       </div>
     </div>

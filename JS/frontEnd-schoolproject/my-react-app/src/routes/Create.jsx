@@ -1,9 +1,10 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import PhotoInfoForm from '../ui/PhotoInfoForm';
 
 export default function Create() {
   const [file, setFile] = useState(null);
+  const [title, setTitle] = useState('');
+  const [description, setDescription] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [status, setStatus] = useState(null);
 
@@ -11,7 +12,7 @@ export default function Create() {
   const apiHost = import.meta.env.VITE_API_HOST;
   const apiUrl = `${apiHost}/api/photo/create`;
 
-  const handleCreate = async ({ title, description }) => {
+  const handleCreate = async () => {
     if (!file) {
       setStatus('Please upload a file.');
       return;
@@ -49,25 +50,64 @@ export default function Create() {
   };
 
   return (
-    <div className="d-flex flex-column justify-content-center align-items-center min-vh-100">
-      <h1>Create New Post</h1>
-      <PhotoInfoForm
-        initialTitle=""
-        initialDescription=""
-        onSubmit={handleCreate}
-        isSubmitted={isSubmitting}
-        showUploadButton={false}
-      />
-      <div className="mt-3">
-        <input
-          type="file"
-          onChange={handleFileChange}
-          className="form-control"
-          style={{ width: '300px' }}
-          required
-        />
-      </div>
-      {status && <p className="mt-3">{status}</p>}
+    <div className="container mt-5">
+      <h1 className="text-center">Create New Photo Post</h1>
+
+      <form 
+        onSubmit={(e) => {
+          e.preventDefault();
+          handleCreate();
+        }}
+        className="mx-auto" 
+        style={{ maxWidth: '400px' }}
+      >
+        {/* Title Field */}
+        <div className="mb-3">
+          <label className="form-label">Title:</label>
+          <input
+            type="text"
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+            className="form-control"
+            required
+          />
+        </div>
+
+        {/* Description Field */}
+        <div className="mb-3">
+          <label className="form-label">Description:</label>
+          <textarea
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
+            className="form-control"
+            style={{ height: '150px' }}
+            required
+          />
+        </div>
+
+        {/* File Upload */}
+        <div className="mb-3">
+          <label className="form-label">Upload Photo:</label>
+          <input
+            type="file"
+            onChange={handleFileChange}
+            className="form-control"
+            required
+          />
+        </div>
+
+        {/* Submit Button */}
+        <button
+          type="submit"
+          disabled={isSubmitting}
+          className={`btn ${isSubmitting ? 'btn-secondary' : 'btn-success'} w-100`}
+        >
+          {isSubmitting ? 'Submitting...' : 'Submit'}
+        </button>
+      </form>
+
+      {/* Status Message */}
+      {status && <p className="mt-3 text-center">{status}</p>}
     </div>
   );
 }
