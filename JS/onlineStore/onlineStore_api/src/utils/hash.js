@@ -11,5 +11,4 @@ async function comparePasswords(password, hashedPassword) {
   return isPasswordValid;
 }
 
-module.exports = { hashPassword };
-module.exports = { comparePasswords };
+module.exports = { hashPassword,comparePasswords };

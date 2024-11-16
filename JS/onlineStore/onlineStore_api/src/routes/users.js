@@ -5,6 +5,9 @@ const { comparePasswords } = require('../utils/hash');
 const prisma = new PrismaClient();
 
 const router = express.Router();
+
+const sessions = new Map();
+
 router.post('/login', async (req, res) => {
   const { email, password } = req.body;
 
@@ -23,13 +26,15 @@ router.post('/login', async (req, res) => {
       return res.status(401).json({ error: "Invalid password." });
     }
 
-    res.status(200).json({ message: "Login successful", email: user.email });
+    const sessionId = `${user.customer_id}-${Date.now()}`;
+    sessions.set(sessionId, { userId: user.customer_id, email: user.email });
+
+    res.status(200).json({ message: "Login successful", sessionId });
   } catch (error) {
     console.error("Error during login:", error);
     res.status(500).json({ error: "Internal server error." });
   }
 });
-
 
 router.post('/signup', async (req, res) => {
   const { email, password, firstName, lastName } = req.body;
@@ -60,6 +65,28 @@ router.post('/signup', async (req, res) => {
     console.error("Error creating user:", error);
     res.status(500).json({ error: "Internal server error." });
   }
+});
+
+router.post('/logout', (req, res) => {
+  const { sessionId } = req.body;
+
+  if (!sessionId || !sessions.has(sessionId)) {
+    return res.status(400).json({ error: "Invalid session ID." });
+  }
+
+  sessions.delete(sessionId);
+  res.status(200).json({ message: "Logout successful" });
+});
+
+router.get('/getSession', (req, res) => {
+  const { sessionId } = req.query;
+
+  if (!sessionId || !sessions.has(sessionId)) {
+    return res.status(401).json({ error: "Session not found or expired." });
+  }
+
+  const sessionData = sessions.get(sessionId);
+  res.status(200).json({ message: "Session active", session: sessionData });
 });
 
 module.exports = router;
