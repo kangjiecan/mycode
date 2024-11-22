@@ -6,7 +6,7 @@
 Human::Human() : Organism()
 {
 }
-Human::Human(City *city, int size) : Organism(city, size)
+Human::Human(int x, int y, City *city, int gridsize, bool flag, int breed) : Organism(x, y, city, gridsize, flag, breed)
 {
 }
 
@@ -16,7 +16,7 @@ Human::~Human()
 
 std::string Human::getType() const
 {
-    return "Human";
+    return "H";
 }
 
 int Human::getBreed()
@@ -41,7 +41,7 @@ void Human::turn()
         int nx = x + move.first;
         int ny = y + move.second;
 
-        if (city->inBounderies(nx, ny) && (city->getOrganism(nx, ny) == nullptr ||  city->getOrganism(nx, ny)->getType() == "zombie") && flag)
+        if (city->inBounderies(nx, ny) && (city->getOrganism(nx, ny) == nullptr || city->getOrganism(nx, ny)->getType() == "z") && flag)
         {
             this->x = nx;
             this->y = ny;

@@ -2,10 +2,10 @@
 #include "City.h"
 
 Organism::Organism() 
-    : x(0), y(0), breed(0),size(0), flag(false), city(nullptr) {}
+    : x(0), y(0), city(nullptr), gridsize(0), flag(false), breed(0) {}
 
-Organism::Organism(City* city, int size)
-    : x(0), y(0), breed(0), size(size), flag(false), city(city) {}
+Organism::Organism(int x, int y, City *city, int gridsize, bool flag, int breed)
+    : x(x), y(y), city(city), gridsize(gridsize), flag(flag), breed(breed) {}
 
 Organism::~Organism() {}
 

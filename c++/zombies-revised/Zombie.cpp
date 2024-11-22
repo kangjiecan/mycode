@@ -8,9 +8,8 @@ Zombie::Zombie() : Organism()
 {
 }
 
-Zombie::Zombie(City *city, int size) : Organism(city, size)
-{
-}
+Zombie::Zombie(int x, int y, City *city, int gridsize, bool flag, int breed, int starve)
+    : Organism(x, y, city, gridsize, flag, breed), starve(starve) {}
 
 Zombie::~Zombie()
 {
@@ -18,9 +17,18 @@ Zombie::~Zombie()
 
 std::string Zombie::getType() const
 {
-    return "Zombie";
+    return "Z";
 }
 
+int Zombie::getStarve()
+{
+    return starve;
+}
+
+void Zombie::setStarve(int starveSet)
+{
+    this->starve = starveSet;
+}
 int Zombie::getBreed()
 {
     return breed;
@@ -43,20 +51,19 @@ void Zombie::turn()
         int nx = x + move.first;
         int ny = y + move.second;
 
-        if (city->inBounderies(nx, ny) && flag && (city->getOrganism(nx, ny)->getType() == "Human"))
+        if (city->inBounderies(nx, ny) && flag && (city->getOrganism(nx, ny)->getType() == "H"))
         {
             this->x = nx;
             this->y = ny;
             return;
         }
-        
     }
     for (const auto &move : moves)
     {
         int nx = x + move.first;
         int ny = y + move.second;
 
-        if (city->inBounderies(nx, ny) && flag && (city->getOrganism(nx, ny) == nullptr ))
+        if (city->inBounderies(nx, ny) && flag && (city->getOrganism(nx, ny) == nullptr))
         {
             this->x = nx;
             this->y = ny;

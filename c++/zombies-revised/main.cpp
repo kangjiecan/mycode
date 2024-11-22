@@ -10,9 +10,10 @@
 #include <thread>
 #include "Organism.h"
 #include "City.h"
-#include "Constants.h"
-
+#include "GameSpecs.h"
 using namespace std;
+
+const int intervalseting = 1000; // Define intervalseting with an appropriate value
 
 void ClearScreen()
 {
@@ -21,18 +22,19 @@ void ClearScreen()
 
 int main() {
     City *city = new City();
-    chrono:: milliseconds interval(INTERVAL);
+    chrono:: milliseconds interval(intervalseting);
 
     while (city->hasDiversity()) { //while both humans and zombies exist
         this_thread::sleep_for(interval);
         ClearScreen();
         city->step(); 
         city->reset(); //resets moved flags
-        city->countOrganisms(Z or H goes here);// run once for each type
+        city->countOrganisms("Z");
+        city->countOrganisms("H");// run once for each type
         cout << *city; //prints city
         cout << "GENERATION " << city->getGeneration() << endl;
-        cout << "HUMANS: " << city->countType(HUMAN_CH) << endl;
-        cout << "ZOMBIES: " << city->countType(ZOMBIE_CH) << endl;
+        cout << "HUMANS: " << city->countType("H") << endl;
+        cout << "ZOMBIES: " << city->countType("Z") << endl;
     }//end while
 }//end main
 

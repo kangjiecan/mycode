@@ -10,7 +10,7 @@ const int zombie_starve = 3; // steps until a zombie starves and converts back
 const char human_ch = 111; // ascii for human
 const char space_ch = 45; // ascii dash for empty elements
 const char zombie_ch = 90; // ascii for zombie
-const int interval = 300; // millisecond pause between city steps
+const int intervalSetting = 300; // millisecond pause between city steps
 const int iterations = 1000; // max number of steps
 
 // Colors
