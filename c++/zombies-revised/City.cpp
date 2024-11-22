@@ -117,12 +117,17 @@ void City::movingIn(Organism *organism, int X, int Y)
     {
         setOrganism(organism);
         organism->setFlag(false);
-        organism->setBreed();
+        //organism->setBreed();
         if (organism->getType() == "z")
         {
 
             Zombie *zombie = dynamic_cast<Zombie *>(organism);
             zombie->setStarve(zombie->getStarve() - 1);
+        }
+        else
+        {
+            Human *human = dynamic_cast<Human *>(organism);
+            human->setBreed();
         }
     }
     else if (existingOrganism->getType() == "H" && organism->getType() == "Z")
@@ -132,7 +137,8 @@ void City::movingIn(Organism *organism, int X, int Y)
         organism->setFlag(false);
         Zombie *zombie = dynamic_cast<Zombie *>(organism);
         zombie->setStarve(3);
-        zombie->setBreed();
+        Zombie->setBreed();
+        
     }
     else if (existingOrganism->getType() == "Z" && organism->getType() == "H")
     {
@@ -141,6 +147,7 @@ void City::movingIn(Organism *organism, int X, int Y)
         Zombie *zombie = dynamic_cast<Zombie *>(existingOrganism);
         zombie->setStarve(3);
         zombie->setBreed();
+        
     }
 }
 
