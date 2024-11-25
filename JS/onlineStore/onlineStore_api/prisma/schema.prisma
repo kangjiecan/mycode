@@ -7,18 +7,60 @@ generator client {
   provider = "prisma-client-js"
 }
 
-model Product {
-  product_id     Int     @id @default(autoincrement())
-  name           String
-  description    String?
-  cost           Float   
-  image_filename String?
+model Purchase {
+  purchase_id    Int      @id @default(autoincrement())
+  customer_id    Int
+  street         String
+  city           String
+  province       String
+  country        String
+  postal_code    String
+  credit_card    String
+  credit_expire  String
+  credit_cvv     String
+  invoice_amt    Float
+  invoice_tax    Float
+  invoice_total  Float
+  order_date     DateTime @default(now())
+
+  customer       Customer @relation(fields: [customer_id], references: [customer_id])
+  purchaseItems  PurchaseItem[]
+
+  @@map("purchases")
+}
+
+model PurchaseItem {
+  purchase_id Int
+  product_id  Int
+  quantity    Int
+
+  purchase    Purchase @relation(fields: [purchase_id], references: [purchase_id])
+  product     Product  @relation(fields: [product_id], references: [product_id])
+
+  @@id([purchase_id, product_id]) 
+  @@map("purchase_items")
 }
 
 model Customer {
-  customer_id Int    @id @default(autoincrement())
-  email       String @unique
-  password    String
-  first_name  String
-  last_name   String
+  customer_id  Int       @id @default(autoincrement())
+  email        String    @unique
+  first_name   String
+  last_name    String
+  password     String
+  purchases    Purchase[]
+
+  @@map("customers")
 }
+
+model Product {
+  product_id Int      @id @default(autoincrement())
+  name       String
+  price      Float
+  stock      Int
+  description String
+  photo       String
+  purchaseItems PurchaseItem[]
+
+  @@map("products")
+}
+
