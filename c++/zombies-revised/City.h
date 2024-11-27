@@ -5,12 +5,14 @@
 #include "GameSpecs.h"
 #include "Organism.h"
 
+
 class City
 {
-protected:
+    protected:
 	int gridsize;
 	Organism ***grid;
 	int generation;
+
 
 public:
 	City();
@@ -27,9 +29,14 @@ public:
 	bool hasDiversity();
 	int countOrganisms(const std::string &type) const;
 	int getGeneration();
+	void setGeneration(int generation);
 	void generateOrganisms(int zombie_startcount, int human_startcount, int gridsize);
 	void movingIn(Organism *organism1, int x, int y);
-	void col(int c); // for color
+	void humanRecruit(Organism *organism);
+	void zombieCovertToHuman(Organism *organism);
+
+	void col(int c);
+	void covertingHumanToZombie(Organism *organism);
 };
 
-#endif
+#endif // _CITY_H

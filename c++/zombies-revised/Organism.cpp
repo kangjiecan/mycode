@@ -25,7 +25,25 @@ void Organism::setFlag(bool move) {
     this->flag = move;
 }
 
+City* Organism::getCity() {
+    return city;
+}
 
+int Organism::getGridSize() {
+    return gridsize;
+}
+
+void Organism::breedReset() {
+    this->breed = 0;
+}
+
+void Organism::setBreed(int breed) {
+    this->breed = breed;
+}
+
+int Organism::getBreed() {
+    return breed;
+}
 
 std::ostream& operator<<(std::ostream& output, const Organism* organism) {
     if (organism) {

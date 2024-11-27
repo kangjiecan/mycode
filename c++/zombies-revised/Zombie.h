@@ -12,11 +12,9 @@ private:
 public:
 	Zombie();
 	Zombie(int x, int y, City *city, int gridsize, bool flag = false, int breed = 0, int starve = 3);
-	Zombie(Organism *organism);//covert human to zombie
+	// Zombie(Organism *organism);//covert human to zombie
 	virtual ~Zombie();
 	std::string getType() const override;
-	int getBreed() override;
-	void setBreed() override;
 	void turn() override;
 	int getStarve();
 	void setStarve(int starveSet);

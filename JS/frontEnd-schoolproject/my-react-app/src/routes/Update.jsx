@@ -63,7 +63,7 @@ export default function Update() {
       setStatus('Please select a file to upload.');
       return;
     }
-    setIsUploading(true);
+    setIsUploading(true); 
 
     const formData = new FormData();
     formData.append('file', file);

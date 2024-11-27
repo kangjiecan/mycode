@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">My Application</string>
+    <string name="click_me">Click Me</string>
+    <string name="welcome_to_my_application">Welcome to My Application!</string>
+    <string name="background_desc">Background image for the app</string>
+
+</resources>

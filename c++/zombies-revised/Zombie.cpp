@@ -29,15 +29,6 @@ void Zombie::setStarve(int starveSet)
 {
     this->starve = starveSet;
 }
-int Zombie::getBreed()
-{
-    return breed;
-}
-
-void Zombie::setBreed()
-{
-    this->breed = breed + 1;
-}
 
 void Zombie::turn()
 {
@@ -51,22 +42,34 @@ void Zombie::turn()
         int nx = x + move.first;
         int ny = y + move.second;
 
-        if (city->inBounderies(nx, ny) && flag && (city->getOrganism(nx, ny)->getType() == "H"))
+        // serach for human
+        if (city->inBounderies(nx, ny))
         {
-            this->x = nx;
-            this->y = ny;
-            return;
+            Organism *target = city->getOrganism(nx, ny);
+            if (target && target->getType() == "H")
+            {
+                this->x = nx;
+                this->y = ny;
+                return;
+            }
         }
     }
+
+    // serch for empty space
     for (const auto &move : moves)
     {
         int nx = x + move.first;
         int ny = y + move.second;
 
-        if (city->inBounderies(nx, ny) && flag && (city->getOrganism(nx, ny) == nullptr))
+        if (city->inBounderies(nx, ny))
         {
-            this->x = nx;
-            this->y = ny;
+            Organism *target = city->getOrganism(nx, ny);
+            if (target == nullptr)
+            {
+                this->x = nx;
+                this->y = ny;
+                return;
+            }
         }
     }
 }

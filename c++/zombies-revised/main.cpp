@@ -1,40 +1,43 @@
-//
-// Created by W0068332 on 11/21/2021.
-//
-//Example main.cpp
-//This supposes that city->step() calls the move method of each organism in the city
-//in a single pass causing each to perform all tasks that it can.
-
 #include <iostream>
 #include <chrono>
 #include <thread>
-#include "Organism.h"
 #include "City.h"
+#include "Organism.h"
+#include "Human.h"
+#include "Zombie.h"
 #include "GameSpecs.h"
+
 using namespace std;
 
-const int intervalseting = 1000; // Define intervalseting with an appropriate value
+const int stepInterval = ITERATIONS; // Time between steps (ms)
 
 void ClearScreen()
 {
-    cout << "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n";
+    std::cout << "\033[2J\033[1;1H"; // Clears console screen (UNIX-like systems)
 }
 
-int main() {
-    City *city = new City();
-    chrono:: milliseconds interval(intervalseting);
+int main()
+{
+    City *city = new City(GRIDSIZE);
 
-    while (city->hasDiversity()) { //while both humans and zombies exist
+    city->generateOrganisms(ZOMBIE_STARTCOUNT, HUMAN_STARTCOUNT, GRIDSIZE);
+
+    chrono::milliseconds interval(stepInterval);
+
+    while (city->hasDiversity())
+    {
+        city->setGeneration(city->getGeneration() + 1);
         this_thread::sleep_for(interval);
         ClearScreen();
-        city->step(); 
-        city->reset(); //resets moved flags
-        city->countOrganisms("Z");
-        city->countOrganisms("H");// run once for each type
-        cout << *city; //prints city
+        city->reset();
+        city->step();
+        cout << *city;
         cout << "GENERATION " << city->getGeneration() << endl;
         cout << "HUMANS: " << city->countType("H") << endl;
         cout << "ZOMBIES: " << city->countType("Z") << endl;
-    }//end while
-}//end main
+    }
 
+    cout << "Simulation ended. Final generation: " << city->getGeneration() << endl;
+    delete city;
+    return 0;
+}
