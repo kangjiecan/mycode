@@ -12,28 +12,30 @@
         android:scaleType="centerCrop"
         android:src="@drawable/background_image" />
 
-    <!-- Horizontal Buttons -->
-    <include
-        layout="@layout/buttons_layout"
-        android:id="@+id/buttonsLayout"
-        android:layout_width="match_parent"
+    <!-- Return Button -->
+    <Button
+        android:id="@+id/returnButton"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true" />
+        android:layout_alignParentTop="true"
+        android:layout_margin="16dp"
+        android:layout_alignParentStart="true"
+        android:text="Return"
+        android:textColor="@android:color/white"
+        app:backgroundTint="@color/button_background_color"
+        />
 
-    <!-- Alert Schedules TextView -->
+    <!-- Weather Details TextView -->
     <TextView
-        android:id="@+id/alertSchedulesTextView"
+        android:id="@+id/weatherDetailsTextView"
         android:layout_width="350dp"
         android:layout_height="wrap_content"
-        android:layout_below="@id/buttonsLayout"
+        android:layout_below="@id/returnButton"
         android:layout_marginTop="16dp"
         android:padding="16dp"
-        android:text="Date: 2023-12-01, Location: Mountain Trail\n\nDate: 2023-12-02, Location: Forest Path"
+        android:text="Weather Details:\nTemperature: 25°C\nHumidity: 60%\nCondition: Clear Sky"
         android:textSize="16sp"
-        android:textColor="@android:color/holo_red_light"
+        android:textColor="@android:color/black"
         android:gravity="start"
-        android:layout_centerHorizontal="true"
-        android:clickable="true"
-        android:focusable="true"
-        android:onClick="openWeatherDetails" />
+        android:layout_centerHorizontal="true" />
 </RelativeLayout>

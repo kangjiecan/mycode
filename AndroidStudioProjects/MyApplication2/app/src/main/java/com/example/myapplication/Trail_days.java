@@ -1,29 +1,29 @@
 package com.example.myapplication;
 
-import android.content.Intent;
+import androidx.appcompat.app.AppCompatActivity;
+import android.content.Intent; // For navigation
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
-import androidx.appcompat.app.AppCompatActivity;
-
-public class SettingActivity extends AppCompatActivity {
+public class Trail_days extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.threshold_setting); // Reference your layout file
+        setContentView(R.layout.activity_trail_days);
 
-        // Handle button clicks
+        // Find buttons by ID
         Button button1 = findViewById(R.id.button1);
         Button button2 = findViewById(R.id.button2);
         Button button3 = findViewById(R.id.button3);
         Button button4 = findViewById(R.id.button4);
 
-        button1.setOnClickListener(new View.OnClickListener() {
+        // Set click listeners
+        button3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(SettingActivity.this, SettingActivity.class);
+                Intent intent = new Intent(Trail_days.this, MainActivity.class);
                 startActivity(intent);
             }
         });
@@ -31,15 +31,15 @@ public class SettingActivity extends AppCompatActivity {
         button2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(SettingActivity.this, Trail_days.class);
-                startActivity(intent);
+                Toast.makeText(Trail_days.this, "Button 2 clicked!", Toast.LENGTH_SHORT).show();
             }
         });
 
-        button3.setOnClickListener(new View.OnClickListener() {
+        // Use button 3 to navigate to SettingActivity
+        button1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(SettingActivity.this, MainActivity.class);
+                Intent intent = new Intent(Trail_days.this, SettingActivity.class);
                 startActivity(intent);
             }
         });
@@ -47,7 +47,7 @@ public class SettingActivity extends AppCompatActivity {
         button4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(SettingActivity.this, "Button 4 clicked!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(Trail_days.this, "Button 4 clicked!", Toast.LENGTH_SHORT).show();
             }
         });
     }

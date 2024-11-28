@@ -3,5 +3,10 @@
     <string name="click_me">Click Me</string>
     <string name="welcome_to_my_application">Welcome to My Application!</string>
     <string name="background_desc">Background image for the app</string>
+    <string name="location_label">Location:</string>
 
+    <string name="trail_days_title">TrailDays</string>
+    <string name="date_label">Date:</string>
+    <string name="confirm_button">Confirm</string>
+    <string name="date_2023_12_01_location_mountain_trail_n_ndate_2023_12_02_location_forest_path">Date: 2023-12-01, Location: Mountain Trail\n\nDate: 2023-12-02, Location: Forest Path</string>
 </resources>

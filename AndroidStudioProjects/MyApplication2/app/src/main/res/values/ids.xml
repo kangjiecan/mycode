@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="field1Label" type="id" />
+    <item name="field1Input" type="id" />
+    <item name="field2Label" type="id" />
+    <item name="field2Input" type="id" />
+    <item name="locationLabel" type="id" />
+    <item name="locationInput" type="id" />
+    <item name="dateInput" type="id" />
+    <item name="dateLabel" type="id" />
+    <item name="alertSchedulesTextView" type="id" />
+    <item name="weatherDetailsTextView" type="id" />
+    <item name="returnButton" type="id" />
+</resources>

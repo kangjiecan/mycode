@@ -13,28 +13,13 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
         // Find buttons by ID
         Button button1 = findViewById(R.id.button1);
         Button button2 = findViewById(R.id.button2);
         Button button3 = findViewById(R.id.button3);
         Button button4 = findViewById(R.id.button4);
 
-        // Set click listeners
-        button3.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(MainActivity.this, "Button 1 clicked!", Toast.LENGTH_SHORT).show();
-            }
-        });
-
-        button2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(MainActivity.this, "Button 2 clicked!", Toast.LENGTH_SHORT).show();
-            }
-        });
-
-        // Use button 3 to navigate to SettingActivity
         button1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -43,11 +28,34 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+
+        button2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, Trail_days.class);
+                startActivity(intent);
+            }
+        });
+
+
+        button3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(MainActivity.this, "Button 1 clicked!", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+
         button4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Toast.makeText(MainActivity.this, "Button 4 clicked!", Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    public void openWeatherDetails(View view) {
+        Intent intent = new Intent(this, Weather_details.class); // Replace 'Weather_details' with your target activity class
+        startActivity(intent);
     }
 }
