@@ -1,0 +1,113 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\kangj\\source\\repos\\SentimentAnalysisApp\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{9819507D-28E5-4AA5-982A-37F588646F84}|SentimentAnalysisApp\\SentimentAnalysisApp.csproj|c:\\users\\kangj\\source\\repos\\sentimentanalysisapp\\sentimentanalysisapp\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9819507D-28E5-4AA5-982A-37F588646F84}|SentimentAnalysisApp\\SentimentAnalysisApp.csproj|solutionrelative:sentimentanalysisapp\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9819507D-28E5-4AA5-982A-37F588646F84}|SentimentAnalysisApp\\SentimentAnalysisApp.csproj|c:\\users\\kangj\\source\\repos\\sentimentanalysisapp\\sentimentanalysisapp\\sentimentdata.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9819507D-28E5-4AA5-982A-37F588646F84}|SentimentAnalysisApp\\SentimentAnalysisApp.csproj|solutionrelative:sentimentanalysisapp\\sentimentdata.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9819507D-28E5-4AA5-982A-37F588646F84}|SentimentAnalysisApp\\SentimentAnalysisApp.csproj|c:\\users\\kangj\\source\\repos\\sentimentanalysisapp\\sentimentanalysisapp\\sentimentanalysisapp.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{9819507D-28E5-4AA5-982A-37F588646F84}|SentimentAnalysisApp\\SentimentAnalysisApp.csproj|solutionrelative:sentimentanalysisapp\\sentimentanalysisapp.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9819507D-28E5-4AA5-982A-37F588646F84}|SentimentAnalysisApp\\SentimentAnalysisApp.csproj|c:\\users\\kangj\\source\\repos\\sentimentanalysisapp\\sentimentanalysisapp\\sentimentprediction.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9819507D-28E5-4AA5-982A-37F588646F84}|SentimentAnalysisApp\\SentimentAnalysisApp.csproj|solutionrelative:sentimentanalysisapp\\sentimentprediction.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9819507D-28E5-4AA5-982A-37F588646F84}|SentimentAnalysisApp\\SentimentAnalysisApp.csproj|c:\\users\\kangj\\source\\repos\\sentimentanalysisapp\\sentimentanalysisapp\\labeldata.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9819507D-28E5-4AA5-982A-37F588646F84}|SentimentAnalysisApp\\SentimentAnalysisApp.csproj|solutionrelative:sentimentanalysisapp\\labeldata.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 4,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "SentimentPrediction.cs",
+              "DocumentMoniker": "C:\\Users\\kangj\\source\\repos\\SentimentAnalysisApp\\SentimentAnalysisApp\\SentimentPrediction.cs",
+              "RelativeDocumentMoniker": "SentimentAnalysisApp\\SentimentPrediction.cs",
+              "ToolTip": "C:\\Users\\kangj\\source\\repos\\SentimentAnalysisApp\\SentimentAnalysisApp\\SentimentPrediction.cs",
+              "RelativeToolTip": "SentimentAnalysisApp\\SentimentPrediction.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABUAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-02T19:25:44.231Z",
+              "IsPinned": true,
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{aa2115a1-9712-457b-9047-dbb71ca2cdd2}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{cce594b6-0c39-4442-ba28-10c64ac7e89f}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "SentimentAnalysisApp.csproj",
+              "DocumentMoniker": "C:\\Users\\kangj\\source\\repos\\SentimentAnalysisApp\\SentimentAnalysisApp\\SentimentAnalysisApp.csproj",
+              "RelativeDocumentMoniker": "SentimentAnalysisApp\\SentimentAnalysisApp.csproj",
+              "ToolTip": "C:\\Users\\kangj\\source\\repos\\SentimentAnalysisApp\\SentimentAnalysisApp\\SentimentAnalysisApp.csproj",
+              "RelativeToolTip": "SentimentAnalysisApp\\SentimentAnalysisApp.csproj",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2024-12-02T19:22:04.796Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\kangj\\source\\repos\\SentimentAnalysisApp\\SentimentAnalysisApp\\Program.cs",
+              "RelativeDocumentMoniker": "SentimentAnalysisApp\\Program.cs",
+              "ToolTip": "C:\\Users\\kangj\\source\\repos\\SentimentAnalysisApp\\SentimentAnalysisApp\\Program.cs",
+              "RelativeToolTip": "SentimentAnalysisApp\\Program.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAuAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-02T21:47:11.962Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "LabelData.cs",
+              "DocumentMoniker": "C:\\Users\\kangj\\source\\repos\\SentimentAnalysisApp\\SentimentAnalysisApp\\LabelData.cs",
+              "RelativeDocumentMoniker": "SentimentAnalysisApp\\LabelData.cs",
+              "ToolTip": "C:\\Users\\kangj\\source\\repos\\SentimentAnalysisApp\\SentimentAnalysisApp\\LabelData.cs",
+              "RelativeToolTip": "SentimentAnalysisApp\\LabelData.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-02T20:20:40.635Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "SentimentData.cs",
+              "DocumentMoniker": "C:\\Users\\kangj\\source\\repos\\SentimentAnalysisApp\\SentimentAnalysisApp\\SentimentData.cs",
+              "RelativeDocumentMoniker": "SentimentAnalysisApp\\SentimentData.cs",
+              "ToolTip": "C:\\Users\\kangj\\source\\repos\\SentimentAnalysisApp\\SentimentAnalysisApp\\SentimentData.cs",
+              "RelativeToolTip": "SentimentAnalysisApp\\SentimentData.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAABKAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-02T19:23:59.537Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
