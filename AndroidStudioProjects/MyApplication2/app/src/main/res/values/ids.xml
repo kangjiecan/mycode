@@ -11,4 +11,6 @@
     <item name="alertSchedulesTextView" type="id" />
     <item name="weatherDetailsTextView" type="id" />
     <item name="returnButton" type="id" />
+    <item name="refreshButton" type="id" />
+    <item name="debugTextView" type="id" />
 </resources>

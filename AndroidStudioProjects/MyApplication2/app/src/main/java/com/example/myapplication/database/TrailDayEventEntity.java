@@ -2,34 +2,39 @@ package com.example.myapplication.database;
 
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
-import com.example.myapplication.model.Even;
+import com.example.myapplication.model.Event;
 
 @Entity(tableName = "trail_day_even")
-public class TrailDayEvenEntity {
+public class TrailDayEventEntity {
     @PrimaryKey(autoGenerate = true)
-    private int id;
 
+    private int id;
     private String event;
     private String date;
     private double latitude;
     private double longitude;
 
-    // Constructor to create entity from Even model
-    public TrailDayEvenEntity(Even even) {
-        this.event = even.getEvent();
-        this.date = even.getDate();
-        this.latitude = even.getLatitude();
-        this.longitude = even.getLongitude();
+    // Constructor to create entity from Event model
+    public TrailDayEventEntity(Event event) {
+        this.event = event.getEvent();
+        this.date = event.getDate();
+        this.latitude = event.getLatitude();
+        this.longitude = event.getLongitude();
     }
 
     // Default constructor required by Room
-    public TrailDayEvenEntity() {
+    public TrailDayEventEntity() {
     }
 
-    // Convert entity to Even model
-    public Even toEven() {
-        return new Even(event, date, latitude, longitude);
-    }
+    // Convert entity to Event model
+    public Event toEvent() {
+        return new Event(
+                this.id,  // Include the ID when converting to Event
+                this.event,
+                this.date,
+                this.latitude,
+                this.longitude
+        );}
 
     // Getters and Setters
     public int getId() {
@@ -71,4 +76,6 @@ public class TrailDayEvenEntity {
     public void setLongitude(double longitude) {
         this.longitude = longitude;
     }
+
+
 }

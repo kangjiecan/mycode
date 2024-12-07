@@ -1,6 +1,6 @@
 package com.example.myapplication.model;
 
-public class Even {
+public class Event {
 
     // Attributes
     private String event;       // Name of the event
@@ -8,14 +8,32 @@ public class Even {
     private double latitude;    // Latitude of the location
     private double longitude;   // Longitude of the location
 
+    private      int id;
     // Constructor
-    public Even(String event, String date, double latitude, double longitude) {
+    public Event(String event, String date, double latitude, double longitude) {
         this.event = event;
         this.date = date;
         this.latitude = latitude;
         this.longitude = longitude;
     }
 
+    public Event(int id, String event, String date, double latitude, double longitude) {
+        this.id = id;
+        this.event = event;
+        this.date = date;
+        this.latitude = latitude;
+        this.longitude = longitude;
+    }
+
+
+    public int getId() {
+        return id;
+    }
+
+    // Add setter for id
+    public void setId(int id) {
+        this.id = id;
+    }
     // Getters and Setters
     public String getEvent() {
         return event;

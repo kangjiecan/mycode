@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
@@ -104,7 +105,7 @@
                 android:hint="Enter latitude"
                 android:textColor="@android:color/black"
                 android:textColorHint="@android:color/darker_gray"
-                android:inputType="numberDecimal" />
+                android:inputType="numberDecimal|numberSigned" />
         </LinearLayout>
 
         <!-- Longitude Input -->
@@ -130,7 +131,7 @@
                 android:hint="Enter longitude"
                 android:textColor="@android:color/black"
                 android:textColorHint="@android:color/darker_gray"
-                android:inputType="numberDecimal" />
+                android:inputType="numberDecimal|numberSigned" />
         </LinearLayout>
 
         <!-- Confirm Button -->
@@ -146,34 +147,50 @@
     </LinearLayout>
 
     <!-- Schedule List Section -->
-    <LinearLayout
-        android:id="@+id/scheduleListContainer"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="16dp"
+        android:layout_height="match_parent"
         android:layout_below="@id/inputFieldsContainer"
-        android:layout_marginTop="16dp">
+        android:layout_marginTop="16dp"
+        android:padding="16dp">
 
-        <!-- Title for Schedule List -->
-        <TextView
-            android:id="@+id/scheduleListTitle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Scheduled Events:"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            android:textColor="@android:color/black"
-            android:layout_marginBottom="8dp" />
-
-        <!-- Placeholder for Schedules -->
-        <TextView
-            android:id="@+id/schedulePlaceholder"
+        <LinearLayout
+            android:id="@+id/scheduleListContainer"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="No schedules available"
-            android:textColor="@android:color/darker_gray"
-            android:textAlignment="center"
-            android:padding="8dp" />
-    </LinearLayout>
+            android:orientation="vertical"
+            android:background="#F5F5F5"
+            android:padding="16dp">
+
+            <!-- Title for Schedule List -->
+            <TextView
+                android:id="@+id/scheduleListTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Scheduled Events:"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:textColor="@android:color/black"
+                android:layout_marginBottom="8dp" />
+
+            <!-- Container for dynamically added events -->
+            <LinearLayout
+                android:id="@+id/eventsContainer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <!-- Placeholder for no events -->
+                <TextView
+                    android:id="@+id/schedulePlaceholder"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="No schedules available"
+                    android:textColor="@android:color/darker_gray"
+                    android:textAlignment="center"
+                    android:padding="8dp" />
+
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
 </RelativeLayout>

@@ -2,15 +2,26 @@ package com.example.myapplication.database;
 
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
+import androidx.room.ForeignKey;
+import androidx.room.Index;
+import com.example.myapplication.model.WeatherData;
 
-@Entity(tableName = "weather_data")
+@Entity(
+        tableName = "weather_data",
+        foreignKeys = @ForeignKey(
+                entity = TrailDayEventEntity.class,
+                parentColumns = "id",
+                childColumns = "eventId",
+                onDelete = ForeignKey.CASCADE
+        ),
+        indices = {@Index("eventId")}
+)
 public class WeatherDataEntity {
     @PrimaryKey(autoGenerate = true)
     private int id;
 
+    private int eventId;
     private String date;
-    private double latitude;
-    private double longitude;
     private double rainfall;
     private double windSpeed;
     private boolean stormAlert;
@@ -18,6 +29,58 @@ public class WeatherDataEntity {
     private double snow;
     private double minTemperature;
     private double maxTemperature;
+
+    // Default Constructor
+    public WeatherDataEntity() {
+    }
+
+    // Parameterized Constructor
+    public WeatherDataEntity(String date, double rainfall, double windSpeed,
+                             boolean stormAlert, boolean iceRainAlert, double snow,
+                             double minTemperature, double maxTemperature, int eventId) {
+        this.date = date;
+        this.rainfall = rainfall;
+        this.windSpeed = windSpeed;
+        this.stormAlert = stormAlert;
+        this.iceRainAlert = iceRainAlert;
+        this.snow = snow;
+        this.minTemperature = minTemperature;
+        this.maxTemperature = maxTemperature;
+        this.eventId = eventId;
+    }
+
+    // Convert to Model (you'll need to get location from associated Event)
+    public WeatherData toWeatherData() {
+        return new WeatherData(
+                this.id,
+                this.eventId,  // Moved to match constructor order
+                this.date,
+                this.rainfall,
+                this.windSpeed,
+                this.stormAlert,
+                this.iceRainAlert,
+                this.snow,
+                this.minTemperature,
+                this.maxTemperature
+        );
+    }
+
+    // Convert from Model
+    public static WeatherDataEntity fromWeatherData(WeatherData weatherData, int eventId) {
+        WeatherDataEntity entity = new WeatherDataEntity(
+                weatherData.getDate(),
+                weatherData.getRainfall(),
+                weatherData.getWindSpeed(),
+                weatherData.isStormAlert(),
+                weatherData.isIceRainAlert(),
+                weatherData.getSnow(),
+                weatherData.getMinTemperature(),
+                weatherData.getMaxTemperature(),
+                eventId
+        );
+        entity.setId(weatherData.getId());
+        return entity;
+    }
 
     // Getters and Setters
     public int getId() {
@@ -28,28 +91,20 @@ public class WeatherDataEntity {
         this.id = id;
     }
 
+    public int getEventId() {
+        return eventId;
+    }
+
+    public void setEventId(int eventId) {
+        this.eventId = eventId;
+    }
+
     public String getDate() {
         return date;
     }
 
     public void setDate(String date) {
         this.date = date;
-    }
-
-    public double getLatitude() {
-        return latitude;
-    }
-
-    public void setLatitude(double latitude) {
-        this.latitude = latitude;
-    }
-
-    public double getLongitude() {
-        return longitude;
-    }
-
-    public void setLongitude(double longitude) {
-        this.longitude = longitude;
     }
 
     public double getRainfall() {

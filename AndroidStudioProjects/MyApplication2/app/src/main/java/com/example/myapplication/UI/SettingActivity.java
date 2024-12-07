@@ -36,7 +36,7 @@ public class SettingActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.threshold_setting);
+        setContentView(R.layout.user_setting);
 
         initializeViews();
         setupClickListeners();
@@ -87,18 +87,14 @@ public class SettingActivity extends AppCompatActivity {
 
         new Thread(() -> {
             try {
-                // Get the latest settings
+                // Get the latest settings using a direct query
                 UserSettingEntity settings = DatabaseClient.getInstance(getApplicationContext())
                         .getAppDatabase()
                         .userSettingDAO()
-                        .getAll()
-                        .stream()
-                        .reduce((first, second) -> second)
-                        .orElse(null);
+                        .getLatestSetting(); // You'll need to add this method to your DAO
 
                 if (settings != null) {
                     currentSettings = settings;
-                    // Convert to UserSetting for validation
                     UserSetting userSetting = settings.toUserSetting();
 
                     runOnUiThread(() -> {
@@ -109,16 +105,23 @@ public class SettingActivity extends AppCompatActivity {
                         snowInput.setText(String.valueOf(userSetting.getSnowThreshold()));
                         minTempInput.setText(String.valueOf(userSetting.getMinTemperature()));
                         maxTempInput.setText(String.valueOf(userSetting.getMaxTemperature()));
+                        progressBar.setVisibility(View.GONE);
+                    });
+                } else {
+                    runOnUiThread(() -> {
+                        Toast.makeText(SettingActivity.this,
+                                "No existing settings found",
+                                Toast.LENGTH_SHORT).show();
+                        progressBar.setVisibility(View.GONE);
                     });
                 }
             } catch (Exception e) {
-                runOnUiThread(() ->
-                        Toast.makeText(SettingActivity.this,
-                                "Error loading settings: " + e.getMessage(),
-                                Toast.LENGTH_LONG).show()
-                );
-            } finally {
-                runOnUiThread(() -> progressBar.setVisibility(View.GONE));
+                runOnUiThread(() -> {
+                    Toast.makeText(SettingActivity.this,
+                            "Error loading settings: " + e.getMessage(),
+                            Toast.LENGTH_LONG).show();
+                    progressBar.setVisibility(View.GONE);
+                });
             }
         }).start();
     }
@@ -145,43 +148,38 @@ public class SettingActivity extends AppCompatActivity {
             // Create UserSettingEntity from UserSetting
             UserSettingEntity settingEntity = new UserSettingEntity(userSetting);
 
-            // If updating, preserve entity-specific fields
+            // Set current timestamp and other necessary fields
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
+            settingEntity.setDate(sdf.format(new Date()));
+            settingEntity.setAlertEnabled(true);
+
+            // Copy location data if exists
             if (currentSettings != null) {
-                settingEntity.setId(currentSettings.getId());
-                settingEntity.setDate(currentSettings.getDate());
                 settingEntity.setEvent(currentSettings.getEvent());
                 settingEntity.setLatitude(currentSettings.getLatitude());
                 settingEntity.setLongitude(currentSettings.getLongitude());
-                settingEntity.setAlertEnabled(currentSettings.isAlertEnabled());
-            } else {
-                // Set default values for new entity
-                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
-                settingEntity.setDate(sdf.format(new Date()));
-                settingEntity.setAlertEnabled(true);
             }
 
             // Execute database operation in background
             new Thread(() -> {
                 try {
-                    if (currentSettings != null) {
-                        DatabaseClient.getInstance(getApplicationContext())
-                                .getAppDatabase()
-                                .userSettingDAO()
-                                .update(settingEntity);
-                    } else {
-                        DatabaseClient.getInstance(getApplicationContext())
-                                .getAppDatabase()
-                                .userSettingDAO()
-                                .insert(settingEntity);
-                    }
+                    DatabaseClient.getInstance(getApplicationContext())
+                            .getAppDatabase()
+                            .userSettingDAO()
+                            .insert(settingEntity);
 
                     runOnUiThread(() -> {
-                        Toast.makeText(SettingActivity.this, "Settings saved successfully!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(SettingActivity.this,
+                                "Settings saved successfully!",
+                                Toast.LENGTH_SHORT).show();
                         progressBar.setVisibility(View.GONE);
+                        loadExistingSettings();
                     });
                 } catch (Exception e) {
                     runOnUiThread(() -> {
-                        Toast.makeText(SettingActivity.this, "Error saving settings: " + e.getMessage(), Toast.LENGTH_LONG).show();
+                        Toast.makeText(SettingActivity.this,
+                                "Error saving settings: " + e.getMessage(),
+                                Toast.LENGTH_LONG).show();
                         progressBar.setVisibility(View.GONE);
                     });
                 }
@@ -191,7 +189,6 @@ public class SettingActivity extends AppCompatActivity {
             progressBar.setVisibility(View.GONE);
         }
     }
-
     private boolean validateInputs() {
         String rainfall = rainfallInput.getText().toString();
         String windSpeed = windSpeedInput.getText().toString();
@@ -220,7 +217,6 @@ public class SettingActivity extends AppCompatActivity {
 
         // Validate numerical inputs
         try {
-            // We'll let the UserSetting constructor handle the validation
             Double.parseDouble(rainfall);
             Double.parseDouble(windSpeed);
             Double.parseDouble(snow);

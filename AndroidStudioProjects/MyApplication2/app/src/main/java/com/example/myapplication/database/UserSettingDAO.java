@@ -24,4 +24,7 @@ public interface UserSettingDAO {
 
     @Query("SELECT * FROM user_settings")
     List<UserSettingEntity> getAll();
+
+    @Query("SELECT * FROM user_settings ORDER BY date DESC LIMIT 1")
+    UserSettingEntity getLatestSetting();
 }

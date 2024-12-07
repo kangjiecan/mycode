@@ -12,7 +12,7 @@ import android.widget.Toast;
 import com.example.myapplication.R;
 import com.example.myapplication.database.DatabaseClient;
 import com.example.myapplication.database.AppDatabase;
-import com.example.myapplication.model.Even;
+import com.example.myapplication.model.Event;
 
 import java.util.List;
 import java.util.concurrent.ExecutorService;
@@ -69,11 +69,11 @@ public class MainActivity extends AppCompatActivity {
         executorService.execute(() -> {
             try {
                 // Use the new convenience method to get Even objects
-                List<Even> events = db.trailDayEvenDAO().getAllEvens();
+                List<Event> events = db.trailDayEventDAO().getAllEvents();
 
                 // Build the display text
                 StringBuilder displayText = new StringBuilder();
-                for (Even event : events) {
+                for (Event event : events) {
                     displayText.append("Date: ").append(event.getDate())
                             .append(", Event: ").append(event.getEvent())
                             .append("\nLocation: (").append(event.getLatitude())
@@ -102,7 +102,7 @@ public class MainActivity extends AppCompatActivity {
     private void debugDatabaseStatus() {
         executorService.execute(() -> {
             try {
-                List<Even> events = db.trailDayEvenDAO().getAllEvens();
+                List<Event> events = db.trailDayEventDAO().getAllEvents();
                 Log.d(TAG, "Current database status:");
                 Log.d(TAG, "Total events: " + events.size());
                 Log.d(TAG, "Database path: " + getDatabasePath("app_database").getAbsolutePath());

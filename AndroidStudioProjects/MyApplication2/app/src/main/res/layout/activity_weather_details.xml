@@ -22,8 +22,19 @@
         android:layout_alignParentStart="true"
         android:text="Return"
         android:textColor="@android:color/white"
-        app:backgroundTint="@color/button_background_color"
-        />
+        app:backgroundTint="@color/button_background_color" />
+
+    <!-- Refresh Button -->
+    <Button
+        android:id="@+id/refreshButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_margin="16dp"
+        android:layout_alignParentEnd="true"
+        android:text="Refresh"
+        android:textColor="@android:color/white"
+        app:backgroundTint="@color/button_background_color" />
 
     <!-- Weather Details TextView -->
     <TextView
@@ -33,9 +44,24 @@
         android:layout_below="@id/returnButton"
         android:layout_marginTop="16dp"
         android:padding="16dp"
-        android:text="Weather Details:\nTemperature: 25°C\nHumidity: 60%\nCondition: Clear Sky"
         android:textSize="16sp"
         android:textColor="@android:color/black"
         android:gravity="start"
+        android:background="#CCFFFFFF"
         android:layout_centerHorizontal="true" />
+
+    <!-- Debug TextView -->
+    <TextView
+        android:id="@+id/debugTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/weatherDetailsTextView"
+        android:layout_margin="16dp"
+        android:padding="8dp"
+        android:textSize="12sp"
+        android:fontFamily="monospace"
+        android:background="#CCFFFFFF"
+        android:scrollbars="vertical"
+        android:maxHeight="200dp" />
+
 </RelativeLayout>
