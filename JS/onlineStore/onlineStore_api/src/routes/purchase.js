@@ -14,9 +14,7 @@ router.post('/purchase', async (req, res) => {
     credit_expire, 
     credit_cvv, 
     cart, 
-    invoice_amt, 
-    invoice_tax, 
-    invoice_total 
+   
   } = req.body;
 
   if (!req.session || !req.session.user) {
@@ -26,7 +24,7 @@ router.post('/purchase', async (req, res) => {
   const customerId = req.session.user.customer_id;
 
   if (!street || !city || !province || !country || !postal_code || !credit_card || 
-      !credit_expire || !credit_cvv || !cart || !invoice_amt || !invoice_tax || !invoice_total) {
+      !credit_expire || !credit_cvv || !cart) {
     return res.status(400).json({ error: "All fields are required." });
   }
 
@@ -48,9 +46,7 @@ router.post('/purchase', async (req, res) => {
           credit_card,
           credit_expire,
           credit_cvv,
-          invoice_amt,
-          invoice_tax,
-          invoice_total,
+         
           order_date: new Date(),
         },
       });

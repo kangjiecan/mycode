@@ -4,6 +4,16 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:visibility="gone"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
 
     <!-- Background Image -->
     <ImageView
@@ -43,11 +53,16 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Weather conditions alert thresholds"
-            android:textSize="18sp"
+            android:textSize="24sp"
             android:textStyle="bold"
-            android:textColor="@android:color/white"
+            android:textColor="#FFFFFF"
             android:layout_gravity="center_horizontal"
-            android:layout_marginBottom="16dp" />
+            android:layout_marginBottom="24dp"
+            android:shadowColor="#000000"
+            android:shadowDx="2"
+            android:shadowDy="2"
+            android:shadowRadius="4"
+            android:fontFamily="sans-serif-medium" />
 
         <!-- Rainfall Input -->
         <LinearLayout
@@ -62,7 +77,11 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="Rain Fall: > mm/day"
-                android:textColor="@android:color/white" />
+                android:textColor="#FFFFFF"
+                android:shadowColor="#000000"
+                android:shadowDx="2"
+                android:shadowDy="2"
+                android:shadowRadius="4" />
 
             <EditText
                 android:id="@+id/rainfallInput"
@@ -70,8 +89,13 @@
                 android:layout_height="wrap_content"
                 android:inputType="number"
                 android:hint="12"
-                android:textColor="@android:color/white"
-                android:textColorHint="@android:color/white" />
+                android:textColor="#FFFFFF"
+                android:textColorHint="#FFFFFF"
+                android:shadowColor="#000000"
+                android:shadowDx="2"
+                android:shadowDy="2"
+                android:shadowRadius="4"
+                android:background="@android:color/transparent" />
         </LinearLayout>
 
         <!-- Wind Speed Input -->
@@ -87,7 +111,11 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="Wind Speed: > KM/H"
-                android:textColor="@android:color/white" />
+                android:textColor="#FFFFFF"
+                android:shadowColor="#000000"
+                android:shadowDx="2"
+                android:shadowDy="2"
+                android:shadowRadius="4" />
 
             <EditText
                 android:id="@+id/windSpeedInput"
@@ -95,8 +123,13 @@
                 android:layout_height="wrap_content"
                 android:inputType="number"
                 android:hint="12"
-                android:textColor="@android:color/white"
-                android:textColorHint="@android:color/white" />
+                android:textColor="#FFFFFF"
+                android:textColorHint="#FFFFFF"
+                android:shadowColor="#000000"
+                android:shadowDx="2"
+                android:shadowDy="2"
+                android:shadowRadius="4"
+                android:background="@android:color/transparent" />
         </LinearLayout>
 
         <!-- Storm Input -->
@@ -112,7 +145,11 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="Storm within 24 hours:"
-                android:textColor="@android:color/white" />
+                android:textColor="#FFFFFF"
+                android:shadowColor="#000000"
+                android:shadowDx="2"
+                android:shadowDy="2"
+                android:shadowRadius="4" />
 
             <EditText
                 android:id="@+id/stormInput"
@@ -120,8 +157,13 @@
                 android:layout_height="wrap_content"
                 android:inputType="text"
                 android:hint="yes"
-                android:textColor="@android:color/white"
-                android:textColorHint="@android:color/white" />
+                android:textColor="#FFFFFF"
+                android:textColorHint="#FFFFFF"
+                android:shadowColor="#000000"
+                android:shadowDx="2"
+                android:shadowDy="2"
+                android:shadowRadius="4"
+                android:background="@android:color/transparent" />
         </LinearLayout>
 
         <!-- Ice Rain Input -->
@@ -137,7 +179,11 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="Ice Rain: yes/no"
-                android:textColor="@android:color/white" />
+                android:textColor="#FFFFFF"
+                android:shadowColor="#000000"
+                android:shadowDx="2"
+                android:shadowDy="2"
+                android:shadowRadius="4" />
 
             <EditText
                 android:id="@+id/iceRainInput"
@@ -145,8 +191,13 @@
                 android:layout_height="wrap_content"
                 android:inputType="text"
                 android:hint="yes"
-                android:textColor="@android:color/white"
-                android:textColorHint="@android:color/white" />
+                android:textColor="#FFFFFF"
+                android:textColorHint="#FFFFFF"
+                android:shadowColor="#000000"
+                android:shadowDx="2"
+                android:shadowDy="2"
+                android:shadowRadius="4"
+                android:background="@android:color/transparent" />
         </LinearLayout>
 
         <!-- Snow Input -->
@@ -162,7 +213,11 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="Snow: mm/day"
-                android:textColor="@android:color/white" />
+                android:textColor="#FFFFFF"
+                android:shadowColor="#000000"
+                android:shadowDx="2"
+                android:shadowDy="2"
+                android:shadowRadius="4" />
 
             <EditText
                 android:id="@+id/snowInput"
@@ -170,8 +225,13 @@
                 android:layout_height="wrap_content"
                 android:inputType="number"
                 android:hint="0"
-                android:textColor="@android:color/white"
-                android:textColorHint="@android:color/white" />
+                android:textColor="#FFFFFF"
+                android:textColorHint="#FFFFFF"
+                android:shadowColor="#000000"
+                android:shadowDx="2"
+                android:shadowDy="2"
+                android:shadowRadius="4"
+                android:background="@android:color/transparent" />
         </LinearLayout>
 
         <!-- Minimum Temperature Input -->
@@ -187,7 +247,11 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="Minimum Temperature:"
-                android:textColor="@android:color/white" />
+                android:textColor="#FFFFFF"
+                android:shadowColor="#000000"
+                android:shadowDx="2"
+                android:shadowDy="2"
+                android:shadowRadius="4" />
 
             <EditText
                 android:id="@+id/minTempInput"
@@ -195,8 +259,13 @@
                 android:layout_height="wrap_content"
                 android:inputType="number"
                 android:hint="4"
-                android:textColor="@android:color/white"
-                android:textColorHint="@android:color/white" />
+                android:textColor="#FFFFFF"
+                android:textColorHint="#FFFFFF"
+                android:shadowColor="#000000"
+                android:shadowDx="2"
+                android:shadowDy="2"
+                android:shadowRadius="4"
+                android:background="@android:color/transparent" />
         </LinearLayout>
 
         <!-- Maximum Temperature Input -->
@@ -212,7 +281,12 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="Maximum Temperature:"
-                android:textColor="@android:color/white" />
+                android:textColor="#990000"
+                android:shadowColor="#FFFFFF"
+                android:shadowDx="3"
+                android:shadowDy="3"
+                android:shadowRadius="2"
+                />
 
             <EditText
                 android:id="@+id/maxTempInput"
@@ -220,8 +294,13 @@
                 android:layout_height="wrap_content"
                 android:inputType="number"
                 android:hint="30"
-                android:textColor="@android:color/white"
-                android:textColorHint="@android:color/white" />
+                android:textColor="#FFFFFF"
+                android:textColorHint="#FFFFFF"
+                android:shadowColor="#000000"
+                android:shadowDx="2"
+                android:shadowDy="2"
+                android:shadowRadius="4"
+                android:background="@android:color/transparent" />
         </LinearLayout>
 
         <!-- Confirm Button -->
@@ -230,7 +309,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Confirm"
-            android:textColor="@android:color/white"
+            android:textColor="#FFFFFF"
             app:backgroundTint="@color/button_background_color"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="16dp" />

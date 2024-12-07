@@ -28,7 +28,6 @@
         android:layout_below="@id/buttonsLayout"
         android:layout_marginTop="16dp"
         android:padding="16dp"
-        android:text="Date: 2023-12-01, Location: Mountain Trail\n\nDate: 2023-12-02, Location: Forest Path"
         android:textSize="16sp"
         android:textColor="@android:color/holo_red_light"
         android:gravity="start"

@@ -29,6 +29,7 @@ app.use(session({
       httpOnly: true, 
       maxAge: 24 * 60 * 60 * 1000 
   }
+ 
 }));;
 
 // Middleware setup

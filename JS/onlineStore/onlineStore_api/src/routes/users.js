@@ -38,6 +38,7 @@ router.post("/login", async (req, res) => {
       first_name: user.first_name,
       last_name: user.last_name,
     };
+    const sessionId = req.session.id;
 
     // Return session ID and user data
     res.status(200).json({

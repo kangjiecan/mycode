@@ -29,6 +29,32 @@
         android:layout_below="@layout/buttons_layout"
         android:layout_marginTop="64dp">
 
+        <!-- Event Name Input -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="8dp">
+
+            <TextView
+                android:id="@+id/eventNameLabel"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Event Name:"
+                android:textSize="16sp"
+                android:textColor="@android:color/black" />
+
+            <EditText
+                android:id="@+id/eventNameInput"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:hint="Enter event name"
+                android:textColor="@android:color/black"
+                android:textColorHint="@android:color/darker_gray"
+                android:inputType="text" />
+        </LinearLayout>
+
         <!-- Date Input -->
         <LinearLayout
             android:layout_width="match_parent"
@@ -55,7 +81,7 @@
                 android:inputType="date" />
         </LinearLayout>
 
-        <!-- Location Input -->
+        <!-- Latitude Input -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -63,22 +89,48 @@
             android:layout_marginBottom="8dp">
 
             <TextView
-                android:id="@+id/locationLabel"
+                android:id="@+id/latitudeLabel"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Location Input:"
+                android:text="Latitude:"
                 android:textSize="16sp"
                 android:textColor="@android:color/black" />
 
             <EditText
-                android:id="@+id/locationInput"
+                android:id="@+id/latitudeInput"
                 android:layout_width="200dp"
                 android:layout_height="wrap_content"
-                android:hint="Enter location"
+                android:hint="Enter latitude"
                 android:textColor="@android:color/black"
                 android:textColorHint="@android:color/darker_gray"
-                android:inputType="text" />
+                android:inputType="numberDecimal" />
+        </LinearLayout>
+
+        <!-- Longitude Input -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="8dp">
+
+            <TextView
+                android:id="@+id/longitudeLabel"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Longitude:"
+                android:textSize="16sp"
+                android:textColor="@android:color/black" />
+
+            <EditText
+                android:id="@+id/longitudeInput"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:hint="Enter longitude"
+                android:textColor="@android:color/black"
+                android:textColorHint="@android:color/darker_gray"
+                android:inputType="numberDecimal" />
         </LinearLayout>
 
         <!-- Confirm Button -->
