@@ -1,10 +1,12 @@
 package com.example.myapplication.database;
 
 import androidx.room.Entity;
+import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 import androidx.room.ForeignKey;
 import androidx.room.Index;
 import com.example.myapplication.model.WeatherData;
+
 
 @Entity(
         tableName = "weather_data",
@@ -35,6 +37,8 @@ public class WeatherDataEntity {
     }
 
     // Parameterized Constructor
+    @Ignore
+
     public WeatherDataEntity(String date, double rainfall, double windSpeed,
                              boolean stormAlert, boolean iceRainAlert, double snow,
                              double minTemperature, double maxTemperature, int eventId) {
@@ -66,6 +70,7 @@ public class WeatherDataEntity {
     }
 
     // Convert from Model
+
     public static WeatherDataEntity fromWeatherData(WeatherData weatherData, int eventId) {
         WeatherDataEntity entity = new WeatherDataEntity(
                 weatherData.getDate(),

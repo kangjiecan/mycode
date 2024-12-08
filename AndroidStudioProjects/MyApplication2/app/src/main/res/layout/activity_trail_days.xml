@@ -13,13 +13,6 @@
         android:scaleType="centerCrop"
         android:src="@drawable/background_image" />
 
-    <!-- Horizontal Buttons -->
-    <include
-        layout="@layout/buttons_layout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true" />
-
     <!-- Input Fields and Confirm Button -->
     <LinearLayout
         android:id="@+id/inputFieldsContainer"
@@ -27,8 +20,7 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:padding="16dp"
-        android:layout_below="@layout/buttons_layout"
-        android:layout_marginTop="64dp">
+        android:layout_marginTop="16dp">
 
         <!-- Event Name Input -->
         <LinearLayout
@@ -151,6 +143,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/inputFieldsContainer"
+        android:layout_above="@id/buttonsLayout"
         android:layout_marginTop="16dp"
         android:padding="16dp">
 
@@ -193,4 +186,13 @@
             </LinearLayout>
         </LinearLayout>
     </ScrollView>
+
+    <!-- Horizontal Buttons -->
+    <include
+        layout="@layout/buttons_layout"
+        android:id="@+id/buttonsLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true" />
+
 </RelativeLayout>

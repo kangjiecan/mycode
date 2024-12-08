@@ -3,8 +3,10 @@ plugins {
 }
 
 android {
+
+
     namespace = "com.example.myapplication"
-    compileSdk = 34
+    compileSdk = 35
 
     defaultConfig {
         applicationId = "com.example.myapplication"
@@ -38,6 +40,7 @@ dependencies {
     implementation(libs.constraintlayout)
     implementation(libs.room.common)
     implementation(libs.room.runtime)
+    implementation(libs.junit.junit)
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
@@ -51,5 +54,6 @@ dependencies {
     implementation(libs.rxjava2.rxandroid)
 
     // Work Manager - using single version
-    implementation("androidx.work:work-runtime:2.9.0")
+    implementation(libs.work.runtime)
+    implementation(libs.concurrent.futures)
 }

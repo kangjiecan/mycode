@@ -8,6 +8,7 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.myapplication.R;
@@ -76,9 +77,17 @@ public class SettingActivity extends AppCompatActivity {
             startActivity(intent);
         });
 
-        button4.setOnClickListener(v ->
-                Toast.makeText(SettingActivity.this, "Button 4 clicked!", Toast.LENGTH_SHORT).show()
-        );
+        button4.setOnClickListener(v -> {
+            new AlertDialog.Builder(SettingActivity.this)
+                    .setTitle("Exit")
+                    .setMessage("Are you sure you want to exit?")
+                    .setPositiveButton("Yes", (dialog, which) -> {
+                        Toast.makeText(SettingActivity.this, "Exiting app...", Toast.LENGTH_SHORT).show();
+                        finishAffinity();
+                    })
+                    .setNegativeButton("No", null)
+                    .show();
+        });
 
         confirmButton.setOnClickListener(v -> captureAndInsertData());
     }

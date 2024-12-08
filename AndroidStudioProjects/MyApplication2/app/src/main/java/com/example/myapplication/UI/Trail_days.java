@@ -66,8 +66,17 @@ public class Trail_days extends AppCompatActivity {
             startActivity(intent);
         });
 
-        findViewById(R.id.button4).setOnClickListener(v ->
-                Toast.makeText(Trail_days.this, "Button 4 clicked!", Toast.LENGTH_SHORT).show());
+        findViewById(R.id.button4).setOnClickListener(v -> {
+            new AlertDialog.Builder(Trail_days.this)
+                    .setTitle("Exit")
+                    .setMessage("Are you sure you want to exit?")
+                    .setPositiveButton("Yes", (dialog, which) -> {
+                        Toast.makeText(Trail_days.this, "Exiting app...", Toast.LENGTH_SHORT).show();
+                        finishAffinity();
+                    })
+                    .setNegativeButton("No", null)
+                    .show();
+        });
 
         findViewById(R.id.confirmButton).setOnClickListener(v -> captureAndInsertData());
     }
@@ -116,8 +125,7 @@ public class Trail_days extends AppCompatActivity {
             LinearLayout.LayoutParams textParams = new LinearLayout.LayoutParams(
                     0, LinearLayout.LayoutParams.WRAP_CONTENT, 1f);
             eventView.setLayoutParams(textParams);
-            eventView.setTextColor(getResources().getColor(android.R.color.black));
-
+            eventView.setTextColor(ContextCompat.getColor(this, android.R.color.black));
             String eventText = String.format("Event: %s\nDate: %s\nLocation: %.4f, %.4f",
                     event.getEvent(),
                     event.getDate(),

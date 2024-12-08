@@ -1,5 +1,6 @@
 package com.example.myapplication.UI;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.work.ExistingPeriodicWorkPolicy;
 import androidx.work.PeriodicWorkRequest;
@@ -84,8 +85,17 @@ public class MainActivity extends AppCompatActivity {
             checkWeather();
         });
 
-        button4.setOnClickListener(v ->
-                Toast.makeText(MainActivity.this, "Button 4 clicked!", Toast.LENGTH_SHORT).show());
+        button4.setOnClickListener(v -> {
+            new AlertDialog.Builder(MainActivity.this)
+                    .setTitle("Exit")
+                    .setMessage("Are you sure you want to exit?")
+                    .setPositiveButton("Yes", (dialog, which) -> {
+                        Toast.makeText(MainActivity.this, "Exiting app...", Toast.LENGTH_SHORT).show();
+                        finishAffinity();
+                    })
+                    .setNegativeButton("No", null)
+                    .show();
+        });
     }
 
     private void setupPeriodicWeatherCheck() {
