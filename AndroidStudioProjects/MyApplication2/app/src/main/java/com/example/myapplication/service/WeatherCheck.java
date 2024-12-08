@@ -7,7 +7,9 @@ import com.example.myapplication.openWeatherApi.OpenWeatherApi;
 import com.example.myapplication.database.TrailDayEventDAO;
 import com.example.myapplication.database.UserSettingDAO;
 import com.example.myapplication.database.UserSettingEntity;
-
+import io.reactivex.rxjava3.core.Single;
+import io.reactivex.rxjava3.schedulers.Schedulers;
+import android.util.Pair;
 public class WeatherCheck {
     private static final String TAG = "WeatherCheck";
     private final TrailDayEventDAO eventDao;
@@ -21,104 +23,95 @@ public class WeatherCheck {
     }
 
     private boolean shouldTriggerAlert(WeatherData weather, UserSettingEntity settings) {
+        Log.d(TAG, "Checking alert conditions...");
+
         if (!settings.isAlertEnabled()) {
             return false;
         }
 
-        // Check storm and ice rain alerts if enabled in settings
-        if ((settings.isStormAlert() && weather.isStormAlert()) ||
-                (settings.isIceRainAlert() && weather.isIceRainAlert())) {
-            return true;
-        }
-
-        // Check thresholds
-        return weather.getRainfall() > settings.getRainfallThreshold() ||
+        boolean shouldAlert = weather.getMinTemperature() < settings.getMinTemperature() ||
+                weather.getMaxTemperature() > settings.getMaxTemperature() ||
+                weather.getRainfall() > settings.getRainfallThreshold() ||
                 weather.getWindSpeed() > settings.getWindSpeedThreshold() ||
                 weather.getSnow() > settings.getSnowThreshold() ||
-                weather.getMaxTemperature() > settings.getMaxTemperature() ||
-                weather.getMinTemperature() < settings.getMinTemperature();
+                (settings.isStormAlert() && weather.isStormAlert()) ||
+                (settings.isIceRainAlert() && weather.isIceRainAlert());
+
+        Log.d(TAG, "Alert triggered: " + shouldAlert);
+        return shouldAlert;
     }
 
     public void checkWeatherForLastEvent() {
-        // Get last event
-        Event lastEvent = eventDao.getLastEvent();
-        if (lastEvent == null) {
-            Log.i(TAG, "No events found in database");
-            return;
-        }
+        // Get last event on IO thread
+        Single.fromCallable(() -> eventDao.getLastEvent())
+                .subscribeOn(Schedulers.io())
+                .flatMap(lastEvent -> {
+                    if (lastEvent == null) {
+                        return Single.error(new IllegalStateException("No events found"));
+                    }
+                    return Single.just(lastEvent);
+                })
+                // Get user settings on IO thread
+                .flatMap(lastEvent ->
+                        Single.fromCallable(() -> userSettingDao.getLatestSetting())
+                                .subscribeOn(Schedulers.io())
+                                .map(settings -> new Pair<>(lastEvent, settings))
+                )
+                .flatMap(pair -> {
+                    Event lastEvent = pair.first;
+                    UserSettingEntity settings = pair.second;
 
-        // Get latest user settings
-        UserSettingEntity userSettings = userSettingDao.getLatestSetting();
-        if (userSettings == null) {
-            Log.i(TAG, "No user settings found in database");
-            return;
-        }
-
-        // Log event details
-        Log.i(TAG, String.format("Checking weather for event ID: %d - %s at location: %.4f, %.4f",
-                lastEvent.getId(),
-                lastEvent.getEvent(),
-                lastEvent.getLatitude(),
-                lastEvent.getLongitude()));
-
-        // Fetch weather data
-        weatherApi.fetchWeatherData(
-                lastEvent.getLatitude(),
-                lastEvent.getLongitude(),
-                lastEvent.getDate()
-        ).subscribe(
-                weatherData -> {
-                    // Create new WeatherData object with event ID
-                    WeatherData eventWeather = new WeatherData(
-                            0,
-                            lastEvent.getId(),
-                            lastEvent.getDate(),
-                            weatherData.getRainfall(),
-                            weatherData.getWindSpeed(),
-                            weatherData.isStormAlert(),
-                            weatherData.isIceRainAlert(),
-                            weatherData.getSnow(),
-                            weatherData.getMinTemperature(),
-                            weatherData.getMaxTemperature()
-                    );
-
-                    // Check if alert should be triggered
-                    boolean shouldAlert = shouldTriggerAlert(eventWeather, userSettings);
-
-                    // Update event alert status if needed
-                    if (shouldAlert) {
-                        eventDao.updateEventAlertStatus(lastEvent, lastEvent.getId(), true);
-                        Log.i(TAG, "Updated alert status to true for event ID: " + lastEvent.getId());
+                    if (settings == null) {
+                        return Single.error(new IllegalStateException("No settings found"));
                     }
 
-                    // Log comprehensive weather and alert information
-                    Log.i(TAG, String.format(
-                            "Weather Alert Status:\n" +
-                                    "Event: %s\n" +
-                                    "Weather: %s\n" +
-                                    "Settings: %s\n" +
-                                    "Alert Triggered: %b\n" +
-                                    "Reasons for alert:\n" +
-                                    "- Storm Alert: %b (Setting: %b)\n" +
-                                    "- Ice Rain Alert: %b (Setting: %b)\n" +
-                                    "- Rainfall: %.1f mm/day (Threshold: %.1f)\n" +
-                                    "- Wind Speed: %.1f km/h (Threshold: %.1f)\n" +
-                                    "- Snow: %.1f mm/day (Threshold: %.1f)\n" +
-                                    "- Temperature Range: %.1f to %.1f °C (Settings: %.1f to %.1f)",
-                            lastEvent.getEvent(),
-                            eventWeather.toString(),
-                            userSettings.toString(),
-                            shouldAlert,
-                            eventWeather.isStormAlert(), userSettings.isStormAlert(),
-                            eventWeather.isIceRainAlert(), userSettings.isIceRainAlert(),
-                            eventWeather.getRainfall(), userSettings.getRainfallThreshold(),
-                            eventWeather.getWindSpeed(), userSettings.getWindSpeedThreshold(),
-                            eventWeather.getSnow(), userSettings.getSnowThreshold(),
-                            eventWeather.getMinTemperature(), eventWeather.getMaxTemperature(),
-                            userSettings.getMinTemperature(), userSettings.getMaxTemperature()
-                    ));
-                },
-                error -> Log.e(TAG, "Error fetching weather data: " + error.getMessage())
-        );
+                    // Fetch weather data
+                    return weatherApi.fetchWeatherData(
+                                    lastEvent.getLatitude(),
+                                    lastEvent.getLongitude(),
+                                    lastEvent.getDate()
+                            )
+                            .map(weatherData -> new Triple<>(lastEvent, settings, weatherData));
+                })
+                .observeOn(Schedulers.io()) // Ensure we're on IO thread for database operations
+                .subscribe(
+                        triple -> {
+                            Event lastEvent = triple.first;
+                            UserSettingEntity settings = triple.second;
+                            WeatherData weatherData = triple.third;
+
+                            Log.d(TAG, String.format("Checking weather for event ID: %d at location: %.4f, %.4f",
+                                    lastEvent.getId(),
+                                    lastEvent.getLatitude(),
+                                    lastEvent.getLongitude()));
+
+                            boolean shouldAlert = shouldTriggerAlert(weatherData, settings);
+                            Log.d(TAG, "Updating database with alert status: " + shouldAlert);
+
+                            // Update database regardless of shouldAlert value
+                            eventDao.updateEventAlertStatus(lastEvent, lastEvent.getId(), shouldAlert);
+
+                            // Verify update
+                            Event updatedEvent = eventDao.getEventById(lastEvent.getId());
+                            if (updatedEvent != null) {
+                                Log.d(TAG, "Database successfully updated with alert status: " + updatedEvent.isAlerted());
+                            }
+                        },
+                        error -> Log.e(TAG, "Error in weather check: " + error.getMessage())
+                );
     }
+
+    // Helper class for triple values
+    private static class Triple<T, U, V> {
+        final T first;
+        final U second;
+        final V third;
+
+        Triple(T first, U second, V third) {
+            this.first = first;
+            this.second = second;
+            this.third = third;
+        }
+    }
+
 }

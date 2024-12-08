@@ -257,7 +257,7 @@
                 android:id="@+id/minTempInput"
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
-                android:inputType="number"
+                android:inputType="numberSigned"
                 android:hint="4"
                 android:textColor="#FFFFFF"
                 android:textColorHint="#FFFFFF"

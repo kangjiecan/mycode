@@ -3,7 +3,6 @@
     package="com.example.myapplication">
     <uses-permission android:name="android.permission.INTERNET" />
 
-
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -11,6 +10,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.MyApplication">
+
+
+
         <activity
             android:name=".UI.Weather_details"
             android:exported="false"
@@ -20,14 +22,13 @@
             android:label="Setting" />
         <activity
             android:name=".UI.Trail_days"
-            android:label="Trailheads" /> <!-- Launcher activity -->
+            android:label="Trailheads" />
         <activity
             android:name=".UI.MainActivity"
             android:exported="true"
             android:label="Alert">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>

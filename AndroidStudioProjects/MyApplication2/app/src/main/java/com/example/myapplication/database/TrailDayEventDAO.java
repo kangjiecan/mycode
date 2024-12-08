@@ -60,5 +60,13 @@ public interface TrailDayEventDAO {
         TrailDayEventEntity lastEntity = getLastTrailDayEvent();
         return lastEntity != null ? lastEntity.toEvent() : null;
     }
-}
+
+    @Query("SELECT * FROM trail_day_even WHERE id = :id")
+    TrailDayEventEntity getTrailDayEventById(int id);
+
+    // Convenience method that returns Event model
+    default Event getEventById(int id) {
+        TrailDayEventEntity entity = getTrailDayEventById(id);
+        return entity != null ? entity.toEvent() : null;
+}}
 

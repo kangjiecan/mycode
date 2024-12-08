@@ -66,8 +66,9 @@ public class SettingActivity extends AppCompatActivity {
             startActivity(intent);
         });
 
-        button2.setOnClickListener(v ->
-                Toast.makeText(SettingActivity.this, "Button 2 clicked!", Toast.LENGTH_SHORT).show()
+        button2.setOnClickListener(v ->{
+                Intent intent = new Intent(SettingActivity.this, Trail_days.class);
+        startActivity(intent);}
         );
 
         button1.setOnClickListener(v -> {

@@ -32,7 +32,6 @@ android {
 }
 
 dependencies {
-
     implementation(libs.appcompat)
     implementation(libs.material)
     implementation(libs.activity)
@@ -43,10 +42,14 @@ dependencies {
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
     annotationProcessor(libs.room.compiler)
-        implementation(libs.retrofit)
-        implementation(libs.adapter.rxjava3)
-        implementation(libs.converter.gson)
+    implementation(libs.retrofit)
+    implementation(libs.converter.gson)
     implementation(libs.rxjava)
     implementation(libs.rxandroid)
     implementation(libs.okhttp)
+    implementation(libs.rxjava2.rxjava)
+    implementation(libs.rxjava2.rxandroid)
+
+    // Work Manager - using single version
+    implementation("androidx.work:work-runtime:2.9.0")
 }
