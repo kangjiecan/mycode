@@ -9,6 +9,8 @@ public class Event {
     private double longitude;   // Longitude of the location
 
     private      int id;
+
+    private boolean isAlerted = false;
     // Constructor
     public Event(String event, String date, double latitude, double longitude) {
         this.event = event;
@@ -17,17 +19,26 @@ public class Event {
         this.longitude = longitude;
     }
 
-    public Event(int id, String event, String date, double latitude, double longitude) {
+    public Event(int id, String event, String date, double latitude, double longitude, boolean isAlerted) {
         this.id = id;
         this.event = event;
         this.date = date;
         this.latitude = latitude;
         this.longitude = longitude;
+        this.isAlerted = isAlerted;
     }
 
 
     public int getId() {
         return id;
+    }
+
+    public boolean isAlerted() {
+        return this.isAlerted;
+    }
+
+    public void setAlerted(boolean alerted) {
+        isAlerted = alerted;
     }
 
     // Add setter for id
@@ -66,6 +77,7 @@ public class Event {
     public void setLongitude(double longitude) {
         this.longitude = longitude;
     }
+
 
     // toString Method for Debugging and Logging
     @Override

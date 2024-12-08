@@ -1,136 +1,178 @@
 package com.example.myapplication.openWeatherApi;
+
 import com.example.myapplication.model.WeatherData;
-import android.util.Log;
+import io.reactivex.rxjava3.core.Single;
+import io.reactivex.rxjava3.schedulers.Schedulers;
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import org.json.JSONObject;
 import org.json.JSONArray;
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
+import android.util.Log;
 
 public class OpenWeatherApi {
     private static final String TAG = "OpenWeatherApi";
     private static final String API_KEY = "2ea9a21e0ce9a9119507d3331b6a32ff";
     private static final String BASE_URL = "https://api.openweathermap.org/data/2.5/forecast";
 
-    public void fetchWeatherData(double latitude, double longitude, String targetDate,
-                                 WeatherDataCallback callback) {
-        new Thread(() -> {
-            try {
-                String urlString = String.format("%s?lat=%f&lon=%f&appid=%s&units=metric",
-                        BASE_URL, latitude, longitude, API_KEY);
+    private final OkHttpClient client;
 
-                URL url = new URL(urlString);
-                HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-
-                Log.d(TAG, "Fetching from URL: " + urlString);
-
-                BufferedReader reader = new BufferedReader(
-                        new InputStreamReader(connection.getInputStream()));
-                StringBuilder response = new StringBuilder();
-                String line;
-
-                while ((line = reader.readLine()) != null) {
-                    response.append(line);
-                }
-                reader.close();
-
-                // Parse the response for the specific date
-                JSONObject jsonResponse = new JSONObject(response.toString());
-                JSONArray list = jsonResponse.getJSONArray("list");
-
-                double minTemp = Double.MAX_VALUE;
-                double maxTemp = Double.MIN_VALUE;
-                double totalRain = 0;
-                double totalSnow = 0;
-                double maxWindSpeed = 0;
-                boolean hasStorm = false;
-                boolean hasIceRain = false;
-                int dataPointsCount = 0;
-
-                // Filter and aggregate data for target date
-                for (int i = 0; i < list.length(); i++) {
-                    JSONObject timeSlot = list.getJSONObject(i);
-                    String dt_txt = timeSlot.getString("dt_txt").split(" ")[0]; // Get date part
-
-                    if (dt_txt.equals(targetDate)) {
-                        dataPointsCount++;
-                        JSONObject main = timeSlot.getJSONObject("main");
-                        JSONObject wind = timeSlot.getJSONObject("wind");
-
-                        // Update temperature range
-                        minTemp = Math.min(minTemp, main.getDouble("temp_min"));
-                        maxTemp = Math.max(maxTemp, main.getDouble("temp_max"));
-
-                        // Update wind speed
-                        maxWindSpeed = Math.max(maxWindSpeed, wind.getDouble("speed"));
-
-                        // Check for rain
-                        if (timeSlot.has("rain")) {
-                            JSONObject rain = timeSlot.getJSONObject("rain");
-                            if (rain.has("3h")) {
-                                totalRain += rain.getDouble("3h");
-                            }
-                        }
-
-                        // Check for snow
-                        if (timeSlot.has("snow")) {
-                            JSONObject snow = timeSlot.getJSONObject("snow");
-                            if (snow.has("3h")) {
-                                totalSnow += snow.getDouble("3h");
-                            }
-                        }
-
-                        // Check specific weather conditions
-                        JSONArray weather = timeSlot.getJSONArray("weather");
-                        for (int j = 0; j < weather.length(); j++) {
-                            int id = weather.getJSONObject(j).getInt("id");
-                            // Check for specific storm codes (210, 211, 212)
-                            if (id == 210 || id == 211 || id == 212) {
-                                hasStorm = true;
-                            }
-                            // Check for freezing rain (511)
-                            if (id == 511) {
-                                hasIceRain = true;
-                            }
-                        }
-                    }
-                }
-
-                if (dataPointsCount == 0) {
-                    throw new Exception("No data available for date: " + targetDate);
-                }
-
-                // Create WeatherData object with aggregated data
-                final WeatherData weatherData = new WeatherData(
-                        targetDate,
-                        totalRain,        // total rainfall for the day
-                        maxWindSpeed,     // maximum wind speed
-                        hasStorm,         // storm alert
-                        hasIceRain,       // ice rain alert
-                        totalSnow,        // total snowfall
-                        minTemp,          // minimum temperature
-                        maxTemp           // maximum temperature
-                );
-
-                Log.d(TAG, "Processed data points: " + dataPointsCount);
-                Log.d(TAG, "Weather data: " + weatherData.toString());
-
-                new android.os.Handler(android.os.Looper.getMainLooper()).post(() -> {
-                    callback.onSuccess(weatherData);
-                });
-
-            } catch (Exception e) {
-                Log.e(TAG, "Error fetching weather: " + e.getMessage(), e);
-                new android.os.Handler(android.os.Looper.getMainLooper()).post(() -> {
-                    callback.onError(e);
-                });
-            }
-        }).start();
+    // Weather condition codes
+    private static class WeatherCodes {
+        static final int THUNDERSTORM_WITH_LIGHT_RAIN = 210;
+        static final int THUNDERSTORM = 211;
+        static final int HEAVY_THUNDERSTORM = 212;
+        static final int FREEZING_RAIN = 511;
     }
 
-    public interface WeatherDataCallback {
-        void onSuccess(WeatherData weatherData);
-        void onError(Exception e);
+    public OpenWeatherApi() {
+        this.client = new OkHttpClient();
+    }
+
+    public Single<WeatherData> fetchWeatherData(double latitude, double longitude, String targetDate) {
+        return Single.fromCallable(() -> {
+                    String urlString = String.format("%s?lat=%f&lon=%f&appid=%s&units=metric",
+                            BASE_URL, latitude, longitude, API_KEY);
+
+                    Request request = new Request.Builder()
+                            .url(urlString)
+                            .build();
+
+                    try (Response response = client.newCall(request).execute()) {
+                        if (!response.isSuccessful()) {
+                            throw new Exception("Unexpected code " + response);
+                        }
+
+                        String jsonData = response.body().string();
+                        return processWeatherData(jsonData, targetDate);
+                    }
+                })
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread());
+    }
+
+    private WeatherData processWeatherData(String jsonData, String targetDate) throws Exception {
+        JSONObject jsonResponse = new JSONObject(jsonData);
+        JSONArray list = jsonResponse.getJSONArray("list");
+
+        WeatherDataBuilder builder = new WeatherDataBuilder();
+        builder.setTargetDate(targetDate);
+
+        for (int i = 0; i < list.length(); i++) {
+            JSONObject timeSlot = list.getJSONObject(i);
+            String dt_txt = timeSlot.getString("dt_txt").split(" ")[0];
+
+            if (dt_txt.equals(targetDate)) {
+                processTimeSlot(timeSlot, builder);
+            }
+        }
+
+        if (builder.getDataPoints() == 0) {
+            throw new Exception("No data available for date: " + targetDate);
+        }
+
+        return builder.build();
+    }
+
+    private void processTimeSlot(JSONObject timeSlot, WeatherDataBuilder builder) throws Exception {
+        JSONObject main = timeSlot.getJSONObject("main");
+        builder.updateTemperature(
+                main.getDouble("temp_min"),
+                main.getDouble("temp_max")
+        );
+
+        JSONObject wind = timeSlot.getJSONObject("wind");
+        builder.updateWindSpeed(wind.getDouble("speed"));
+
+        if (timeSlot.has("rain")) {
+            JSONObject rain = timeSlot.getJSONObject("rain");
+            if (rain.has("3h")) {
+                builder.addRainfall(rain.getDouble("3h"));
+            }
+        }
+
+        if (timeSlot.has("snow")) {
+            JSONObject snow = timeSlot.getJSONObject("snow");
+            if (snow.has("3h")) {
+                builder.addSnowfall(snow.getDouble("3h"));
+            }
+        }
+
+        JSONArray weather = timeSlot.getJSONArray("weather");
+        for (int i = 0; i < weather.length(); i++) {
+            int id = weather.getJSONObject(i).getInt("id");
+            checkWeatherCondition(id, builder);
+        }
+    }
+
+    private void checkWeatherCondition(int weatherCode, WeatherDataBuilder builder) {
+        if (weatherCode == WeatherCodes.THUNDERSTORM_WITH_LIGHT_RAIN ||
+                weatherCode == WeatherCodes.THUNDERSTORM ||
+                weatherCode == WeatherCodes.HEAVY_THUNDERSTORM) {
+            builder.setStormAlert(true);
+        }
+        if (weatherCode == WeatherCodes.FREEZING_RAIN) {
+            builder.setIceRainAlert(true);
+        }
+    }
+
+    private static class WeatherDataBuilder {
+        private double minTemp = Double.MAX_VALUE;
+        private double maxTemp = Double.MIN_VALUE;
+        private double totalRain = 0;
+        private double totalSnow = 0;
+        private double maxWindSpeed = 0;
+        private boolean hasStorm = false;
+        private boolean hasIceRain = false;
+        private String targetDate;
+        private int dataPoints = 0;
+
+        public void updateTemperature(double min, double max) {
+            minTemp = Math.min(minTemp, min);
+            maxTemp = Math.max(maxTemp, max);
+            dataPoints++;
+        }
+
+        public void updateWindSpeed(double speed) {
+            maxWindSpeed = Math.max(maxWindSpeed, speed);
+        }
+
+        public void addRainfall(double rain) {
+            totalRain += rain;
+        }
+
+        public void addSnowfall(double snow) {
+            totalSnow += snow;
+        }
+
+        public void setStormAlert(boolean hasStorm) {
+            this.hasStorm = hasStorm;
+        }
+
+        public void setIceRainAlert(boolean hasIceRain) {
+            this.hasIceRain = hasIceRain;
+        }
+
+        public void setTargetDate(String targetDate) {
+            this.targetDate = targetDate;
+        }
+
+        public int getDataPoints() {
+            return dataPoints;
+        }
+
+        public WeatherData build() {
+            return new WeatherData(
+                    targetDate,
+                    totalRain,
+                    maxWindSpeed,
+                    hasStorm,
+                    hasIceRain,
+                    totalSnow,
+                    minTemp,
+                    maxTemp
+            );
+        }
     }
 }

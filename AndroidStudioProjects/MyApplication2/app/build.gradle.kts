@@ -43,4 +43,10 @@ dependencies {
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
     annotationProcessor(libs.room.compiler)
+        implementation(libs.retrofit)
+        implementation(libs.adapter.rxjava3)
+        implementation(libs.converter.gson)
+    implementation(libs.rxjava)
+    implementation(libs.rxandroid)
+    implementation(libs.okhttp)
 }

@@ -6,6 +6,8 @@ import androidx.room.Query;
 import androidx.room.Update;
 import androidx.room.Delete;
 
+import com.example.myapplication.model.Event;
+
 import java.util.List;
 
 @Dao
@@ -27,4 +29,10 @@ public interface UserSettingDAO {
 
     @Query("SELECT * FROM user_settings ORDER BY date DESC LIMIT 1")
     UserSettingEntity getLatestSetting();
-}
+
+
+    }
+
+// Convenience method that works with Event model
+
+

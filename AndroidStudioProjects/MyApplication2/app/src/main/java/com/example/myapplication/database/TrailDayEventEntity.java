@@ -7,12 +7,12 @@ import com.example.myapplication.model.Event;
 @Entity(tableName = "trail_day_even")
 public class TrailDayEventEntity {
     @PrimaryKey(autoGenerate = true)
-
     private int id;
     private String event;
     private String date;
     private double latitude;
     private double longitude;
+    private boolean isAlerted;
 
     // Constructor to create entity from Event model
     public TrailDayEventEntity(Event event) {
@@ -20,6 +20,7 @@ public class TrailDayEventEntity {
         this.date = event.getDate();
         this.latitude = event.getLatitude();
         this.longitude = event.getLongitude();
+        this.isAlerted = event.isAlerted();
     }
 
     // Default constructor required by Room
@@ -29,12 +30,14 @@ public class TrailDayEventEntity {
     // Convert entity to Event model
     public Event toEvent() {
         return new Event(
-                this.id,  // Include the ID when converting to Event
+                this.id,
                 this.event,
                 this.date,
                 this.latitude,
-                this.longitude
-        );}
+                this.longitude,
+                this.isAlerted
+        );
+    }
 
     // Getters and Setters
     public int getId() {
@@ -77,5 +80,12 @@ public class TrailDayEventEntity {
         this.longitude = longitude;
     }
 
+    // Added missing getters and setters for isAlerted
+    public boolean isAlerted() {
+        return isAlerted;
+    }
 
+    public void setAlerted(boolean alerted) {
+        isAlerted = alerted;
+    }
 }
