@@ -9,11 +9,12 @@ import org.json.JSONArray;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
-import android.util.Log;
+import com.example.myapplication.BuildConfig;
 
 public class OpenWeatherApi {
     private static final String TAG = "OpenWeatherApi";
-    private static final String API_KEY = "2ea9a21e0ce9a9119507d3331b6a32ff";
+
+    private static final String API_KEY = BuildConfig.WEATHER_API_KEY;
     private static final String BASE_URL = "https://api.openweathermap.org/data/2.5/forecast";
 
     private final OkHttpClient client;
